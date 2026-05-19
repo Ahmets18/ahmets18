@@ -68,43 +68,41 @@ function Convert-ToSupabaseRow {
 
 $payload = @($rows | ForEach-Object { Convert-ToSupabaseRow $_ }) | ConvertTo-Json -Depth 12
 $endpoint = "$($supabaseUrl.TrimEnd('/'))/rest/v1/$supabaseTable?on_conflict=id"
-
-$headers = @{
-  apikey = $supabaseServiceKey
-  "Content-Type" = "application/json"
-  Prefer = "resolution=merge-duplicates,return=minimal"
-}
-
-if ($supabaseServiceKey -notmatch '^sb_(publishable|secret)_') {
-  $headers.Authorization = "Bearer $supabaseServiceKey"
-}
-
+$tempPayload = New-TemporaryFile
+Set-Content -LiteralPath $tempPayload -Value $payload -Encoding utf8
 try {
-  Invoke-RestMethod -Method Post -Uri $endpoint -Headers $headers -Body $payload | Out-Null
+  $curlArgs = @(
+    "-sS",
+    "-o", "NUL",
+    "-w", "%{http_code}",
+    "-X", "POST",
+    "-H", "apikey: $supabaseServiceKey",
+    "-H", "Content-Type: application/json",
+    "-H", "Prefer: resolution=merge-duplicates,return=minimal"
+  )
+
+  if ($supabaseServiceKey -match '^eyJ') {
+    $curlArgs += @("-H", "Authorization: Bearer $supabaseServiceKey")
+  }
+
+  $curlArgs += @("--data-binary", "@$tempPayload", $endpoint)
+  $httpCode = & curl.exe @curlArgs
+  if ($LASTEXITCODE -ne 0) {
+    throw "curl exit code $LASTEXITCODE"
+  }
+  if ($httpCode -notin @("200", "201", "204")) {
+    throw "Supabase publish failed with HTTP $httpCode."
+  }
 }
 catch {
   $statusCode = ""
   $responseBody = ""
-  try {
-    $webException = $_.Exception
-    if ($webException.Response) {
-      $statusCode = [int]$webException.Response.StatusCode
-      $stream = $webException.Response.GetResponseStream()
-      if ($stream) {
-        $reader = New-Object System.IO.StreamReader($stream)
-        try { $responseBody = $reader.ReadToEnd() } finally { $reader.Dispose() }
-      }
-    }
-  }
-  catch {
-    # ignore secondary logging failures
-  }
-
-  if ($statusCode) {
-    throw "Supabase publish failed with HTTP $statusCode. $responseBody"
-  }
-
   throw
+}
+finally {
+  if (Test-Path -LiteralPath $tempPayload) {
+    Remove-Item -LiteralPath $tempPayload -Force
+  }
 }
 
 Write-Host "Published $($rows.Count) rows to Supabase table '$supabaseTable'."
