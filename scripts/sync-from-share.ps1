@@ -437,3 +437,5 @@ if ($env:SUPABASE_URL -or $env:SUPABASE_SERVICE_KEY -or $localConfig) {
 else {
   Write-Log "Supabase publish skipped: no local config found."
 }
+
+Start-Sleep -Seconds 3
