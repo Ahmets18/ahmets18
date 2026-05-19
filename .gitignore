@@ -2,3 +2,4 @@ data/database.txt
 local-database.js
 logs/
 dist/
+secrets/

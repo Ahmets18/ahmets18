@@ -27,6 +27,14 @@ Yerel build uretmek icin:
 
 degerlerini gir.
 
+Yerel senkron icin `secrets/supabase.local.json` dosyasini kullan:
+
+- `url`
+- `serviceKey`
+- `table`
+
+Bu dosya git'e girmez ve zamanlanmis gorevden bagimsiz calisir.
+
 ## Not
 
 Arayuz, giris yapildiktan sonra Supabase'teki `orders` tablosundan veri okur.

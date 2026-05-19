@@ -3,17 +3,34 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$rootDir = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+$localConfigPath = Join-Path $rootDir "secrets\supabase.local.json"
 
 if (-not (Test-Path -LiteralPath $DatabasePath)) {
   throw "Database not found: $DatabasePath"
 }
 
-$supabaseUrl = $env:SUPABASE_URL
-$supabaseServiceKey = $env:SUPABASE_SERVICE_KEY
-$supabaseTable = if ($env:SUPABASE_TABLE) { $env:SUPABASE_TABLE } else { "orders" }
+function Read-LocalConfig {
+  param([string]$Path)
+  if (-not (Test-Path -LiteralPath $Path)) {
+    return $null
+  }
+
+  try {
+    return Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
+  }
+  catch {
+    throw "Could not read local Supabase config: $Path"
+  }
+}
+
+$localConfig = Read-LocalConfig -Path $localConfigPath
+$supabaseUrl = if ($env:SUPABASE_URL) { $env:SUPABASE_URL } elseif ($localConfig?.url) { $localConfig.url } else { $null }
+$supabaseServiceKey = if ($env:SUPABASE_SERVICE_KEY) { $env:SUPABASE_SERVICE_KEY } elseif ($localConfig?.serviceKey) { $localConfig.serviceKey } else { $null }
+$supabaseTable = if ($env:SUPABASE_TABLE) { $env:SUPABASE_TABLE } elseif ($localConfig?.table) { $localConfig.table } else { "orders" }
 
 if (-not $supabaseUrl -or -not $supabaseServiceKey) {
-  throw "SUPABASE_URL and SUPABASE_SERVICE_KEY must be set."
+  throw "SUPABASE_URL and SUPABASE_SERVICE_KEY must be set, or secrets\supabase.local.json must exist."
 }
 
 $database = Get-Content -LiteralPath $DatabasePath -Raw | ConvertFrom-Json

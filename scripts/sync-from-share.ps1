@@ -4,6 +4,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $rootDir = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+$localConfigPath = Join-Path $rootDir "secrets\supabase.local.json"
 $dataDir = Join-Path $rootDir "data"
 $logDir = Join-Path $rootDir "logs"
 $databasePath = Join-Path $dataDir "database.txt"
@@ -333,6 +334,20 @@ if (-not (Test-Path -LiteralPath $SourcePath)) {
   throw "Source folder not found: $SourcePath"
 }
 
+function Read-LocalConfig {
+  param([string]$Path)
+  if (-not (Test-Path -LiteralPath $Path)) {
+    return $null
+  }
+
+  try {
+    return Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
+  }
+  catch {
+    throw "Could not read local Supabase config: $Path"
+  }
+}
+
 $startTime = Get-Date
 Write-Log "Start: last 1 day scan from $SourcePath"
 
@@ -408,7 +423,8 @@ Write-Log "local-database.js updated: $localDatabaseJsPath"
 Write-Log "Last 1 day: $($files.Count) files, $($records.Count) records."
 Write-Log ("Done in {0:n1} sec" -f ((Get-Date) - $startTime).TotalSeconds)
 
-if ($env:SUPABASE_URL -and $env:SUPABASE_SERVICE_KEY) {
+$localConfig = Read-LocalConfig -Path $localConfigPath
+if ($env:SUPABASE_URL -or $env:SUPABASE_SERVICE_KEY -or $localConfig) {
   Write-Log "Publishing to Supabase..."
   try {
     & (Join-Path $PSScriptRoot "push-to-supabase.ps1") -DatabasePath $databasePath
@@ -419,5 +435,5 @@ if ($env:SUPABASE_URL -and $env:SUPABASE_SERVICE_KEY) {
   }
 }
 else {
-  Write-Log "Supabase publish skipped: SUPABASE_URL or SUPABASE_SERVICE_KEY not set."
+  Write-Log "Supabase publish skipped: no local config found."
 }
