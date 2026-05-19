@@ -2,7 +2,7 @@ const AUTH_EMAIL = "artiebatlama18@local.invalid";
 const AUTH_CONFIRM_MESSAGE = "Supabase Authentication ayarlarında e-posta onayı kapalı olmalı.";
 const SESSION_STORAGE_KEY = "siparis_supabase_session";
 const SUPABASE_CONFIG = {
-  url: "https://uutwmafpwxgexsqlzoqs.supabase.co",
+  url: "https://svhmejuufiwqtwhlvxzc.supabase.co",
   anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV1dHdtYWZwd3hnZXhzcWx6b3FzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMDE1OTIsImV4cCI6MjA5NDc3NzU5Mn0._sNraUB7ytFSBv0Kk9WVMnhYjVvwuzJupb8r8PyPjBg",
   table: "orders"
 };
