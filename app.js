@@ -21,6 +21,7 @@ const elements = {
   loginForm: document.getElementById("loginForm"),
   passwordInput: document.getElementById("passwordInput"),
   authError: document.getElementById("authError"),
+  bootMessage: document.getElementById("bootMessage"),
   appShell: document.getElementById("appShell"),
   searchInput: document.getElementById("searchInput"),
   resultsBody: document.getElementById("resultsBody"),
@@ -33,6 +34,7 @@ const elements = {
 
 bootstrap().catch((error) => {
   console.error(error);
+  finishBooting();
   if (elements.resultsBody) {
     elements.resultsBody.innerHTML = `<tr><td colspan="8" class="empty">Canlı veri yüklenemedi. Supabase bağlantısını kontrol et.</td></tr>`;
   }
@@ -42,23 +44,27 @@ bootstrap().catch((error) => {
 });
 
 async function bootstrap() {
-  setupAuth();
+  try {
+    setupAuth();
 
-  state.session = loadStoredSession();
-  if (state.session?.access_token) {
-    const valid = await verifySession(state.session.access_token);
-    if (valid) {
-      unlockApp();
-      await startApp();
-      return;
+    state.session = loadStoredSession();
+    if (state.session?.access_token) {
+      const valid = await verifySession(state.session.access_token);
+      if (valid) {
+        unlockApp();
+        await startApp();
+        return;
+      }
+      clearStoredSession();
+      state.session = null;
     }
-    clearStoredSession();
-    state.session = null;
-  }
 
-  lockApp();
-  setAuthError("");
-  elements.passwordInput?.focus();
+    lockApp();
+    setAuthError("");
+    elements.passwordInput?.focus();
+  } finally {
+    finishBooting();
+  }
 }
 
 function setupAuth() {
@@ -80,6 +86,7 @@ async function handleLogin(event) {
   }
 
   setAuthError("");
+  showAuthLoading("Giriş doğrulanıyor...");
 
   try {
     let session = await signInWithSupabase(password);
@@ -88,6 +95,7 @@ async function handleLogin(event) {
     }
     if (!session) {
       setAuthError("Şifre yanlış.");
+      hideAuthLoading();
       elements.passwordInput?.focus();
       elements.passwordInput?.select?.();
       return;
@@ -100,6 +108,7 @@ async function handleLogin(event) {
   } catch (error) {
     console.error(error);
     setAuthError(AUTH_CONFIRM_MESSAGE);
+    hideAuthLoading();
   }
 }
 
@@ -128,6 +137,25 @@ function unlockApp() {
   }
   if (elements.appShell) {
     elements.appShell.hidden = false;
+  }
+  hideAuthLoading();
+}
+
+function finishBooting() {
+  document.documentElement.classList.remove("booting");
+}
+
+function showAuthLoading(message) {
+  if (elements.bootMessage) {
+    elements.bootMessage.textContent = message;
+  }
+  document.documentElement.classList.add("authenticating");
+}
+
+function hideAuthLoading() {
+  document.documentElement.classList.remove("authenticating");
+  if (elements.bootMessage) {
+    elements.bootMessage.textContent = "Oturum kontrol ediliyor...";
   }
 }
 

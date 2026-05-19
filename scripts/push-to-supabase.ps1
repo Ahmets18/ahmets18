@@ -25,9 +25,9 @@ function Read-LocalConfig {
 }
 
 $localConfig = Read-LocalConfig -Path $localConfigPath
-$supabaseUrl = if ($env:SUPABASE_URL) { $env:SUPABASE_URL } elseif ($localConfig?.url) { $localConfig.url } else { $null }
-$supabaseServiceKey = if ($env:SUPABASE_SERVICE_KEY) { $env:SUPABASE_SERVICE_KEY } elseif ($localConfig?.serviceKey) { $localConfig.serviceKey } else { $null }
-$supabaseTable = if ($env:SUPABASE_TABLE) { $env:SUPABASE_TABLE } elseif ($localConfig?.table) { $localConfig.table } else { "orders" }
+$supabaseUrl = if ($env:SUPABASE_URL) { $env:SUPABASE_URL } elseif ($null -ne $localConfig -and $localConfig.url) { $localConfig.url } else { $null }
+$supabaseServiceKey = if ($env:SUPABASE_SERVICE_KEY) { $env:SUPABASE_SERVICE_KEY } elseif ($null -ne $localConfig -and $localConfig.serviceKey) { $localConfig.serviceKey } else { $null }
+$supabaseTable = if ($env:SUPABASE_TABLE) { $env:SUPABASE_TABLE } elseif ($null -ne $localConfig -and $localConfig.table) { $localConfig.table } else { "orders" }
 
 if (-not $supabaseUrl -or -not $supabaseServiceKey) {
   throw "SUPABASE_URL and SUPABASE_SERVICE_KEY must be set, or secrets\supabase.local.json must exist."
@@ -67,41 +67,49 @@ function Convert-ToSupabaseRow {
 }
 
 $payload = @($rows | ForEach-Object { Convert-ToSupabaseRow $_ }) | ConvertTo-Json -Depth 12
-$endpoint = "$($supabaseUrl.TrimEnd('/'))/rest/v1/$supabaseTable?on_conflict=id"
-$tempPayload = New-TemporaryFile
-Set-Content -LiteralPath $tempPayload -Value $payload -Encoding utf8
+$endpoint = "$($supabaseUrl.TrimEnd('/'))/rest/v1/$supabaseTable"
 try {
+  $tempPayload = New-TemporaryFile
+  $tempResponse = New-TemporaryFile
+  [System.IO.File]::WriteAllText($tempPayload.FullName, $payload, [System.Text.UTF8Encoding]::new($false))
+
   $curlArgs = @(
     "-sS",
-    "-o", "NUL",
+    "-o", $tempResponse,
     "-w", "%{http_code}",
     "-X", "POST",
     "-H", "apikey: $supabaseServiceKey",
+    "-H", "Authorization: Bearer $supabaseServiceKey",
     "-H", "Content-Type: application/json",
-    "-H", "Prefer: resolution=merge-duplicates,return=minimal"
+    "-H", "Prefer: return=minimal",
+    "--data-binary", "@$($tempPayload.FullName)",
+    $endpoint
   )
 
-  if ($supabaseServiceKey -match '^eyJ') {
-    $curlArgs += @("-H", "Authorization: Bearer $supabaseServiceKey")
-  }
-
-  $curlArgs += @("--data-binary", "@$tempPayload", $endpoint)
   $httpCode = & curl.exe @curlArgs
   if ($LASTEXITCODE -ne 0) {
     throw "curl exit code $LASTEXITCODE"
   }
   if ($httpCode -notin @("200", "201", "204")) {
+    $responseBody = ""
+    if (Test-Path -LiteralPath $tempResponse) {
+      $responseBody = Get-Content -LiteralPath $tempResponse -Raw
+    }
+    if ($responseBody) {
+      throw "Supabase publish failed with HTTP $httpCode. Response: $responseBody"
+    }
     throw "Supabase publish failed with HTTP $httpCode."
   }
 }
 catch {
-  $statusCode = ""
-  $responseBody = ""
   throw
 }
 finally {
   if (Test-Path -LiteralPath $tempPayload) {
     Remove-Item -LiteralPath $tempPayload -Force
+  }
+  if (Test-Path -LiteralPath $tempResponse) {
+    Remove-Item -LiteralPath $tempResponse -Force
   }
 }
 

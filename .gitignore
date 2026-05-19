@@ -1,5 +1,7 @@
 data/database.txt
+data/sync-state.json
 local-database.js
 logs/
 dist/
 secrets/
+exports/

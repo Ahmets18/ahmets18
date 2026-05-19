@@ -1,16 +1,32 @@
 param(
-  [string]$SourcePath = ("\\ARTI\Schelling\YEDEK L" + [char]0x0130 + "STELER")
+  [string]$SourcePath = ("\\ARTI\Schelling\YEDEK L" + [char]0x0130 + "STELER"),
+  [switch]$HiddenRun
 )
 
 $ErrorActionPreference = "Stop"
+$scriptPath = $PSCommandPath
+if (-not $HiddenRun -and -not $env:SIPARIS_SYNC_HIDDEN) {
+  $env:SIPARIS_SYNC_HIDDEN = "1"
+  Start-Process -FilePath "powershell.exe" -WindowStyle Hidden -ArgumentList @(
+    "-NoProfile"
+    "-ExecutionPolicy"
+    "Bypass"
+    "-File"
+    $scriptPath
+    "-SourcePath"
+    $SourcePath
+    "-HiddenRun"
+  ) | Out-Null
+  return
+}
 $rootDir = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
-$localConfigPath = Join-Path $rootDir "secrets\supabase.local.json"
 $dataDir = Join-Path $rootDir "data"
 $logDir = Join-Path $rootDir "logs"
+$statePath = Join-Path $dataDir "sync-state.json"
 $databasePath = Join-Path $dataDir "database.txt"
 $localDatabaseJsPath = Join-Path $rootDir "local-database.js"
 $logPath = Join-Path $logDir "sync.log"
-$cutoff = (Get-Date).AddDays(-1)
+$cutoff = (Get-Date).AddMonths(-1)
 
 if (-not ("System.IO.Compression.ZipFile" -as [type])) {
   Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -95,6 +111,60 @@ function Get-CustomerFromFilename {
   $base = ($base -replace '\s+', ' ').Trim()
   if ($base) { return $base }
   return $FileName
+}
+
+function Get-SourceKey {
+  param([string]$FileName)
+  $base = Clean-Text ([IO.Path]::GetFileNameWithoutExtension($FileName))
+  $compact = ($base -replace '[^A-Za-z0-9]+', '')
+  if ($compact.Length -lt 4) {
+    return $compact.ToUpperInvariant()
+  }
+  return $compact.Substring(0, 4).ToUpperInvariant()
+}
+
+function Load-State {
+  if (-not (Test-Path -LiteralPath $statePath)) {
+    return [ordered]@{
+      processedKeys = @()
+      lastRunAt = $null
+    }
+  }
+
+  try {
+    $state = Get-Content -LiteralPath $statePath -Raw | ConvertFrom-Json
+    $keys = @()
+    if ($state.processedKeys) {
+      $keys = @($state.processedKeys | ForEach-Object { [string]$_ })
+    }
+    return [ordered]@{
+      processedKeys = $keys
+      lastRunAt = $state.lastRunAt
+    }
+  }
+  catch {
+    return [ordered]@{
+      processedKeys = @()
+      lastRunAt = $null
+    }
+  }
+}
+
+function Save-State {
+  param(
+    [string[]]$ProcessedKeys,
+    [string]$LastRunAt
+  )
+
+  if (-not (Test-Path -LiteralPath $dataDir)) {
+    New-Item -ItemType Directory -Path $dataDir -Force | Out-Null
+  }
+
+  $state = [ordered]@{
+    processedKeys = @($ProcessedKeys | Sort-Object -Unique)
+    lastRunAt = $LastRunAt
+  }
+  $state | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $statePath -Encoding utf8
 }
 
 function Get-ZipText {
@@ -334,31 +404,42 @@ if (-not (Test-Path -LiteralPath $SourcePath)) {
   throw "Source folder not found: $SourcePath"
 }
 
-function Read-LocalConfig {
-  param([string]$Path)
-  if (-not (Test-Path -LiteralPath $Path)) {
-    return $null
-  }
-
-  try {
-    return Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
-  }
-  catch {
-    throw "Could not read local Supabase config: $Path"
-  }
-}
-
 $startTime = Get-Date
-Write-Log "Start: last 1 day scan from $SourcePath"
+Write-Log "Start: last 1 month scan from $SourcePath"
+$state = Load-State
+$processedKeySet = New-Object 'System.Collections.Generic.HashSet[string]'
+foreach ($key in @($state.processedKeys)) {
+  if ($key) { [void]$processedKeySet.Add($key.ToUpperInvariant()) }
+}
 
 $files = Get-ChildItem -LiteralPath $SourcePath -Recurse -File | Where-Object {
   $_.Extension -eq ".xlsm" -and $_.LastWriteTime -ge $cutoff
-}
+} | Sort-Object LastWriteTime -Descending
 Write-Log "Files found: $($files.Count)"
 
 $records = New-Object System.Collections.Generic.List[object]
+$seenSourceKeys = New-Object 'System.Collections.Generic.HashSet[string]'
+$skippedDuplicates = 0
+$skippedPreviouslyProcessed = 0
+$processedFiles = 0
 
 foreach ($file in $files) {
+  $sourceKey = Get-SourceKey $file.Name
+  if ($sourceKey -and $processedKeySet.Contains($sourceKey)) {
+    $skippedPreviouslyProcessed++
+    Write-Log "Skipping already processed source key: $sourceKey ($($file.FullName))"
+    continue
+  }
+  if ($sourceKey -and $seenSourceKeys.Contains($sourceKey)) {
+    $skippedDuplicates++
+    Write-Log "Skipping duplicate source key: $sourceKey ($($file.FullName))"
+    continue
+  }
+  if ($sourceKey) {
+    [void]$seenSourceKeys.Add($sourceKey)
+  }
+
+  $processedFiles++
   Write-Log "Reading file: $($file.FullName)"
   try {
     $zip = [System.IO.Compression.ZipFile]::OpenRead($file.FullName)
@@ -391,6 +472,9 @@ foreach ($file in $files) {
       $record = Build-Record -FileName $file.Name -FileDate $file.LastWriteTime -Map $map -SheetName $firstSheet.sheetName
       [void]$records.Add($record)
       Write-Log "File done: $($file.FullName) (1 record)"
+      if ($sourceKey) {
+        [void]$processedKeySet.Add($sourceKey)
+      }
     }
     finally {
       $zip.Dispose()
@@ -406,7 +490,9 @@ $database = [ordered]@{
   generatedAt = (Get-Date).ToString("o")
   cutoffDate = $cutoff.ToString("o")
   totalRecords = $records.Count
-  totalFiles = $files.Count
+  totalFiles = $processedFiles
+  skippedDuplicates = $skippedDuplicates
+  skippedPreviouslyProcessed = $skippedPreviouslyProcessed
   records = $records
 }
 
@@ -420,22 +506,27 @@ $databaseEncoded = [uri]::EscapeDataString($databaseJson)
 ("window.LOCAL_DATABASE_TEXT = decodeURIComponent('" + $databaseEncoded + "');") | Set-Content -LiteralPath $localDatabaseJsPath -Encoding utf8
 Write-Log "database.txt updated: $databasePath"
 Write-Log "local-database.js updated: $localDatabaseJsPath"
-Write-Log "Last 1 day: $($files.Count) files, $($records.Count) records."
+Save-State -ProcessedKeys @($processedKeySet) -LastRunAt (Get-Date).ToString("o")
+Write-Log "sync-state.json updated: $statePath"
+Write-Log "Last 1 month: $($files.Count) files, $processedFiles processed, $skippedDuplicates duplicates skipped, $skippedPreviouslyProcessed already processed skipped, $($records.Count) records."
 Write-Log ("Done in {0:n1} sec" -f ((Get-Date) - $startTime).TotalSeconds)
 
-$localConfig = Read-LocalConfig -Path $localConfigPath
-if ($env:SUPABASE_URL -or $env:SUPABASE_SERVICE_KEY -or $localConfig) {
-  Write-Log "Publishing to Supabase..."
-  try {
-    & (Join-Path $PSScriptRoot "push-to-supabase.ps1") -DatabasePath $databasePath
-    Write-Log "Supabase publish completed."
-  }
-  catch {
-    Write-Log ("Supabase publish failed: {0}" -f $_.Exception.Message)
-  }
+Write-Log "Preparing Supabase export..."
+try {
+  & (Join-Path $PSScriptRoot "export-for-supabase.ps1") -DatabasePath $databasePath
+  Write-Log "Supabase export completed."
 }
-else {
-  Write-Log "Supabase publish skipped: no local config found."
+catch {
+  Write-Log ("Supabase export failed: {0}" -f $_.Exception.Message)
+}
+
+Write-Log "Preparing Supabase upload..."
+try {
+  & (Join-Path $PSScriptRoot "push-to-supabase.ps1") -DatabasePath $databasePath
+  Write-Log "Supabase upload completed."
+}
+catch {
+  Write-Log ("Supabase upload failed: {0}" -f $_.Exception.Message)
 }
 
 Start-Sleep -Seconds 3
