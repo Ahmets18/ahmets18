@@ -21,7 +21,6 @@ const elements = {
   loginForm: document.getElementById("loginForm"),
   passwordInput: document.getElementById("passwordInput"),
   authError: document.getElementById("authError"),
-  bootMessage: document.getElementById("bootMessage"),
   appShell: document.getElementById("appShell"),
   searchInput: document.getElementById("searchInput"),
   resultsBody: document.getElementById("resultsBody"),
@@ -34,7 +33,6 @@ const elements = {
 
 bootstrap().catch((error) => {
   console.error(error);
-  finishBooting();
   if (elements.resultsBody) {
     elements.resultsBody.innerHTML = `<tr><td colspan="8" class="empty">Canlı veri yüklenemedi. Supabase bağlantısını kontrol et.</td></tr>`;
   }
@@ -44,27 +42,23 @@ bootstrap().catch((error) => {
 });
 
 async function bootstrap() {
-  try {
-    setupAuth();
+  setupAuth();
 
-    state.session = loadStoredSession();
-    if (state.session?.access_token) {
-      const valid = await verifySession(state.session.access_token);
-      if (valid) {
-        unlockApp();
-        await startApp();
-        return;
-      }
-      clearStoredSession();
-      state.session = null;
+  state.session = loadStoredSession();
+  if (state.session?.access_token) {
+    const valid = await verifySession(state.session.access_token);
+    if (valid) {
+      unlockApp();
+      await startApp();
+      return;
     }
-
-    lockApp();
-    setAuthError("");
-    elements.passwordInput?.focus();
-  } finally {
-    finishBooting();
+    clearStoredSession();
+    state.session = null;
   }
+
+  lockApp();
+  setAuthError("");
+  elements.passwordInput?.focus();
 }
 
 function setupAuth() {
@@ -86,7 +80,6 @@ async function handleLogin(event) {
   }
 
   setAuthError("");
-  showAuthLoading("Giriş doğrulanıyor...");
 
   try {
     let session = await signInWithSupabase(password);
@@ -95,7 +88,6 @@ async function handleLogin(event) {
     }
     if (!session) {
       setAuthError("Şifre yanlış.");
-      hideAuthLoading();
       elements.passwordInput?.focus();
       elements.passwordInput?.select?.();
       return;
@@ -108,7 +100,6 @@ async function handleLogin(event) {
   } catch (error) {
     console.error(error);
     setAuthError(AUTH_CONFIRM_MESSAGE);
-    hideAuthLoading();
   }
 }
 
@@ -137,25 +128,6 @@ function unlockApp() {
   }
   if (elements.appShell) {
     elements.appShell.hidden = false;
-  }
-  hideAuthLoading();
-}
-
-function finishBooting() {
-  document.documentElement.classList.remove("booting");
-}
-
-function showAuthLoading(message) {
-  if (elements.bootMessage) {
-    elements.bootMessage.textContent = message;
-  }
-  document.documentElement.classList.add("authenticating");
-}
-
-function hideAuthLoading() {
-  document.documentElement.classList.remove("authenticating");
-  if (elements.bootMessage) {
-    elements.bootMessage.textContent = "Oturum kontrol ediliyor...";
   }
 }
 
@@ -394,21 +366,25 @@ function buildDatabaseFromRows(rows) {
 
 function normalizeSupabaseRow(row) {
   if (!row || typeof row !== "object") return null;
+  const cellHighlights = Array.isArray(row.cell_highlights) ? row.cell_highlights : [];
+  const plaka = row.plaka ?? buildPlakaValue(cellHighlights);
   return {
     id: row.id ?? "",
     customerName: row.customer_name ?? "",
     material: row.material ?? "",
     color: row.color ?? "",
-    pvcMeters: row.pvc_meters ?? null,
+    pvcMeters: extractPvcMeters(row.pvc_meters, cellHighlights, plaka),
     quantity: row.quantity ?? null,
     cutStatus: row.cut_status ?? "Bilinmiyor",
     notes: row.notes ?? "",
-    cellHighlights: row.cell_highlights ?? [],
+    cellHighlights,
     rangeNotes: row.range_notes ?? [],
     orderDate: row.order_date ?? "",
     sourceFile: row.source_file ?? "",
     sheetName: row.sheet_name ?? "",
-    sourceRow: row.source_row ?? null
+    sourceRow: row.source_row ?? null,
+    opt: row.opt ?? row.color ?? "",
+    plaka
   };
 }
 
@@ -522,10 +498,10 @@ function renderRow(record) {
     <tr>
       <td>${escapeHtml(date)}</td>
       <td>${escapeHtml(displayFileName(record.sourceFile))}</td>
-      <td>${escapeHtml(record.opt || getCellValue(record.cellHighlights, "D12") || "-")}</td>
+      <td>${escapeHtml(record.opt || getCellValue(record.cellHighlights, "D12") || record.color || "-")}</td>
       <td>${escapeHtml(record.material || getCellValue(record.cellHighlights, "A15") || "-")}</td>
       <td>${escapeHtml(record.plaka || buildPlakaValue(record.cellHighlights) || "-")}</td>
-      <td>${formatNumber(record.pvcMeters)}</td>
+      <td>${formatNumber(extractPvcMeters(record.pvcMeters, record.cellHighlights, record.plaka))}</td>
       <td><span class="badge ${cutClass}">${escapeHtml(record.cutStatus || "Bilinmiyor")}</span></td>
       <td>${formatRangeNotes(record.rangeNotes || record.notes)}</td>
     </tr>
@@ -545,10 +521,47 @@ function getCellValue(items, cellName) {
 function buildPlakaValue(items) {
   const c46 = getCellValue(items, "C46");
   const d15 = getCellValue(items, "D15");
+  if (c46 && c46 !== "-" && d15 && d15 !== "-") {
+    return `${c46} PLK ${d15}`;
+  }
   const parts = [];
   if (c46 && c46 !== "-") parts.push(c46);
   if (d15 && d15 !== "-") parts.push(d15);
   return parts.length ? parts.join(" ") : "-";
+}
+
+function extractPvcMeters(primaryValue, items, plakaValue) {
+  const fromHighlights = parseMetersFromText(getCellValue(items, "D15"));
+  if (Number.isFinite(fromHighlights) && fromHighlights > 0) {
+    return fromHighlights;
+  }
+
+  const fromPlaka = parseMetersFromText(plakaValue);
+  if (Number.isFinite(fromPlaka) && fromPlaka > 0) {
+    return fromPlaka;
+  }
+
+  const parsedPrimary = parseNumericValue(primaryValue);
+  if (Number.isFinite(parsedPrimary) && parsedPrimary > 0) {
+    return parsedPrimary;
+  }
+
+  return null;
+}
+
+function parseMetersFromText(value) {
+  const text = String(value ?? "");
+  const match = text.match(/(\d+(?:[.,]\d+)?)\s*M\b/i);
+  if (!match) return null;
+  return parseNumericValue(match[1]);
+}
+
+function parseNumericValue(value) {
+  if (value == null || value === "") return null;
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  const text = String(value).replace(",", ".").trim();
+  const num = Number(text);
+  return Number.isFinite(num) ? num : null;
 }
 
 function sortRecords(records) {

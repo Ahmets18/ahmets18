@@ -91,6 +91,149 @@ function Parse-Date {
   try { return ([datetime]::Parse($text)).ToString("o") } catch { return $Fallback.ToString("o") }
 }
 
+function Parse-PvcMeters {
+  param(
+    [object]$PrimaryValue,
+    [object]$FallbackValue
+  )
+
+  $text = Clean-Text $PrimaryValue
+  if ($text -match '(?<meters>\d+(?:[.,]\d+)?)\s*M\b') {
+    $meters = 0.0
+    if ([double]::TryParse(($Matches.meters -replace ",", "."), [System.Globalization.NumberStyles]::Float, [System.Globalization.CultureInfo]::InvariantCulture, [ref]$meters)) {
+      return $meters
+    }
+  }
+
+  $fallback = Parse-Number $FallbackValue
+  if ($null -ne $fallback) { return $fallback }
+  return $null
+}
+
+function Parse-PvcMetersFromText {
+  param([object]$Value)
+
+  $text = Clean-Text $Value
+  if (-not $text) { return $null }
+  if ($text -match '^(?<meters>\d+(?:[.,]\d+)?)\s*M\b') {
+    $meters = 0.0
+    if ([double]::TryParse(($Matches.meters -replace ",", "."), [System.Globalization.NumberStyles]::Float, [System.Globalization.CultureInfo]::InvariantCulture, [ref]$meters)) {
+      return $meters
+    }
+  }
+  if ($text -match '\b(?<meters>\d+(?:[.,]\d+)?)\s*M\b') {
+    $meters = 0.0
+    if ([double]::TryParse(($Matches.meters -replace ",", "."), [System.Globalization.NumberStyles]::Float, [System.Globalization.CultureInfo]::InvariantCulture, [ref]$meters)) {
+      return $meters
+    }
+  }
+  return $null
+}
+
+function Split-PlakaValue {
+  param([object]$Value)
+
+  $text = Clean-Text $Value
+  if (-not $text) {
+    return [ordered]@{
+      plateCount = $null
+      detail = ""
+    }
+  }
+
+  if ($text -match '^(?<count>\d+(?:[.,]\d+)?)\s*PLK\s*(?<detail>.+)$') {
+    return [ordered]@{
+      plateCount = Parse-Number $Matches.count
+      detail = Clean-Text $Matches.detail
+    }
+  }
+
+  return [ordered]@{
+    plateCount = $null
+    detail = $text
+  }
+}
+
+function Build-CellHighlights {
+  param(
+    [string]$Opt,
+    [string]$Material,
+    [object]$PlateCount,
+    [string]$PlakaDetail,
+    [object]$PvcMeters,
+    [datetime]$OrderDate
+  )
+
+  $items = New-Object System.Collections.Generic.List[object]
+  if ($Opt) {
+    [void]$items.Add([ordered]@{ cell = "D12"; label = "OPT"; value = $Opt })
+  }
+  if ($Material) {
+    [void]$items.Add([ordered]@{ cell = "A15"; label = "MALZEME"; value = $Material })
+  }
+  if ($null -ne $PlateCount -and $PlateCount -ne "") {
+    [void]$items.Add([ordered]@{ cell = "C46"; label = "PLAKA ADEDI"; value = [string]$PlateCount })
+  }
+  if ($PlakaDetail) {
+    [void]$items.Add([ordered]@{ cell = "D15"; label = "PLAKA DETAY"; value = $PlakaDetail })
+  }
+  if ($null -ne $PvcMeters -and $PvcMeters -ne "") {
+    [void]$items.Add([ordered]@{ cell = "I15"; label = "PVC METRAJ"; value = [string]$PvcMeters })
+  }
+  if ($OrderDate) {
+    [void]$items.Add([ordered]@{ cell = "O9"; label = "TARIH"; value = $OrderDate.ToString("o") })
+  }
+  return $items.ToArray()
+}
+
+function Repair-ExistingRecord {
+  param([object]$Record)
+
+  if ($null -eq $Record) { return $Record }
+
+  $opt = Clean-Text $Record.opt
+  if (-not $opt) { $opt = Clean-Text $Record.color }
+
+  $material = Clean-Text $Record.material
+  $plaka = Clean-Text $Record.plaka
+  $splitPlaka = Split-PlakaValue $plaka
+
+  $plateCount = $Record.quantity
+  if (($null -eq $plateCount -or $plateCount -eq "") -and $splitPlaka.plateCount) {
+    $plateCount = $splitPlaka.plateCount
+  }
+
+  $plakaDetail = $splitPlaka.detail
+  $pvcMeters = Parse-PvcMetersFromText $plakaDetail
+  if ($null -eq $pvcMeters) {
+    $pvcMeters = Parse-PvcMetersFromText $plaka
+  }
+  if ($null -eq $pvcMeters) {
+    $pvcMeters = Parse-Number $Record.pvcMeters
+  }
+
+  if (-not $plaka -and $plateCount -ne $null -and $plakaDetail) {
+    $plaka = "$plateCount PLK $plakaDetail"
+  }
+
+  $orderDateText = Clean-Text $Record.orderDate
+  $orderDate = $null
+  if ($orderDateText) {
+    try { $orderDate = [datetime]::Parse($orderDateText) } catch { $orderDate = $null }
+  }
+
+  $existingHighlights = @($Record.cellHighlights)
+  if (-not $existingHighlights.Count) {
+    $Record.cellHighlights = Build-CellHighlights -Opt $opt -Material $material -PlateCount $plateCount -PlakaDetail $plakaDetail -PvcMeters $pvcMeters -OrderDate $orderDate
+  }
+
+  if ($opt) { $Record.opt = $opt }
+  if ($plaka) { $Record.plaka = $plaka }
+  if ($null -ne $plateCount) { $Record.quantity = $plateCount }
+  if ($null -ne $pvcMeters) { $Record.pvcMeters = $pvcMeters }
+  return $Record
+}
+
 function Is-MeasurementLike {
   param([string]$Value)
   if ([string]::IsNullOrWhiteSpace($Value)) { return $false }
@@ -390,7 +533,8 @@ function Build-Record {
   $material = Get-CellValue $Map "A15"
   $c46 = Get-CellValue $Map "C46"
   $d15 = Get-CellValue $Map "D15"
-  $pvcMeters = Parse-Number (Get-CellValue $Map "I15")
+  $i15 = Get-CellValue $Map "I15"
+  $pvcMeters = Parse-PvcMeters $d15 $i15
   $orderDate = Parse-Date (Get-CellValue $Map "O9") $FileDate
 
   $plaka = ""
@@ -413,8 +557,8 @@ function Build-Record {
   $finalQuantity = $null
   if ($c46) { $finalQuantity = Parse-Number $c46 }
   $notesText = "-"
-  $highlights = @()
-  $rangeNotes = @()
+  $highlights = Build-Highlights $Map
+  $rangeNotes = Build-RangeNotes $Map
 
   $record = [ordered]@{
     id = ([Guid]::NewGuid().ToString("N"))
@@ -450,6 +594,7 @@ if ($existingDatabase -and $existingDatabase.records) {
   $existingRecords = @($existingDatabase.records)
   $existingRecordCount = $existingRecords.Count
   foreach ($existingRecord in $existingRecords) {
+    $existingRecord = Repair-ExistingRecord $existingRecord
     $existingKey = Get-RecordKey $existingRecord
     if (-not $existingKey) {
       $existingKey = "id|" + ([Guid]::NewGuid().ToString("N"))
