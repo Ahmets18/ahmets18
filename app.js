@@ -1,5 +1,6 @@
 const AUTH_EMAIL = "artiebatlama18@local.invalid";
 const AUTH_CONFIRM_MESSAGE = "Supabase Authentication ayarlarında e-posta onayı kapalı olmalı.";
+const SESSION_STORAGE_KEY = "siparis_supabase_session";
 
 const state = {
   database: null,
@@ -25,8 +26,6 @@ const elements = {
   matchedRecords: document.getElementById("matchedRecords")
 };
 
-let supabaseClient = null;
-
 bootstrap().catch((error) => {
   console.error(error);
   if (elements.resultsBody) {
@@ -40,34 +39,16 @@ bootstrap().catch((error) => {
 async function bootstrap() {
   setupAuth();
 
-  const client = getSupabaseClient();
-  if (!client) {
-    lockApp();
-    setAuthError("Supabase bağlantısı bulunamadı.");
-    return;
-  }
-
-  const { data } = await client.auth.getSession();
-  state.session = data?.session ?? null;
-
-  client.auth.onAuthStateChange(async (_event, session) => {
-    state.session = session ?? null;
-    if (state.session) {
+  state.session = loadStoredSession();
+  if (state.session?.access_token) {
+    const valid = await verifySession(state.session.access_token);
+    if (valid) {
       unlockApp();
       await startApp();
       return;
     }
-
-    state.appReady = false;
-    state.database = null;
-    state.filtered = [];
-    lockApp();
-  });
-
-  if (state.session) {
-    unlockApp();
-    await startApp();
-    return;
+    clearStoredSession();
+    state.session = null;
   }
 
   lockApp();
@@ -79,27 +60,6 @@ function setupAuth() {
   elements.loginForm?.addEventListener("submit", handleLogin);
 }
 
-function getSupabaseClient() {
-  if (supabaseClient) {
-    return supabaseClient;
-  }
-
-  const config = window.SUPABASE_CONFIG;
-  if (!window.supabase || !config?.url || !config?.anonKey) {
-    return null;
-  }
-
-  supabaseClient = window.supabase.createClient(config.url, config.anonKey, {
-    auth: {
-      autoRefreshToken: true,
-      persistSession: true,
-      detectSessionInUrl: false
-    }
-  });
-
-  return supabaseClient;
-}
-
 async function handleLogin(event) {
   event.preventDefault();
 
@@ -109,49 +69,31 @@ async function handleLogin(event) {
     return;
   }
 
-  const client = getSupabaseClient();
-  if (!client) {
+  const config = window.SUPABASE_CONFIG;
+  if (!config?.url || !config?.anonKey) {
     setAuthError("Supabase bağlantısı bulunamadı.");
     return;
   }
 
   setAuthError("");
 
-  const signIn = await client.auth.signInWithPassword({
-    email: AUTH_EMAIL,
-    password
-  });
+  try {
+    const session = await signInWithSupabase(password);
+    if (!session) {
+      setAuthError("Şifre yanlış.");
+      elements.passwordInput?.focus();
+      elements.passwordInput?.select?.();
+      return;
+    }
 
-  if (signIn.data?.session) {
-    state.session = signIn.data.session;
+    state.session = session;
+    saveStoredSession(session);
     unlockApp();
     await startApp();
-    return;
-  }
-
-  const signUp = await client.auth.signUp({
-    email: AUTH_EMAIL,
-    password
-  });
-
-  if (signUp.data?.session) {
-    state.session = signUp.data.session;
-    unlockApp();
-    await startApp();
-    return;
-  }
-
-  const message = signUp.error?.message || signIn.error?.message || AUTH_CONFIRM_MESSAGE;
-  if (/email/i.test(message) || /confirm/i.test(message)) {
+  } catch (error) {
+    console.error(error);
     setAuthError(AUTH_CONFIRM_MESSAGE);
-  } else if (/already registered/i.test(message)) {
-    setAuthError("Şifre yanlış.");
-  } else {
-    setAuthError(message);
   }
-
-  elements.passwordInput?.focus();
-  elements.passwordInput?.select?.();
 }
 
 function setAuthError(message) {
@@ -228,6 +170,66 @@ function emptyDatabase() {
   };
 }
 
+function loadStoredSession() {
+  try {
+    const raw = sessionStorage.getItem(SESSION_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (error) {
+    console.warn("Stored session okunamadi.", error);
+    return null;
+  }
+}
+
+function saveStoredSession(session) {
+  sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
+}
+
+function clearStoredSession() {
+  sessionStorage.removeItem(SESSION_STORAGE_KEY);
+}
+
+async function signInWithSupabase(password) {
+  const config = window.SUPABASE_CONFIG;
+  const response = await fetch(`${config.url}/auth/v1/token?grant_type=password`, {
+    method: "POST",
+    headers: {
+      apikey: config.anonKey,
+      Authorization: `Bearer ${config.anonKey}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email: AUTH_EMAIL, password })
+  });
+
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    return null;
+  }
+
+  return {
+    access_token: payload.access_token,
+    refresh_token: payload.refresh_token,
+    expires_at: payload.expires_at,
+    token_type: payload.token_type,
+    user: payload.user ?? null
+  };
+}
+
+async function verifySession(accessToken) {
+  const config = window.SUPABASE_CONFIG;
+  try {
+    const response = await fetch(`${config.url}/auth/v1/user`, {
+      headers: {
+        apikey: config.anonKey,
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+    return response.ok;
+  } catch (error) {
+    console.warn("Session doğrulanamadı.", error);
+    return false;
+  }
+}
+
 function loadEmbeddedDatabase() {
   const text = window.LOCAL_DATABASE_TEXT;
   if (!text || typeof text !== "string" || !text.trim()) {
@@ -279,22 +281,26 @@ async function loadDatabaseTxt() {
 }
 
 async function loadSupabaseDatabase() {
-  const client = getSupabaseClient();
   const config = window.SUPABASE_CONFIG;
-  if (!client || !config?.table) {
+  if (!config?.url || !config?.anonKey || !state.session?.access_token || !config?.table) {
     return null;
   }
 
   try {
-    const { data: rows, error } = await client
-      .from(config.table)
-      .select("*")
-      .order("order_date", { ascending: false });
+    const response = await fetch(`${config.url}/rest/v1/${config.table}?select=*`, {
+      headers: {
+        apikey: config.anonKey,
+        Authorization: `Bearer ${state.session.access_token}`,
+        Accept: "application/json"
+      },
+      cache: "no-store"
+    });
 
-    if (error) {
-      throw error;
+    if (!response.ok) {
+      return null;
     }
 
+    const rows = await response.json().catch(() => []);
     if (!Array.isArray(rows) || !rows.length) {
       return emptyDatabase();
     }

@@ -407,3 +407,17 @@ Write-Log "database.txt updated: $databasePath"
 Write-Log "local-database.js updated: $localDatabaseJsPath"
 Write-Log "Last 1 day: $($files.Count) files, $($records.Count) records."
 Write-Log ("Done in {0:n1} sec" -f ((Get-Date) - $startTime).TotalSeconds)
+
+if ($env:SUPABASE_URL -and $env:SUPABASE_SERVICE_KEY) {
+  Write-Log "Publishing to Supabase..."
+  try {
+    & (Join-Path $PSScriptRoot "push-to-supabase.ps1") -DatabasePath $databasePath
+    Write-Log "Supabase publish completed."
+  }
+  catch {
+    Write-Log ("Supabase publish failed: {0}" -f $_.Exception.Message)
+  }
+}
+else {
+  Write-Log "Supabase publish skipped: SUPABASE_URL or SUPABASE_SERVICE_KEY not set."
+}
