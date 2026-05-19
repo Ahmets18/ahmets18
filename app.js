@@ -82,7 +82,10 @@ async function handleLogin(event) {
   setAuthError("");
 
   try {
-    const session = await signInWithSupabase(password);
+    let session = await signInWithSupabase(password);
+    if (!session) {
+      session = await signUpWithSupabase(password);
+    }
     if (!session) {
       setAuthError("Şifre yanlış.");
       elements.passwordInput?.focus();
@@ -214,6 +217,36 @@ async function signInWithSupabase(password) {
     expires_at: payload.expires_at,
     token_type: payload.token_type,
     user: payload.user ?? null
+  };
+}
+
+async function signUpWithSupabase(password) {
+  const response = await fetch(`${SUPABASE_CONFIG.url}/auth/v1/signup`, {
+    method: "POST",
+    headers: {
+      apikey: SUPABASE_CONFIG.anonKey,
+      Authorization: `Bearer ${SUPABASE_CONFIG.anonKey}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email: AUTH_EMAIL, password })
+  });
+
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    return null;
+  }
+
+  const session = payload.session ?? payload.data?.session ?? null;
+  if (!session?.access_token) {
+    return null;
+  }
+
+  return {
+    access_token: session.access_token,
+    refresh_token: session.refresh_token,
+    expires_at: session.expires_at,
+    token_type: session.token_type,
+    user: session.user ?? payload.user ?? null
   };
 }
 
