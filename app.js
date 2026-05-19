@@ -1,6 +1,11 @@
 const AUTH_EMAIL = "artiebatlama18@local.invalid";
 const AUTH_CONFIRM_MESSAGE = "Supabase Authentication ayarlarında e-posta onayı kapalı olmalı.";
 const SESSION_STORAGE_KEY = "siparis_supabase_session";
+const SUPABASE_CONFIG = {
+  url: "https://uutwmafpwxgexsqlzoqs.supabase.co",
+  anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV1dHdtYWZwd3hnZXhzcWx6b3FzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkyMDE1OTIsImV4cCI6MjA5NDc3NzU5Mn0._sNraUB7ytFSBv0Kk9WVMnhYjVvwuzJupb8r8PyPjBg",
+  table: "orders"
+};
 
 const state = {
   database: null,
@@ -69,8 +74,7 @@ async function handleLogin(event) {
     return;
   }
 
-  const config = window.SUPABASE_CONFIG;
-  if (!config?.url || !config?.anonKey) {
+  if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) {
     setAuthError("Supabase bağlantısı bulunamadı.");
     return;
   }
@@ -189,12 +193,11 @@ function clearStoredSession() {
 }
 
 async function signInWithSupabase(password) {
-  const config = window.SUPABASE_CONFIG;
-  const response = await fetch(`${config.url}/auth/v1/token?grant_type=password`, {
+  const response = await fetch(`${SUPABASE_CONFIG.url}/auth/v1/token?grant_type=password`, {
     method: "POST",
     headers: {
-      apikey: config.anonKey,
-      Authorization: `Bearer ${config.anonKey}`,
+      apikey: SUPABASE_CONFIG.anonKey,
+      Authorization: `Bearer ${SUPABASE_CONFIG.anonKey}`,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({ email: AUTH_EMAIL, password })
@@ -215,11 +218,10 @@ async function signInWithSupabase(password) {
 }
 
 async function verifySession(accessToken) {
-  const config = window.SUPABASE_CONFIG;
   try {
-    const response = await fetch(`${config.url}/auth/v1/user`, {
+    const response = await fetch(`${SUPABASE_CONFIG.url}/auth/v1/user`, {
       headers: {
-        apikey: config.anonKey,
+        apikey: SUPABASE_CONFIG.anonKey,
         Authorization: `Bearer ${accessToken}`
       }
     });
@@ -281,15 +283,14 @@ async function loadDatabaseTxt() {
 }
 
 async function loadSupabaseDatabase() {
-  const config = window.SUPABASE_CONFIG;
-  if (!config?.url || !config?.anonKey || !state.session?.access_token || !config?.table) {
+  if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey || !state.session?.access_token || !SUPABASE_CONFIG.table) {
     return null;
   }
 
   try {
-    const response = await fetch(`${config.url}/rest/v1/${config.table}?select=*`, {
+    const response = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/${SUPABASE_CONFIG.table}?select=*`, {
       headers: {
-        apikey: config.anonKey,
+        apikey: SUPABASE_CONFIG.anonKey,
         Authorization: `Bearer ${state.session.access_token}`,
         Accept: "application/json"
       },
