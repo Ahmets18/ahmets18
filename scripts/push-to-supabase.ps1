@@ -68,49 +68,95 @@ function Convert-ToSupabaseRow {
 
 $payload = @($rows | ForEach-Object { Convert-ToSupabaseRow $_ }) | ConvertTo-Json -Depth 12
 $endpoint = "$($supabaseUrl.TrimEnd('/'))/rest/v1/$supabaseTable"
+$tempPayload = $null
+$tempScript = $null
 try {
   $tempPayload = New-TemporaryFile
-  $tempResponse = New-TemporaryFile
   [System.IO.File]::WriteAllText($tempPayload.FullName, $payload, [System.Text.UTF8Encoding]::new($false))
+  $tempScript = Join-Path $env:TEMP ("supabase-push-" + ([Guid]::NewGuid().ToString("N")) + ".cjs")
 
-  $curlArgs = @(
-    "-sS",
-    "-o", $tempResponse,
-    "-w", "%{http_code}",
-    "-X", "POST",
-    "-H", "apikey: $supabaseServiceKey",
-    "-H", "Authorization: Bearer $supabaseServiceKey",
-    "-H", "Content-Type: application/json",
-    "-H", "Prefer: return=minimal",
-    "--data-binary", "@$($tempPayload.FullName)",
-    $endpoint
-  )
+  $env:SUPABASE_PAYLOAD_FILE = $tempPayload.FullName
+  $env:SUPABASE_ENDPOINT = $endpoint
+  $env:SUPABASE_SERVICE_KEY = $supabaseServiceKey
 
-  $httpCode = & curl.exe @curlArgs
-  if ($LASTEXITCODE -ne 0) {
-    throw "curl exit code $LASTEXITCODE"
+  $nodeScript = @'
+const fs = require("node:fs");
+
+const payloadPath = process.env.SUPABASE_PAYLOAD_FILE;
+const endpoint = process.env.SUPABASE_ENDPOINT;
+const serviceKey = process.env.SUPABASE_SERVICE_KEY;
+
+(async () => {
+  try {
+    const payload = fs.readFileSync(payloadPath, "utf8");
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        apikey: serviceKey,
+        Authorization: `Bearer ${serviceKey}`,
+        "Content-Type": "application/json",
+        Prefer: "resolution=merge-duplicates,return=minimal"
+      },
+      body: payload
+    });
+    const body = await response.text();
+    process.stdout.write(JSON.stringify({ status: response.status, body }));
+    if (!response.ok) {
+      process.exitCode = 1;
+    }
   }
-  if ($httpCode -notin @("200", "201", "204")) {
-    $responseBody = ""
-    if (Test-Path -LiteralPath $tempResponse) {
-      $responseBody = Get-Content -LiteralPath $tempResponse -Raw
+  catch (error) {
+    process.stdout.write(JSON.stringify({ status: 0, body: String(error && error.stack ? error.stack : error) }));
+    process.exitCode = 1;
+  }
+})();
+'@
+
+  Set-Content -LiteralPath $tempScript -Value $nodeScript -Encoding utf8
+  $nodeResult = & node $tempScript
+  $nodeExitCode = $LASTEXITCODE
+  $nodeOutput = ($nodeResult | Out-String).Trim()
+  $response = $null
+  if ($nodeOutput) {
+    try {
+      $response = $nodeOutput | ConvertFrom-Json
     }
-    if ($responseBody) {
-      throw "Supabase publish failed with HTTP $httpCode. Response: $responseBody"
+    catch {
+      $response = $null
     }
-    throw "Supabase publish failed with HTTP $httpCode."
+  }
+
+  if ($nodeExitCode -ne 0 -and $null -eq $response) {
+    throw "node exit code $nodeExitCode. Raw output: $nodeOutput"
+  }
+
+  if ($nodeExitCode -ne 0) {
+    if ($response.body) {
+      throw "Supabase publish failed with HTTP $($response.status). Response: $($response.body)"
+    }
+    throw "node exit code $nodeExitCode"
+  }
+
+  if ($response.status -notin @(200, 201, 204)) {
+    if ($response.body) {
+      throw "Supabase publish failed with HTTP $($response.status). Response: $($response.body)"
+    }
+    throw "Supabase publish failed with HTTP $($response.status)."
   }
 }
 catch {
   throw
 }
 finally {
-  if (Test-Path -LiteralPath $tempPayload) {
+  if ($null -ne $tempPayload -and (Test-Path -LiteralPath $tempPayload)) {
     Remove-Item -LiteralPath $tempPayload -Force
   }
-  if (Test-Path -LiteralPath $tempResponse) {
-    Remove-Item -LiteralPath $tempResponse -Force
+  if ($null -ne $tempScript -and (Test-Path -LiteralPath $tempScript)) {
+    Remove-Item -LiteralPath $tempScript -Force
   }
+  Remove-Item Env:\SUPABASE_PAYLOAD_FILE -ErrorAction SilentlyContinue
+  Remove-Item Env:\SUPABASE_ENDPOINT -ErrorAction SilentlyContinue
+  Remove-Item Env:\SUPABASE_SERVICE_KEY -ErrorAction SilentlyContinue
 }
 
 Write-Host "Published $($rows.Count) rows to Supabase table '$supabaseTable'."

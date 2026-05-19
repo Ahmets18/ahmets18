@@ -167,6 +167,43 @@ function Save-State {
   $state | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $statePath -Encoding utf8
 }
 
+function Load-ExistingDatabase {
+  param([string]$Path)
+
+  if (-not (Test-Path -LiteralPath $Path)) {
+    return $null
+  }
+
+  try {
+    return Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
+  }
+  catch {
+    Write-Log "Existing database could not be read. Starting from a fresh scan."
+    return $null
+  }
+}
+
+function Get-RecordKey {
+  param([object]$Record)
+
+  if ($null -eq $Record) { return $null }
+
+  $sourceFile = Clean-Text $Record.sourceFile
+  $sheetName = Clean-Text $Record.sheetName
+  $sourceRow = Clean-Text $Record.sourceRow
+
+  if ($sourceFile) {
+    return (($sourceFile, $sheetName, $sourceRow) -join "|").ToLowerInvariant()
+  }
+
+  $id = Clean-Text $Record.id
+  if ($id) {
+    return ("id|" + $id.ToLowerInvariant())
+  }
+
+  return $null
+}
+
 function Get-ZipText {
   param([object]$Zip, [string]$EntryName)
   $entry = $Zip.GetEntry($EntryName)
@@ -400,100 +437,140 @@ function Build-Record {
   return $record
 }
 
-if (-not (Test-Path -LiteralPath $SourcePath)) {
-  throw "Source folder not found: $SourcePath"
-}
-
 $startTime = Get-Date
 Write-Log "Start: last 1 month scan from $SourcePath"
-$state = Load-State
-$processedKeySet = New-Object 'System.Collections.Generic.HashSet[string]'
-foreach ($key in @($state.processedKeys)) {
-  if ($key) { [void]$processedKeySet.Add($key.ToUpperInvariant()) }
+$existingDatabase = Load-ExistingDatabase -Path $databasePath
+$mergedRecords = New-Object System.Collections.Generic.List[object]
+$recordIndexByKey = @{}
+$existingRecordCount = 0
+$updatedRecords = 0
+$addedRecords = 0
+
+if ($existingDatabase -and $existingDatabase.records) {
+  $existingRecords = @($existingDatabase.records)
+  $existingRecordCount = $existingRecords.Count
+  foreach ($existingRecord in $existingRecords) {
+    $existingKey = Get-RecordKey $existingRecord
+    if (-not $existingKey) {
+      $existingKey = "id|" + ([Guid]::NewGuid().ToString("N"))
+    }
+
+    if ($recordIndexByKey.ContainsKey($existingKey)) {
+      $mergedRecords[$recordIndexByKey[$existingKey]] = $existingRecord
+      continue
+    }
+
+    $recordIndexByKey[$existingKey] = $mergedRecords.Count
+    [void]$mergedRecords.Add($existingRecord)
+  }
+  Write-Log "Existing database loaded: $existingRecordCount records."
+}
+else {
+  Write-Log "No existing database found. Starting from scratch."
 }
 
-$files = Get-ChildItem -LiteralPath $SourcePath -Recurse -File | Where-Object {
-  $_.Extension -eq ".xlsm" -and $_.LastWriteTime -ge $cutoff
-} | Sort-Object LastWriteTime -Descending
-Write-Log "Files found: $($files.Count)"
-
-$records = New-Object System.Collections.Generic.List[object]
 $seenSourceKeys = New-Object 'System.Collections.Generic.HashSet[string]'
 $skippedDuplicates = 0
-$skippedPreviouslyProcessed = 0
 $processedFiles = 0
 
-foreach ($file in $files) {
-  $sourceKey = Get-SourceKey $file.Name
-  if ($sourceKey -and $processedKeySet.Contains($sourceKey)) {
-    $skippedPreviouslyProcessed++
-    Write-Log "Skipping already processed source key: $sourceKey ($($file.FullName))"
-    continue
+try {
+  if (-not (Test-Path -LiteralPath $SourcePath)) {
+    Write-Log "Source folder not found: $SourcePath. Continuing with the existing database only."
   }
-  if ($sourceKey -and $seenSourceKeys.Contains($sourceKey)) {
-    $skippedDuplicates++
-    Write-Log "Skipping duplicate source key: $sourceKey ($($file.FullName))"
-    continue
-  }
-  if ($sourceKey) {
-    [void]$seenSourceKeys.Add($sourceKey)
-  }
+  else {
+    $files = Get-ChildItem -LiteralPath $SourcePath -Recurse -File | Where-Object {
+      $_.Extension -eq ".xlsm" -and $_.LastWriteTime -ge $cutoff
+    } | Sort-Object LastWriteTime -Descending
+    Write-Log "Files found: $($files.Count)"
 
-  $processedFiles++
-  Write-Log "Reading file: $($file.FullName)"
-  try {
-    $zip = [System.IO.Compression.ZipFile]::OpenRead($file.FullName)
-    try {
-      Write-Log "Stage: shared strings"
-      $sharedStrings = Get-SharedStrings $zip
-      Write-Log "Stage: workbook"
-      $firstSheet = Get-WorkbookFirstSheetTarget $zip
-      if (-not $firstSheet) {
-        Write-Log "Failed file: $($file.FullName)"
-        Write-Log "Error: workbook sheet bulunamadi"
+    foreach ($file in $files) {
+      $sourceKey = Get-SourceKey $file.Name
+      if ($sourceKey -and $seenSourceKeys.Contains($sourceKey)) {
+        $skippedDuplicates++
+        Write-Log "Skipping duplicate source key: $sourceKey ($($file.FullName))"
         continue
       }
-      if ($firstSheet.allSheetNames) {
-        Write-Log ("Sheets: {0}" -f (($firstSheet.allSheetNames) -join " | "))
-      }
-      Write-Log ("Sheet selected: {0}" -f $firstSheet.sheetName)
-
-      Write-Log "Stage: sheet xml"
-      $sheetText = Get-ZipText $zip $firstSheet.target
-      if (-not $sheetText) {
-        Write-Log "Failed file: $($file.FullName)"
-        Write-Log "Error: sheet xml okunamadi"
-        continue
-      }
-
-      Write-Log "Stage: cell map"
-      $map = Get-CellMapFromSheetText -SheetText $sheetText -SharedStrings $sharedStrings
-      Write-Log "Stage: record"
-      $record = Build-Record -FileName $file.Name -FileDate $file.LastWriteTime -Map $map -SheetName $firstSheet.sheetName
-      [void]$records.Add($record)
-      Write-Log "File done: $($file.FullName) (1 record)"
       if ($sourceKey) {
-        [void]$processedKeySet.Add($sourceKey)
+        [void]$seenSourceKeys.Add($sourceKey)
+      }
+
+      $processedFiles++
+      Write-Log "Reading file: $($file.FullName)"
+      try {
+        $zip = [System.IO.Compression.ZipFile]::OpenRead($file.FullName)
+        try {
+          Write-Log "Stage: shared strings"
+          $sharedStrings = Get-SharedStrings $zip
+          Write-Log "Stage: workbook"
+          $firstSheet = Get-WorkbookFirstSheetTarget $zip
+          if (-not $firstSheet) {
+            Write-Log "Failed file: $($file.FullName)"
+            Write-Log "Error: workbook sheet bulunamadi"
+            continue
+          }
+          if ($firstSheet.allSheetNames) {
+            Write-Log ("Sheets: {0}" -f (($firstSheet.allSheetNames) -join " | "))
+          }
+          Write-Log ("Sheet selected: {0}" -f $firstSheet.sheetName)
+
+          Write-Log "Stage: sheet xml"
+          $sheetText = Get-ZipText $zip $firstSheet.target
+          if (-not $sheetText) {
+            Write-Log "Failed file: $($file.FullName)"
+            Write-Log "Error: sheet xml okunamadi"
+            continue
+          }
+
+          Write-Log "Stage: cell map"
+          $map = Get-CellMapFromSheetText -SheetText $sheetText -SharedStrings $sharedStrings
+          Write-Log "Stage: record"
+          $record = Build-Record -FileName $file.Name -FileDate $file.LastWriteTime -Map $map -SheetName $firstSheet.sheetName
+          $recordKey = Get-RecordKey $record
+          if ($recordKey -and $recordIndexByKey.ContainsKey($recordKey)) {
+            $existingRecord = $mergedRecords[$recordIndexByKey[$recordKey]]
+            if ($existingRecord -and $existingRecord.id) {
+              $record.id = $existingRecord.id
+            }
+            $mergedRecords[$recordIndexByKey[$recordKey]] = $record
+            $updatedRecords++
+            Write-Log "File done: $($file.FullName) (updated existing record)"
+          }
+          else {
+            if (-not $recordKey) {
+              $recordKey = "fallback|" + ([Guid]::NewGuid().ToString("N"))
+            }
+            $recordIndexByKey[$recordKey] = $mergedRecords.Count
+            [void]$mergedRecords.Add($record)
+            $addedRecords++
+            Write-Log "File done: $($file.FullName) (new record)"
+          }
+        }
+        finally {
+          $zip.Dispose()
+        }
+      }
+      catch {
+        Write-Log "Failed file: $($file.FullName)"
+        Write-Log ("Error: {0}" -f $_.Exception.Message)
       }
     }
-    finally {
-      $zip.Dispose()
-    }
   }
-  catch {
-    Write-Log "Failed file: $($file.FullName)"
-    Write-Log ("Error: {0}" -f $_.Exception.Message)
-  }
+}
+catch {
+  Write-Log "Source scan could not be completed. Continuing with the existing database only."
+  Write-Log ("Source scan error: {0}" -f $_.Exception.Message)
 }
 
 $database = [ordered]@{
   generatedAt = (Get-Date).ToString("o")
   cutoffDate = $cutoff.ToString("o")
-  totalRecords = $records.Count
+  totalRecords = $mergedRecords.Count
   totalFiles = $processedFiles
   skippedDuplicates = $skippedDuplicates
-  skippedPreviouslyProcessed = $skippedPreviouslyProcessed
-  records = $records
+  existingRecords = $existingRecordCount
+  addedRecords = $addedRecords
+  updatedRecords = $updatedRecords
+  records = $mergedRecords
 }
 
 if (-not (Test-Path -LiteralPath $dataDir)) {
@@ -502,13 +579,13 @@ if (-not (Test-Path -LiteralPath $dataDir)) {
 
 $databaseJson = $database | ConvertTo-Json -Depth 10
 $databaseJson | Set-Content -LiteralPath $databasePath -Encoding utf8
-$databaseEncoded = [uri]::EscapeDataString($databaseJson)
-("window.LOCAL_DATABASE_TEXT = decodeURIComponent('" + $databaseEncoded + "');") | Set-Content -LiteralPath $localDatabaseJsPath -Encoding utf8
+$databaseJsLiteral = $databaseJson | ConvertTo-Json -Compress
+("window.LOCAL_DATABASE_TEXT = " + $databaseJsLiteral + ";") | Set-Content -LiteralPath $localDatabaseJsPath -Encoding utf8
 Write-Log "database.txt updated: $databasePath"
 Write-Log "local-database.js updated: $localDatabaseJsPath"
-Save-State -ProcessedKeys @($processedKeySet) -LastRunAt (Get-Date).ToString("o")
+Save-State -ProcessedKeys @($seenSourceKeys) -LastRunAt (Get-Date).ToString("o")
 Write-Log "sync-state.json updated: $statePath"
-Write-Log "Last 1 month: $($files.Count) files, $processedFiles processed, $skippedDuplicates duplicates skipped, $skippedPreviouslyProcessed already processed skipped, $($records.Count) records."
+Write-Log "Last 1 month: $($files.Count) files, $processedFiles processed, $skippedDuplicates duplicates skipped, $addedRecords new records, $updatedRecords updated records, $($mergedRecords.Count) total records."
 Write-Log ("Done in {0:n1} sec" -f ((Get-Date) - $startTime).TotalSeconds)
 
 Write-Log "Preparing Supabase export..."
