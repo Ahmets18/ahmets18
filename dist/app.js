@@ -1,11 +1,21 @@
+const AUTH_EMAIL = "artiebatlama18@local.invalid";
+const AUTH_CONFIRM_MESSAGE = "Supabase Authentication ayarlarında e-posta onayı kapalı olmalı.";
+
 const state = {
   database: null,
   filtered: [],
   currentPage: 1,
-  pageSize: 10
+  pageSize: 10,
+  appReady: false,
+  session: null
 };
 
 const elements = {
+  authScreen: document.getElementById("authScreen"),
+  loginForm: document.getElementById("loginForm"),
+  passwordInput: document.getElementById("passwordInput"),
+  authError: document.getElementById("authError"),
+  appShell: document.getElementById("appShell"),
   searchInput: document.getElementById("searchInput"),
   resultsBody: document.getElementById("resultsBody"),
   resultLabel: document.getElementById("resultLabel"),
@@ -15,38 +25,323 @@ const elements = {
   matchedRecords: document.getElementById("matchedRecords")
 };
 
-init().catch((error) => {
+let supabaseClient = null;
+
+bootstrap().catch((error) => {
   console.error(error);
-  elements.resultsBody.innerHTML = `<tr><td colspan="10" class="empty">Veri yüklenemedi. database.txt hazır değil.</td></tr>`;
-  elements.resultLabel.textContent = "Veri kaynağı okunamadı.";
+  if (elements.resultsBody) {
+    elements.resultsBody.innerHTML = `<tr><td colspan="8" class="empty">Canlı veri yüklenemedi. Supabase bağlantısını kontrol et.</td></tr>`;
+  }
+  if (elements.resultLabel) {
+    elements.resultLabel.textContent = "Canlı veri kaynağı okunamadı.";
+  }
 });
 
-async function init() {
+async function bootstrap() {
+  setupAuth();
+
+  const client = getSupabaseClient();
+  if (!client) {
+    lockApp();
+    setAuthError("Supabase bağlantısı bulunamadı.");
+    return;
+  }
+
+  const { data } = await client.auth.getSession();
+  state.session = data?.session ?? null;
+
+  client.auth.onAuthStateChange(async (_event, session) => {
+    state.session = session ?? null;
+    if (state.session) {
+      unlockApp();
+      await startApp();
+      return;
+    }
+
+    state.appReady = false;
+    state.database = null;
+    state.filtered = [];
+    lockApp();
+  });
+
+  if (state.session) {
+    unlockApp();
+    await startApp();
+    return;
+  }
+
+  lockApp();
+  setAuthError("");
+  elements.passwordInput?.focus();
+}
+
+function setupAuth() {
+  elements.loginForm?.addEventListener("submit", handleLogin);
+}
+
+function getSupabaseClient() {
+  if (supabaseClient) {
+    return supabaseClient;
+  }
+
+  const config = window.SUPABASE_CONFIG;
+  if (!window.supabase || !config?.url || !config?.anonKey) {
+    return null;
+  }
+
+  supabaseClient = window.supabase.createClient(config.url, config.anonKey, {
+    auth: {
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: false
+    }
+  });
+
+  return supabaseClient;
+}
+
+async function handleLogin(event) {
+  event.preventDefault();
+
+  const password = String(elements.passwordInput?.value ?? "");
+  if (!password) {
+    setAuthError("Şifre gir.");
+    return;
+  }
+
+  const client = getSupabaseClient();
+  if (!client) {
+    setAuthError("Supabase bağlantısı bulunamadı.");
+    return;
+  }
+
+  setAuthError("");
+
+  const signIn = await client.auth.signInWithPassword({
+    email: AUTH_EMAIL,
+    password
+  });
+
+  if (signIn.data?.session) {
+    state.session = signIn.data.session;
+    unlockApp();
+    await startApp();
+    return;
+  }
+
+  const signUp = await client.auth.signUp({
+    email: AUTH_EMAIL,
+    password
+  });
+
+  if (signUp.data?.session) {
+    state.session = signUp.data.session;
+    unlockApp();
+    await startApp();
+    return;
+  }
+
+  const message = signUp.error?.message || signIn.error?.message || AUTH_CONFIRM_MESSAGE;
+  if (/email/i.test(message) || /confirm/i.test(message)) {
+    setAuthError(AUTH_CONFIRM_MESSAGE);
+  } else if (/already registered/i.test(message)) {
+    setAuthError("Şifre yanlış.");
+  } else {
+    setAuthError(message);
+  }
+
+  elements.passwordInput?.focus();
+  elements.passwordInput?.select?.();
+}
+
+function setAuthError(message) {
+  if (elements.authError) {
+    elements.authError.textContent = message;
+  }
+}
+
+function lockApp() {
+  document.body.classList.remove("authenticated");
+  document.body.classList.add("auth-locked");
+  if (elements.authScreen) {
+    elements.authScreen.hidden = false;
+  }
+  if (elements.appShell) {
+    elements.appShell.hidden = true;
+  }
+}
+
+function unlockApp() {
+  document.body.classList.add("authenticated");
+  document.body.classList.remove("auth-locked");
+  if (elements.authScreen) {
+    elements.authScreen.hidden = true;
+  }
+  if (elements.appShell) {
+    elements.appShell.hidden = false;
+  }
+}
+
+async function startApp() {
+  if (state.appReady) {
+    return;
+  }
+
+  state.appReady = true;
   state.database = await loadDatabase();
   state.filtered = sortRecords(state.database.records ?? []);
 
   renderSummary();
   renderResults();
 
-  elements.searchInput.addEventListener("input", () => {
+  elements.searchInput?.addEventListener("input", () => {
     filterAndRender(elements.searchInput.value);
   });
 }
 
 async function loadDatabase() {
-  try {
-    const response = await fetch("./data/database.txt", { cache: "no-store" });
-    if (!response.ok) {
-      throw new Error(`Database not found: ${response.status}`);
-    }
-    return JSON.parse(await response.text());
-  } catch {
-    const seed = document.getElementById("databaseSeed")?.textContent?.trim();
-    if (seed) {
-      return JSON.parse(seed);
-    }
-    throw new Error("Database could not be loaded");
+  const embeddedDatabase = loadEmbeddedDatabase();
+  if (embeddedDatabase && Array.isArray(embeddedDatabase.records) && embeddedDatabase.records.length) {
+    return embeddedDatabase;
   }
+
+  const localDatabase = await loadDatabaseTxt();
+  if (localDatabase && Array.isArray(localDatabase.records) && localDatabase.records.length) {
+    return localDatabase;
+  }
+
+  const supabaseDatabase = await loadSupabaseDatabase();
+  if (supabaseDatabase && Array.isArray(supabaseDatabase.records) && supabaseDatabase.records.length) {
+    return supabaseDatabase;
+  }
+
+  return emptyDatabase();
+}
+
+function emptyDatabase() {
+  return {
+    generatedAt: new Date().toISOString(),
+    cutoffDate: "",
+    totalRecords: 0,
+    totalFiles: 0,
+    records: []
+  };
+}
+
+function loadEmbeddedDatabase() {
+  const text = window.LOCAL_DATABASE_TEXT;
+  if (!text || typeof text !== "string" || !text.trim()) {
+    return null;
+  }
+
+  try {
+    const parsed = JSON.parse(text);
+    const records = Array.isArray(parsed.records) ? parsed.records : [];
+    return {
+      generatedAt: parsed.generatedAt ?? new Date().toISOString(),
+      cutoffDate: parsed.cutoffDate ?? "",
+      totalRecords: Number(parsed.totalRecords ?? records.length),
+      totalFiles: Number(parsed.totalFiles ?? 0),
+      records
+    };
+  } catch (error) {
+    console.warn("Embedded database okunamadi.", error);
+    return null;
+  }
+}
+
+async function loadDatabaseTxt() {
+  try {
+    const response = await fetch("data/database.txt", { cache: "no-store" });
+    if (!response.ok) {
+      return null;
+    }
+    const text = await response.text();
+    if (!text.trim()) {
+      return null;
+    }
+    const parsed = JSON.parse(text);
+    if (!parsed || typeof parsed !== "object") {
+      return null;
+    }
+    const records = Array.isArray(parsed.records) ? parsed.records : [];
+    return {
+      generatedAt: parsed.generatedAt ?? new Date().toISOString(),
+      cutoffDate: parsed.cutoffDate ?? "",
+      totalRecords: Number(parsed.totalRecords ?? records.length),
+      totalFiles: Number(parsed.totalFiles ?? 0),
+      records
+    };
+  } catch (error) {
+    console.warn("database.txt okunamadi.", error);
+    return null;
+  }
+}
+
+async function loadSupabaseDatabase() {
+  const client = getSupabaseClient();
+  const config = window.SUPABASE_CONFIG;
+  if (!client || !config?.table) {
+    return null;
+  }
+
+  try {
+    const { data: rows, error } = await client
+      .from(config.table)
+      .select("*")
+      .order("order_date", { ascending: false });
+
+    if (error) {
+      throw error;
+    }
+
+    if (!Array.isArray(rows) || !rows.length) {
+      return emptyDatabase();
+    }
+
+    return buildDatabaseFromRows(rows);
+  } catch (error) {
+    console.warn("Supabase verisi okunamadi.", error);
+    return null;
+  }
+}
+
+function buildDatabaseFromRows(rows) {
+  const records = rows.map(normalizeSupabaseRow).filter(Boolean);
+  const totalFiles = new Set(records.map((record) => record.sourceFile).filter(Boolean)).size;
+  const orderDates = records
+    .map((record) => new Date(record.orderDate ?? 0).getTime())
+    .filter((value) => Number.isFinite(value) && value > 0);
+  const generatedAt = orderDates.length ? new Date(Math.max(...orderDates)).toISOString() : new Date().toISOString();
+  const cutoffDate = orderDates.length ? new Date(Math.min(...orderDates)).toISOString() : "";
+
+  return {
+    generatedAt,
+    cutoffDate,
+    totalRecords: records.length,
+    totalFiles,
+    records
+  };
+}
+
+function normalizeSupabaseRow(row) {
+  if (!row || typeof row !== "object") return null;
+  return {
+    id: row.id ?? "",
+    customerName: row.customer_name ?? "",
+    material: row.material ?? "",
+    color: row.color ?? "",
+    pvcMeters: row.pvc_meters ?? null,
+    quantity: row.quantity ?? null,
+    cutStatus: row.cut_status ?? "Bilinmiyor",
+    notes: row.notes ?? "",
+    cellHighlights: row.cell_highlights ?? [],
+    rangeNotes: row.range_notes ?? [],
+    orderDate: row.order_date ?? "",
+    sourceFile: row.source_file ?? "",
+    sheetName: row.sheet_name ?? "",
+    sourceRow: row.source_row ?? null
+  };
 }
 
 function renderSummary() {
@@ -67,6 +362,8 @@ function filterAndRender(query) {
             record.customerName,
             record.material,
             record.color,
+            record.opt,
+            record.plaka,
             record.cutStatus,
             record.notes,
             textifyItems(record.cellHighlights),
@@ -87,11 +384,9 @@ function filterAndRender(query) {
 function renderResults(query = "") {
   const count = state.filtered.length;
   if (!count) {
-    const message = query
-      ? `“${query}” için sonuç bulunamadı.`
-      : "Henüz içe aktarılmış kayıt yok.";
+    const message = query ? `"${query}" için sonuç bulunamadı.` : "Henüz içe aktarılmış kayıt yok.";
     elements.resultLabel.textContent = message;
-    elements.resultsBody.innerHTML = `<tr><td colspan="10" class="empty">${escapeHtml(message)}</td></tr>`;
+    elements.resultsBody.innerHTML = `<tr><td colspan="8" class="empty">${escapeHtml(message)}</td></tr>`;
     renderPager(0, 0);
     return;
   }
@@ -107,7 +402,7 @@ function renderResults(query = "") {
   const shown = pageItems.length;
 
   const label = query
-    ? `“${query}” için ${count} kayıt bulundu.`
+    ? `"${query}" için ${count} kayıt bulundu.`
     : `En yeni ${Math.min(count, state.pageSize)} kayıt gösteriliyor.`;
   elements.resultLabel.textContent = label;
 
@@ -158,17 +453,34 @@ function renderRow(record) {
   return `
     <tr>
       <td>${escapeHtml(date)}</td>
-      <td><strong>${escapeHtml(record.customerName)}</strong></td>
-      <td>${escapeHtml(record.sourceFile)}</td>
-      <td>${escapeHtml(record.material)}</td>
-      <td>${escapeHtml(record.color)}</td>
-      <td>${formatNumber(record.quantity)}</td>
+      <td>${escapeHtml(displayFileName(record.sourceFile))}</td>
+      <td>${escapeHtml(record.opt || getCellValue(record.cellHighlights, "D12") || "-")}</td>
+      <td>${escapeHtml(record.material || getCellValue(record.cellHighlights, "A15") || "-")}</td>
+      <td>${escapeHtml(record.plaka || buildPlakaValue(record.cellHighlights) || "-")}</td>
       <td>${formatNumber(record.pvcMeters)}</td>
       <td><span class="badge ${cutClass}">${escapeHtml(record.cutStatus || "Bilinmiyor")}</span></td>
-      <td>${formatCellHighlights(record.cellHighlights)}</td>
       <td>${formatRangeNotes(record.rangeNotes || record.notes)}</td>
     </tr>
   `;
+}
+
+function displayFileName(value) {
+  return String(value ?? "").replace(/\.xlsm$/i, "");
+}
+
+function getCellValue(items, cellName) {
+  const list = normalizeList(items);
+  const found = list.find((item) => item && typeof item === "object" && String(item.cell ?? "") === cellName);
+  return found?.value ?? "-";
+}
+
+function buildPlakaValue(items) {
+  const c46 = getCellValue(items, "C46");
+  const d15 = getCellValue(items, "D15");
+  const parts = [];
+  if (c46 && c46 !== "-") parts.push(c46);
+  if (d15 && d15 !== "-") parts.push(d15);
+  return parts.length ? parts.join(" ") : "-";
 }
 
 function sortRecords(records) {
@@ -178,20 +490,6 @@ function sortRecords(records) {
     if (rightTime !== leftTime) return rightTime - leftTime;
     return String(right.sourceFile ?? "").localeCompare(String(left.sourceFile ?? ""), "tr-TR");
   });
-}
-
-function formatCellHighlights(items) {
-  const list = normalizeList(items);
-  if (!list.length) return "<span class='muted'>-</span>";
-  return `<div class="cell-list">${list
-    .map((item) => {
-      const cell = escapeHtml(item.cell || "");
-      const label = escapeHtml(item.label || "");
-      const value = escapeHtml(item.value ?? "");
-      const header = label ? `${cell}: ${label}` : cell;
-      return `<div><strong>${header}</strong> - ${value}</div>`;
-    })
-    .join("")}</div>`;
 }
 
 function formatRangeNotes(items) {

@@ -6,12 +6,14 @@ from pathlib import Path
 
 ROOT_DIR = Path.cwd()
 DIST_DIR = ROOT_DIR / "dist"
-SITE_FILES = ["index.html", "styles.css", "app.js"]
-DATA_FILES = ["data/database.txt"]
+SITE_FILES = ["index.html", "styles.css", "app.js", "supabase.config.js"]
+DATA_FILES = []
 
 
 def main() -> None:
-    (DIST_DIR / "data").mkdir(parents=True, exist_ok=True)
+    if DIST_DIR.exists():
+        shutil.rmtree(DIST_DIR)
+    DIST_DIR.mkdir(parents=True, exist_ok=True)
 
     for file_name in SITE_FILES + DATA_FILES:
         source = ROOT_DIR / file_name

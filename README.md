@@ -1,38 +1,32 @@
 # Siparis Sunucusu
 
-Bu proje, `xlsm` dosyalarindan uretilen tek bir `data/database.txt` dosyasini GitHub Pages uzerinde yayinlayan basit siparis takip sitesidir.
+Bu proje, `xlsm` dosyalarindan ureyen siparis verisini Supabase'te tutan ve GitHub Pages uzerinde arayuz olarak yayinlayan takip sitesidir.
 
 ## Akis
 
-1. Ağ klasorundeki son 30 gunluk `xlsm` dosyalari yerelde `scripts/sync-from-share.ps1` ile okunur.
+1. `scripts/sync-from-share.ps1` son 1 gunluk `xlsm` dosyalarini tarar.
 2. Script `data/database.txt` dosyasini gunceller.
-3. Bu tek dosya repoya push edilir.
-4. GitHub Actions siteyi paketler ve GitHub Pages'e yayinlar.
-
-## Tek Elle Tutulan Dosya
-
-- `data/database.txt`
-
-Site veri kaynagı olarak sadece bu dosyayi kullanir.
+3. Veri Supabase'e aktarilir.
+4. GitHub Pages login sonrasinda Supabase verisini okur.
 
 ## Calistirma
 
-Yerel bilgisayarda:
+Yerel build uretmek icin:
 
 ```powershell
-.\scripts\sync-from-share.ps1
+& 'C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' .\scripts\build-site.py
 ```
 
-Varsayilan kaynak klasor:
+## Supabase
 
-```powershell
-\\ARTI\Schelling\YEDEK LİSTELER
-```
+`supabase.config.js` icine:
 
-## GitHub Pages
+- `url`
+- `anonKey`
+- `table`
 
-Repository ayarlarinda GitHub Pages kaynagi olarak `GitHub Actions` secili olmali.
+degerlerini gir.
 
 ## Not
 
-Bu ilk surumde arama ekrani, musterI adina gore son siparisleri listeler. Istersen sonra tarih filtresi, durum filtreleri ve detay gorunumu de ekleyebilirim.
+Arayuz, giris yapildiktan sonra Supabase'teki `orders` tablosundan veri okur.

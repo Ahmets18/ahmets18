@@ -1,48 +1,800 @@
-{
-  "generatedAt": "2026-05-18T13:17:14+03:00",
-  "cutoffDate": "2026-04-18T13:17:14+03:00",
-  "totalRecords": 1,
-  "totalFiles": 1,
-  "records": [
-    {
-      "id": "k614-senturk-1",
-      "customerName": "SENTURK",
-      "material": "BEYAZ MDF",
-      "color": "BEYAZ",
-      "pvcMeters": 22,
-      "quantity": 1,
-      "cutStatus": "Bilinmiyor",
-      "notes": "Ebatlama Hizmeti",
-      "cellHighlights": [
-        { "cell": "D5", "label": "OPTİMİZE NO", "value": "K614 SENTURK" },
-        { "cell": "D9", "label": "FİRMA ADI", "value": "SENTURK" },
-        { "cell": "D10", "label": "MÜŞTERİ ADI", "value": "0" },
-        { "cell": "D11", "label": "TELEFON NO", "value": "0" },
-        { "cell": "D12", "label": "OPTİ. BİLGİSAYARI", "value": "ARTI" },
-        { "cell": "O9", "label": "SİPARİŞ TARİHİ", "value": "18.05.2026" },
-        { "cell": "A15", "label": "MALZEME", "value": "BEYAZ MDF" },
-        { "cell": "D15", "label": "EBAT", "value": "18M 2800X2100" },
-        { "cell": "I15", "label": "ADET", "value": "1" },
-        { "cell": "C46", "label": "TOPLAM", "value": "1" }
-      ],
-      "rangeNotes": [
-        { "cell": "A3", "label": "", "value": "ARTI EBATLAMA" },
-        { "cell": "A4", "label": "", "value": "İMG DIŞ TİCARET" },
-        { "cell": "A5", "label": "", "value": "OPTİMİZE NO:" },
-        { "cell": "A9", "label": "", "value": "FİRMA ADI" },
-        { "cell": "A10", "label": "", "value": "MÜŞTERİ ADI" },
-        { "cell": "A11", "label": "", "value": "TELEFON NO" },
-        { "cell": "A12", "label": "", "value": "OPTİ. BİLGİSAYARI:" },
-        { "cell": "A14", "label": "", "value": "MALZEME" },
-        { "cell": "D14", "label": "", "value": "EBAT" },
-        { "cell": "I14", "label": "", "value": "ADET" },
-        { "cell": "O9", "label": "", "value": "SİPARİŞ TARİHİ" },
-        { "cell": "B46", "label": "", "value": "Toplam" }
-      ],
-      "orderDate": "2026-05-18T13:17:14+03:00",
-      "sourceFile": "K614 SENTURK.xlsm",
-      "sheetName": "HESAP1",
-      "sourceRow": 47
-    }
-  ]
+﻿{
+    "generatedAt":  "2026-05-19T21:47:03.9454674+03:00",
+    "cutoffDate":  "2026-05-18T21:46:39.8126898+03:00",
+    "totalRecords":  36,
+    "totalFiles":  36,
+    "records":  [
+                    {
+                        "id":  "cec37a09a5ee4fb0a0a19026cc00b8b9",
+                        "customerName":  "K662 AHMET YASIN",
+                        "material":  "AYTAŞI ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  3,
+                        "quantity":  3,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T09:17:20.0000000",
+                        "sourceFile":  "K662 AHMET YASIN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "66265dc8378948c99c6130597dfb69c2",
+                        "customerName":  "K667 AHMET YASIN",
+                        "material":  "AYTAŞI MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T09:33:49.0000000",
+                        "sourceFile":  "K667 AHMET YASIN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "ef295ca5d3c2421e9da8fa150f9cb799",
+                        "customerName":  "K685 AZPEK",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  3,
+                        "quantity":  3,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T14:05:26.0000000",
+                        "sourceFile":  "K685 AZPEK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "f2e5ce5da2ad4514be1129b80e51f097",
+                        "customerName":  "K686 AZPEK",
+                        "material":  "BEYAZ ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T14:07:30.0000000",
+                        "sourceFile":  "K686 AZPEK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "a6469fa8e9d64049991e073df260cb1a",
+                        "customerName":  "K687 BURAK ULUOCAK",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  4,
+                        "quantity":  4,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T14:26:33.0000000",
+                        "sourceFile":  "K687 BURAK ULUOCAK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "20d52f18bdcf4056a9a8385570fc9264",
+                        "customerName":  "K688 BURAK ULUOCAK",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T14:37:11.0000000",
+                        "sourceFile":  "K688 BURAK ULUOCAK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 4M 2800X2100"
+                    },
+                    {
+                        "id":  "8513698b492d472d953b7e08e5595274",
+                        "customerName":  "K682 FATIH ABI",
+                        "material":  "DÜZ BEYAZ MDFLAM",
+                        "color":  "ERBAY",
+                        "pvcMeters":  3,
+                        "quantity":  3,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T12:14:56.0000000",
+                        "sourceFile":  "K682 FATIH ABI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ERBAY",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "54d8a80542ce4c29a4fcc2dbc06ea21e",
+                        "customerName":  "K664 HALIL KARAKOC",
+                        "material":  "RETRO TAŞ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T09:27:37.0000000",
+                        "sourceFile":  "K664 HALIL KARAKOC.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "5b16d8038c824137adaf0768b17523db",
+                        "customerName":  "K665 HALIL KARAKOC",
+                        "material":  "NTR BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  2,
+                        "quantity":  2,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T09:29:41.0000000",
+                        "sourceFile":  "K665 HALIL KARAKOC.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "924827f711c74460a2e888d88126e76c",
+                        "customerName":  "K689 ILHAMI BILGIC",
+                        "material":  "SİYAH HG PARLAK",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T14:46:38.0000000",
+                        "sourceFile":  "K689 ILHAMI BILGIC.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X1220"
+                    },
+                    {
+                        "id":  "60cfe08f7036494d964166fefc0eb340",
+                        "customerName":  "K659 ISA ISPIR",
+                        "material":  "AKRİLİK PARLAK",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T09:10:55.0000000",
+                        "sourceFile":  "K659 ISA ISPIR.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X1220"
+                    },
+                    {
+                        "id":  "c16d74b51a704103a542b8c697311bb6",
+                        "customerName":  "K660 ISA ISPIR",
+                        "material":  "PARLAK MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T09:12:24.0000000",
+                        "sourceFile":  "K660 ISA ISPIR.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "1bb8918c58864f94aa28351bc658271e",
+                        "customerName":  "K661 ISA ISPIR",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T09:13:42.0000000",
+                        "sourceFile":  "K661 ISA ISPIR.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 5M 2800X2100"
+                    },
+                    {
+                        "id":  "9d0fbe10cbcb450d9bbcafa380e22d61",
+                        "customerName":  "K673 MUSTAFA AYDIN",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  9,
+                        "quantity":  9,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T11:28:01.0000000",
+                        "sourceFile":  "K673 MUSTAFA AYDIN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "9 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "c5c9ba60845f40419b42453d53099e00",
+                        "customerName":  "K674 MUSTAFA AYDIN",
+                        "material":  "CAPPUCİNO HG",
+                        "color":  "ARTI",
+                        "pvcMeters":  2,
+                        "quantity":  2,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T11:31:04.0000000",
+                        "sourceFile":  "K674 MUSTAFA AYDIN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X1220"
+                    },
+                    {
+                        "id":  "05c508f70a0248548951fe17c518b807",
+                        "customerName":  "K675 MUSTAFA AYDIN",
+                        "material":  "BEYAZ HG",
+                        "color":  "ARTI",
+                        "pvcMeters":  4,
+                        "quantity":  4,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T11:34:02.0000000",
+                        "sourceFile":  "K675 MUSTAFA AYDIN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 2800X1220"
+                    },
+                    {
+                        "id":  "787f898893fd4a8db8d3b0998d07d150",
+                        "customerName":  "K504 NIHAT ATAKAN",
+                        "material":  "RUSTİKAL ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-14T11:53:01.0000000",
+                        "sourceFile":  "K504 NIHAT ATAKAN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "c6799cb4bb304f4ba00e3e78c1c28d29",
+                        "customerName":  "K684 NUR MOBILYA",
+                        "material":  "SEDEF KREM MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T12:38:49.0000000",
+                        "sourceFile":  "K684 NUR MOBILYA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "f48127132fac44298c0ba008d6a4f3ca",
+                        "customerName":  "K668 OSMAN AYDOGMUS",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  3,
+                        "quantity":  4,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T10:39:13.0000000",
+                        "sourceFile":  "K668 OSMAN AYDOGMUS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "04d9027749ef47768ee9ec8cf0828c93",
+                        "customerName":  "K669 OSMAN AYDOGMUS",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T10:41:28.0000000",
+                        "sourceFile":  "K669 OSMAN AYDOGMUS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 5M 2800X2100"
+                    },
+                    {
+                        "id":  "0fec8e2145dd440c8f244a013315681b",
+                        "customerName":  "K678 PASHA",
+                        "material":  "KARİNA MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  3,
+                        "quantity":  3,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T12:04:11.0000000",
+                        "sourceFile":  "K678 PASHA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "307779e75fcc4806ae69efefb78a82b1",
+                        "customerName":  "K679 PASHA",
+                        "material":  "ANTRASİT MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T12:05:21.0000000",
+                        "sourceFile":  "K679 PASHA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "221b1b936ca74677974f237831e94b60",
+                        "customerName":  "K680 PASHA",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  3,
+                        "quantity":  3,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T12:10:06.0000000",
+                        "sourceFile":  "K680 PASHA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "6093dde3d13148eabaff1550b16a7a74",
+                        "customerName":  "K676 SAFAK SEVEN",
+                        "material":  "MOZAMBİK MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  2,
+                        "quantity":  2,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T11:54:12.0000000",
+                        "sourceFile":  "K676 SAFAK SEVEN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "cdbe68c12c83452882b61828bcb55ad9",
+                        "customerName":  "K677 SAFAK SEVEN",
+                        "material":  "MOZAMBİK LAK PANEL",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T11:55:09.0000000",
+                        "sourceFile":  "K677 SAFAK SEVEN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "4e53c7e1c13e445ba0cd0a5aae3efec9",
+                        "customerName":  "K670 USTA TANITIM",
+                        "material":  "SAFİR MEŞE SUNTA",
+                        "color":  "ARTI",
+                        "pvcMeters":  2,
+                        "quantity":  2,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T10:57:39.0000000",
+                        "sourceFile":  "K670 USTA TANITIM.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "06ba421fd19d41ec9f1bb486cdd5169d",
+                        "customerName":  "K671 USTA TANITIM",
+                        "material":  "BEYAZ SUNTA",
+                        "color":  "ARTI",
+                        "pvcMeters":  2,
+                        "quantity":  2,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T11:05:47.0000000",
+                        "sourceFile":  "K671 USTA TANITIM.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "286e39e1cf1a4037a51576fa75405188",
+                        "customerName":  "K672 USTA TANITIM",
+                        "material":  "SİYAH NTR SUNTA",
+                        "color":  "ARTI",
+                        "pvcMeters":  2,
+                        "quantity":  2,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T11:07:09.0000000",
+                        "sourceFile":  "K672 USTA TANITIM.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "4230bf1b9cab4041a7166a3300449627",
+                        "customerName":  "K683 USTA TANITIM",
+                        "material":  "HAM MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  6,
+                        "quantity":  6,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T12:30:32.0000000",
+                        "sourceFile":  "K683 USTA TANITIM.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "6 PLK 6M 2800X2100"
+                    },
+                    {
+                        "id":  "720eaa7aa7b94a4db7c00f1741349a9e",
+                        "customerName":  "K657 YAMANLAR",
+                        "material":  "AYTAŞI MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  4,
+                        "quantity":  4,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T08:55:19.0000000",
+                        "sourceFile":  "K657 YAMANLAR.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "9b1d79d8d0ef4a43b4883fcb2979a599",
+                        "customerName":  "K648 YUNUS AK",
+                        "material":  "AYTAŞI ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T09:04:55.0000000",
+                        "sourceFile":  "K648 YUNUS AK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "b75b6270262e4c5cb69a24cce6129680",
+                        "customerName":  "K653 YUNUS AK",
+                        "material":  "SAFİR MEŞE ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T08:37:14.0000000",
+                        "sourceFile":  "K653 YUNUS AK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "761e89da6c03483e8d47fa34c11518c5",
+                        "customerName":  "K654 YUNUS AK",
+                        "material":  "ÇÖL BEJİ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  3,
+                        "quantity":  3,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T08:50:24.0000000",
+                        "sourceFile":  "K654 YUNUS AK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "ec83ef40f3024644853da80a8bfb28cd",
+                        "customerName":  "K655 YUNUS AK",
+                        "material":  "ÇÖL BEJİ ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  1,
+                        "quantity":  1,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T08:51:56.0000000",
+                        "sourceFile":  "K655 YUNUS AK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "678bd5bb3464414cad44d7d85e70161e",
+                        "customerName":  "K656 YUNUS AK",
+                        "material":  "YT38D PUDRA KREM MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  8,
+                        "quantity":  8,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T08:58:19.0000000",
+                        "sourceFile":  "K656 YUNUS AK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "8 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "3ff8fc8ac0164481b5a1c5a61923bd6f",
+                        "customerName":  "K658 YUNUS AK",
+                        "material":  "PUDRA KREM ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  2,
+                        "quantity":  2,
+                        "cutStatus":  "Bilinmiyor",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+
+                                       ],
+                        "orderDate":  "2026-05-19T09:01:41.0000000",
+                        "sourceFile":  "K658 YUNUS AK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 8M 2800X2100"
+                    }
+                ]
 }

@@ -8,12 +8,28 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main class="shell">
+    <section class="auth-screen" id="authScreen" aria-label="Giriş ekranı">
+      <form class="auth-card" id="loginForm" autocomplete="off">
+        <div class="auth-copy">
+          <p class="auth-kicker">Sipariş Takip</p>
+          <h1>Giriş Yap</h1>
+          <p>Devam etmek için şifreyi gir.</p>
+        </div>
+        <label class="auth-field" for="passwordInput">
+          <span>Şifre</span>
+          <input id="passwordInput" type="password" autocomplete="current-password" placeholder="Şifre" />
+        </label>
+        <p class="auth-error" id="authError" role="alert" aria-live="polite"></p>
+        <button class="auth-button" type="submit">Giriş</button>
+      </form>
+    </section>
+
+    <main class="shell" id="appShell" hidden>
       <section class="hero">
         <aside class="hero-panel">
           <label class="search-label" for="searchInput">Müşteri adı ara</label>
           <input id="searchInput" type="search" placeholder="Örn. Ahmet Demirel" autocomplete="off" />
-          <p class="hint">Adın bir kısmını yazman yeterli. Son siparişler otomatik listelenir.</p>
+          <p class="hint">Kısmını yaz. Son siparişler listelenir.</p>
           <div class="mini-stats" aria-label="Özet bilgiler">
             <span><strong id="totalRecords">0</strong> Toplam kayıt</span>
             <span><strong id="totalFiles">0</strong> İşlenen dosya</span>
@@ -33,116 +49,23 @@
             <thead>
               <tr>
                 <th>Tarih</th>
-                <th>Müşteri</th>
                 <th>Dosya</th>
-                <th>Malzeme</th>
-                <th>Renk</th>
-                <th>Adet</th>
+                <th>OPT</th>
+                <th>MALZEME</th>
+                <th>PLAKA</th>
                 <th>PVC Metraj</th>
                 <th>Kesim</th>
-                <th>Hücreler</th>
                 <th>Notlar</th>
               </tr>
             </thead>
-            <tbody id="resultsBody">
-              <tr>
-                <td>18.05.2026</td>
-                <td><strong>SENTURK</strong></td>
-                <td>K614 SENTURK.xlsm</td>
-                <td>BEYAZ MDF</td>
-                <td>BEYAZ</td>
-                <td>1</td>
-                <td>22</td>
-                <td><span class="badge unknown">Bilinmiyor</span></td>
-                <td>
-                  <div class="cell-list">
-                    <div><strong>D5:</strong> OPTİMİZE NO - K614 SENTURK</div>
-                    <div><strong>D9:</strong> FİRMA ADI - SENTURK</div>
-                    <div><strong>D10:</strong> MÜŞTERİ ADI - 0</div>
-                    <div><strong>D11:</strong> TELEFON NO - 0</div>
-                    <div><strong>D12:</strong> OPTİ. BİLGİSAYARI - ARTI</div>
-                    <div><strong>O9:</strong> SİPARİŞ TARİHİ - 18.05.2026</div>
-                    <div><strong>A15:</strong> MALZEME - BEYAZ MDF</div>
-                    <div><strong>D15:</strong> EBAT - 18M 2800X2100</div>
-                    <div><strong>I15:</strong> ADET - 1</div>
-                    <div><strong>C46:</strong> TOPLAM - 1</div>
-                  </div>
-                </td>
-                <td>
-                  <div class="cell-list">
-                    <div>A3: ARTI EBATLAMA</div>
-                    <div>A4: İMG DIŞ TİCARET</div>
-                    <div>A5: OPTİMİZE NO:</div>
-                    <div>A9: FİRMA ADI</div>
-                    <div>A10: MÜŞTERİ ADI</div>
-                    <div>A11: TELEFON NO</div>
-                    <div>A12: OPTİ. BİLGİSAYARI:</div>
-                    <div>A14: MALZEME</div>
-                    <div>D14: EBAT</div>
-                    <div>I14: ADET</div>
-                    <div>O9: SİPARİŞ TARİHİ</div>
-                    <div>B46: Toplam</div>
-                    <div>Hücreler arası metinler not olarak burada gösterilir.</div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
+            <tbody id="resultsBody"></tbody>
           </table>
         </div>
       </section>
     </main>
 
-    <script id="databaseSeed" type="application/json">
-      {
-        "generatedAt": "2026-05-18T13:17:14+03:00",
-        "cutoffDate": "2026-04-18T13:17:14+03:00",
-        "totalRecords": 1,
-        "totalFiles": 1,
-        "records": [
-          {
-            "id": "k614-senturk-1",
-            "customerName": "SENTURK",
-            "material": "BEYAZ MDF",
-            "color": "BEYAZ",
-            "pvcMeters": 22,
-            "quantity": 1,
-            "cutStatus": "Bilinmiyor",
-            "notes": "Ebatlama Hizmeti",
-            "cellHighlights": [
-              { "cell": "D5", "label": "OPTİMİZE NO", "value": "K614 SENTURK" },
-              { "cell": "D9", "label": "FİRMA ADI", "value": "SENTURK" },
-              { "cell": "D10", "label": "MÜŞTERİ ADI", "value": "0" },
-              { "cell": "D11", "label": "TELEFON NO", "value": "0" },
-              { "cell": "D12", "label": "OPTİ. BİLGİSAYARI", "value": "ARTI" },
-              { "cell": "O9", "label": "SİPARİŞ TARİHİ", "value": "18.05.2026" },
-              { "cell": "A15", "label": "MALZEME", "value": "BEYAZ MDF" },
-              { "cell": "D15", "label": "EBAT", "value": "18M 2800X2100" },
-              { "cell": "I15", "label": "ADET", "value": "1" },
-              { "cell": "C46", "label": "TOPLAM", "value": "1" }
-            ],
-            "rangeNotes": [
-              { "cell": "A3", "label": "", "value": "ARTI EBATLAMA" },
-              { "cell": "A4", "label": "", "value": "İMG DIŞ TİCARET" },
-              { "cell": "A5", "label": "", "value": "OPTİMİZE NO:" },
-              { "cell": "A9", "label": "", "value": "FİRMA ADI" },
-              { "cell": "A10", "label": "", "value": "MÜŞTERİ ADI" },
-              { "cell": "A11", "label": "", "value": "TELEFON NO" },
-              { "cell": "A12", "label": "", "value": "OPTİ. BİLGİSAYARI:" },
-              { "cell": "A14", "label": "", "value": "MALZEME" },
-              { "cell": "D14", "label": "", "value": "EBAT" },
-              { "cell": "I14", "label": "", "value": "ADET" },
-              { "cell": "O9", "label": "", "value": "SİPARİŞ TARİHİ" },
-              { "cell": "B46", "label": "", "value": "Toplam" }
-            ],
-            "orderDate": "2026-05-18T13:17:14+03:00",
-            "sourceFile": "K614 SENTURK.xlsm",
-            "sheetName": "HESAP1",
-            "sourceRow": 47
-          }
-        ]
-      }
-    </script>
-
+    <script src="./supabase.config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="./app.js"></script>
   </body>
 </html>
