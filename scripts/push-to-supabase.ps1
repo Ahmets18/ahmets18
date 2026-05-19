@@ -69,13 +69,18 @@ function Convert-ToSupabaseRow {
 $payload = @($rows | ForEach-Object { Convert-ToSupabaseRow $_ }) | ConvertTo-Json -Depth 12
 $endpoint = "$($supabaseUrl.TrimEnd('/'))/rest/v1/$supabaseTable?on_conflict=id"
 
+$headers = @{
+  apikey = $supabaseServiceKey
+  "Content-Type" = "application/json"
+  Prefer = "resolution=merge-duplicates,return=minimal"
+}
+
+if ($supabaseServiceKey -notmatch '^sb_(publishable|secret)_') {
+  $headers.Authorization = "Bearer $supabaseServiceKey"
+}
+
 try {
-  Invoke-RestMethod -Method Post -Uri $endpoint -Headers @{
-    apikey = $supabaseServiceKey
-    Authorization = "Bearer $supabaseServiceKey"
-    "Content-Type" = "application/json"
-    Prefer = "resolution=merge-duplicates,return=minimal"
-  } -Body $payload | Out-Null
+  Invoke-RestMethod -Method Post -Uri $endpoint -Headers $headers -Body $payload | Out-Null
 }
 catch {
   $statusCode = ""
