@@ -33,6 +33,9 @@ if (-not $supabaseUrl -or -not $supabaseServiceKey) {
   throw "SUPABASE_URL and SUPABASE_SERVICE_KEY must be set, or secrets\supabase.local.json must exist."
 }
 
+Write-Host "Supabase target: $supabaseUrl"
+Write-Host "Supabase table: $supabaseTable"
+
 $database = Get-Content -LiteralPath $DatabasePath -Raw | ConvertFrom-Json
 $rows = @($database.records)
 
@@ -66,11 +69,37 @@ function Convert-ToSupabaseRow {
 $payload = @($rows | ForEach-Object { Convert-ToSupabaseRow $_ }) | ConvertTo-Json -Depth 12
 $endpoint = "$($supabaseUrl.TrimEnd('/'))/rest/v1/$supabaseTable?on_conflict=id"
 
-Invoke-RestMethod -Method Post -Uri $endpoint -Headers @{
-  apikey = $supabaseServiceKey
-  Authorization = "Bearer $supabaseServiceKey"
-  "Content-Type" = "application/json"
-  Prefer = "resolution=merge-duplicates,return=minimal"
-} -Body $payload | Out-Null
+try {
+  Invoke-RestMethod -Method Post -Uri $endpoint -Headers @{
+    apikey = $supabaseServiceKey
+    Authorization = "Bearer $supabaseServiceKey"
+    "Content-Type" = "application/json"
+    Prefer = "resolution=merge-duplicates,return=minimal"
+  } -Body $payload | Out-Null
+}
+catch {
+  $statusCode = ""
+  $responseBody = ""
+  try {
+    $webException = $_.Exception
+    if ($webException.Response) {
+      $statusCode = [int]$webException.Response.StatusCode
+      $stream = $webException.Response.GetResponseStream()
+      if ($stream) {
+        $reader = New-Object System.IO.StreamReader($stream)
+        try { $responseBody = $reader.ReadToEnd() } finally { $reader.Dispose() }
+      }
+    }
+  }
+  catch {
+    # ignore secondary logging failures
+  }
+
+  if ($statusCode) {
+    throw "Supabase publish failed with HTTP $statusCode. $responseBody"
+  }
+
+  throw
+}
 
 Write-Host "Published $($rows.Count) rows to Supabase table '$supabaseTable'."
