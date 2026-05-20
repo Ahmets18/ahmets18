@@ -1,5 +1,6 @@
 const AUTH_PASSWORD = "artiebatlama18";
 const AUTH_ERROR_MESSAGE = "Giriş sırasında bir hata oluştu. Şifreyi kontrol et ve tekrar dene.";
+const SESSION_STORAGE_KEY = "siparis_supabase_session";
 
 const state = {
   database: null,
@@ -103,6 +104,23 @@ function unlockApp() {
   }
   if (elements.appShell) {
     elements.appShell.hidden = false;
+  }
+}
+
+function loadStoredSession() {
+  try {
+    const raw = sessionStorage.getItem(SESSION_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function saveStoredSession(session) {
+  try {
+    sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
+  } catch (error) {
+    console.warn("Session kaydedilemedi.", error);
   }
 }
 
