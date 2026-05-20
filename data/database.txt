@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-20T13:30:26.8075162+03:00",
-    "cutoffDate":  "2026-04-20T13:30:01.4027519+03:00",
-    "totalRecords":  959,
-    "totalFiles":  954,
+    "generatedAt":  "2026-05-20T14:00:25.9663838+03:00",
+    "cutoffDate":  "2026-04-20T14:00:01.4468441+03:00",
+    "totalRecords":  960,
+    "totalFiles":  952,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -23690,6 +23690,32 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "2d5d74837b804fa4a2a6a6aa1e494212",
+                        "customerName":  "K713 PERAKENDE",
+                        "jobCode":  "K713 PERAKENDE",
+                        "d5":  "K713 PERAKENDE",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  120,
+                        "quantity":  4,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L27",
+                                           "label":  "L27",
+                                           "value":  "GEÇENİ BİZDEN KES 1M2"
+                                       },
+                        "orderDate":  "2026-05-20T13:47:12.0000000",
+                        "sourceFile":  "K713 PERAKENDE.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 3660X1830"
                     }
                 ]
 }
