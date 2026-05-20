@@ -178,7 +178,7 @@ function Build-CellHighlights {
     [void]$items.Add([ordered]@{ cell = "D15"; label = "PLAKA DETAY"; value = $PlakaDetail })
   }
   if ($null -ne $PvcMeters -and $PvcMeters -ne "") {
-    [void]$items.Add([ordered]@{ cell = "I15"; label = "PVC METRAJ"; value = [string]$PvcMeters })
+    [void]$items.Add([ordered]@{ cell = "C53"; label = "PVC METRAJ"; value = [string]$PvcMeters })
   }
   if ($OrderDate) {
     [void]$items.Add([ordered]@{ cell = "O9"; label = "TARIH"; value = $OrderDate.ToString("o") })
@@ -242,6 +242,18 @@ function Is-MeasurementLike {
   $matchesPlate = $Value -match '^\d+M\s+\d+[xX]\d+$'
   $matchesMm = $Value -match '^\d+MM$'
   return ($matchesNumber -or $matchesSize -or $matchesPlate -or $matchesMm)
+}
+
+function Is-MeaningfulNoteValue {
+  param([object]$Value)
+  $text = Clean-Text $Value
+  if (-not $text) { return $false }
+  if ($text -eq "-") { return $false }
+  if (Is-MeasurementLike $text) { return $false }
+  if ($text -match '^[xX]$') { return $false }
+  if ($text -match '^\d+\*?$') { return $false }
+  $letters = ($text -replace '[^A-Za-zÇĞİÖŞÜçğıöşü]', '')
+  return ($letters.Length -ge 2)
 }
 
 function Get-CustomerFromFilename {
@@ -510,7 +522,7 @@ function Build-RangeNotes {
       $ref = ([char](64 + $c)) + $r
       $value = Get-CellValue $Map $ref
       if (-not $value) { continue }
-      if (Is-MeasurementLike $value) { continue }
+      if (-not (Is-MeaningfulNoteValue $value)) { continue }
       [void]$items.Add([ordered]@{
         cell = $ref
         label = $ref
@@ -533,8 +545,7 @@ function Build-Record {
   $material = Get-CellValue $Map "A15"
   $c46 = Get-CellValue $Map "C46"
   $d15 = Get-CellValue $Map "D15"
-  $i15 = Get-CellValue $Map "I15"
-  $pvcMeters = Parse-PvcMeters $d15 $i15
+  $pvcMeters = Parse-Number (Get-CellValue $Map "C53")
   $orderDate = Parse-Date (Get-CellValue $Map "O9") $FileDate
 
   $plaka = ""
