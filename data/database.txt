@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-20T15:00:28.5490089+03:00",
-    "cutoffDate":  "2026-04-20T15:00:01.4276391+03:00",
-    "totalRecords":  962,
-    "totalFiles":  952,
+    "generatedAt":  "2026-05-20T15:30:30.6869221+03:00",
+    "cutoffDate":  "2026-04-20T15:30:01.4998197+03:00",
+    "totalRecords":  967,
+    "totalFiles":  955,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -423,7 +423,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  106,
                         "quantity":  4,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -1025,7 +1025,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  3,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -1049,7 +1049,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  11,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -23386,7 +23386,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  42,
                         "quantity":  3,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -23763,6 +23763,126 @@
                         "sheetName":  "HESAP1",
                         "sourceRow":  1,
                         "opt":  "ERBAY",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "5ead426d3c8543fdb0db53c9254946f6",
+                        "customerName":  "K717 CR MOBILYA",
+                        "jobCode":  "K717 CR MOBILYA",
+                        "d5":  "K717 CR MOBILYA",
+                        "material":  "RETRO GÜMÜŞ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T15:00:57.0000000",
+                        "sourceFile":  "K717 CR MOBILYA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "350e2ab80f47400a991c8c75dd591ea0",
+                        "customerName":  "K718 CR MOBILYA",
+                        "jobCode":  "K718 CR MOBILYA",
+                        "d5":  "K718 CR MOBILYA",
+                        "material":  "TEAK MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T15:01:31.0000000",
+                        "sourceFile":  "K718 CR MOBILYA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "75955e3d131d42a3b25d3638a08a1226",
+                        "customerName":  "K719 CR MOBILYA",
+                        "jobCode":  "K719 CR MOBILYA",
+                        "d5":  "K719 CR MOBILYA",
+                        "material":  "KOYU GRİ LAK PANEL",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T15:15:04.0000000",
+                        "sourceFile":  "K719 CR MOBILYA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "a2dd479ac6fc4ab49a6ba64cd842df7b",
+                        "customerName":  "K720 CR MOBILYA",
+                        "jobCode":  "K720 CR MOBILYA",
+                        "d5":  "K720 CR MOBILYA",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T15:16:01.0000000",
+                        "sourceFile":  "K720 CR MOBILYA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "96b42b0b997646368bd8c7f42034b05a",
+                        "customerName":  "K681 PERAKENDE",
+                        "jobCode":  "K681 PERAKENDE",
+                        "d5":  "K681 PERAKENDE",
+                        "material":  "HAM MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T15:27:48.0000000",
+                        "sourceFile":  "K681 PERAKENDE.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X2100"
                     }
                 ]
