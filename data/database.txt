@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-20T16:00:25.5440279+03:00",
-    "cutoffDate":  "2026-04-20T16:00:01.4923497+03:00",
-    "totalRecords":  967,
-    "totalFiles":  955,
+    "generatedAt":  "2026-05-20T16:30:26.0512215+03:00",
+    "cutoffDate":  "2026-04-20T16:30:01.4901183+03:00",
+    "totalRecords":  968,
+    "totalFiles":  953,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -23884,6 +23884,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "bcc5f0649dfe43cfbc1659de2427754a",
+                        "customerName":  "K721 AKEL FUAR",
+                        "jobCode":  "K721 AKEL FUAR",
+                        "d5":  "K721 AKEL FUAR",
+                        "material":  "SEDEF KREM MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  55,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T16:23:14.0000000",
+                        "sourceFile":  "K721 AKEL FUAR.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 3660X1830"
                     }
                 ]
 }
