@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-20T17:30:22.9205662+03:00",
-    "cutoffDate":  "2026-04-20T17:30:01.4890607+03:00",
-    "totalRecords":  968,
-    "totalFiles":  945,
+    "generatedAt":  "2026-05-20T18:00:30.3092781+03:00",
+    "cutoffDate":  "2026-04-20T18:00:01.4622469+03:00",
+    "totalRecords":  969,
+    "totalFiles":  941,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -23908,6 +23908,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "2 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "229dd7b07f3b49e3affdbaf51b5f3657",
+                        "customerName":  "K722 TEMEL URER",
+                        "jobCode":  "K722 TEMEL URER",
+                        "d5":  "K722 TEMEL URER",
+                        "material":  "SİS GRİ LAK PANEL",
+                        "color":  "ERBAY",
+                        "pvcMeters":  653,
+                        "quantity":  23,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T17:47:24.0000000",
+                        "sourceFile":  "K722 TEMEL URER.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ERBAY",
+                        "plaka":  "23 PLK 18M 2800X2100"
                     }
                 ]
 }
