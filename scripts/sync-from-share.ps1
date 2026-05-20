@@ -18,6 +18,8 @@ $publishScriptPath = Join-Path $scriptsDir "publish-live-data.ps1"
 $logPath = Join-Path $logDir "sync.log"
 $cutoff = (Get-Date).AddMonths(-1)
 $fileTimeoutSeconds = 20
+$cutDataRoot = "\\Schelling01\d\Schelling\SchellingData\NCData"
+$script:CutStatusIndex = $null
 
 if (-not ("System.IO.Compression.ZipFile" -as [type])) {
   Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -267,6 +269,41 @@ function Get-SourceKeyFromName {
   return $baseName.ToUpperInvariant()
 }
 
+function Get-CutStatusIndex {
+  if ($script:CutStatusIndex) {
+    return $script:CutStatusIndex
+  }
+
+  $byCode = @{}
+  $rootAvailable = $false
+
+  try {
+    $rootAvailable = Test-Path -LiteralPath $cutDataRoot
+    if ($rootAvailable) {
+      foreach ($folder in Get-ChildItem -LiteralPath $cutDataRoot -Directory -Filter "*.l" -ErrorAction Stop) {
+        $code = Get-SourceKeyFromName $folder.Name
+        if (-not $code) { continue }
+
+        $doneFile = Join-Path $folder.FullName "0000.ipz"
+        $isDone = Test-Path -LiteralPath $doneFile
+        if (-not $byCode.ContainsKey($code) -or $isDone) {
+          $byCode[$code] = $isDone
+        }
+      }
+    }
+  }
+  catch {
+    $rootAvailable = $false
+  }
+
+  $script:CutStatusIndex = [ordered]@{
+    rootAvailable = $rootAvailable
+    byCode = $byCode
+  }
+
+  return $script:CutStatusIndex
+}
+
 function Get-CutStatusByCode {
   param([string]$JobCode)
   $jobCode = Clean-Text $JobCode
@@ -274,7 +311,20 @@ function Get-CutStatusByCode {
     return "Bilinmiyor"
   }
 
-  $cutFilePath = "\\Schelling01\d\Schelling\SchellingData\NCData\$jobCode.l\0000.ipz"
+  $sourceKey = Get-SourceKeyFromName $jobCode
+  $index = Get-CutStatusIndex
+  if (-not $index.rootAvailable) {
+    return "Bilinmiyor"
+  }
+
+  if ($sourceKey -and $index.byCode.ContainsKey($sourceKey)) {
+    if ($index.byCode[$sourceKey]) {
+      return "Kesildi"
+    }
+    return "Kesilmedi"
+  }
+
+  $cutFilePath = Join-Path $cutDataRoot "$jobCode.l\0000.ipz"
   try {
     if (Test-Path -LiteralPath $cutFilePath) {
       return "Kesildi"
@@ -289,6 +339,92 @@ function Get-CutStatusByCode {
 function Get-CutStatus {
   param([hashtable]$Map)
   return Get-CutStatusByCode (Get-CellValue $Map "D5")
+}
+
+function Get-RecordJobCode {
+  param([object]$Record)
+
+  if ($null -eq $Record) { return "" }
+
+  foreach ($propertyName in @("jobCode", "d5")) {
+    if ($Record -is [System.Collections.IDictionary] -and $Record.Contains($propertyName)) {
+      $value = Clean-Text $Record[$propertyName]
+      if ($value) { return $value }
+    }
+
+    $property = $Record.PSObject.Properties[$propertyName]
+    if ($property) {
+      $value = Clean-Text $property.Value
+      if ($value) { return $value }
+    }
+  }
+
+  return Get-SourceKeyFromName ([string]$Record.sourceFile)
+}
+
+function Set-RecordProperty {
+  param(
+    [object]$Record,
+    [string]$Name,
+    [object]$Value
+  )
+
+  if ($null -eq $Record) { return }
+
+  if ($Record -is [System.Collections.IDictionary]) {
+    $Record[$Name] = $Value
+    return
+  }
+
+  $property = $Record.PSObject.Properties[$Name]
+  if ($property) {
+    $property.Value = $Value
+  } else {
+    Add-Member -InputObject $Record -NotePropertyName $Name -NotePropertyValue $Value -Force
+  }
+}
+
+function Update-RecordCutStatuses {
+  param([object[]]$Records)
+
+  $checked = 0
+  $changed = 0
+  $unknown = 0
+
+  foreach ($record in @($Records)) {
+    if ($null -eq $record) { continue }
+
+    $jobCode = Get-RecordJobCode $record
+    if (-not $jobCode) {
+      $unknown++
+      Set-RecordProperty -Record $record -Name "cutStatus" -Value "Bilinmiyor"
+      continue
+    }
+
+    $oldStatus = ""
+    if ($record -is [System.Collections.IDictionary] -and $record.Contains("cutStatus")) {
+      $oldStatus = Clean-Text $record["cutStatus"]
+    } else {
+      $oldStatusProperty = $record.PSObject.Properties["cutStatus"]
+      if ($oldStatusProperty) {
+        $oldStatus = Clean-Text $oldStatusProperty.Value
+      }
+    }
+    $newStatus = Get-CutStatusByCode $jobCode
+    if ($newStatus -eq "Bilinmiyor") { $unknown++ }
+    if ($oldStatus -ne $newStatus) { $changed++ }
+
+    Set-RecordProperty -Record $record -Name "jobCode" -Value $jobCode
+    Set-RecordProperty -Record $record -Name "d5" -Value $jobCode
+    Set-RecordProperty -Record $record -Name "cutStatus" -Value $newStatus
+    $checked++
+  }
+
+  return [ordered]@{
+    checked = $checked
+    changed = $changed
+    unknown = $unknown
+  }
 }
 
 function Build-Highlights {
@@ -340,6 +476,7 @@ function Build-Record {
   $d15 = Get-CellValue $Map "D15"
   $pvcMeters = Parse-Number (Get-CellValue $Map "C53")
   $orderDate = Parse-Date (Get-CellValue $Map "O9") $FileDate
+  $jobCode = Clean-Text (Get-CellValue $Map "D5")
 
   $plaka = ""
   if ($c46 -and $d15) {
@@ -363,11 +500,13 @@ function Build-Record {
   $notesText = "-"
   $highlights = @()
   $rangeNotes = Build-RangeNotes $Map
-  $cutStatus = Get-CutStatus $Map
+  $cutStatus = "Bilinmiyor"
 
   $record = [ordered]@{
     id = ([Guid]::NewGuid().ToString("N"))
     customerName = $customerName
+    jobCode = $jobCode
+    d5 = $jobCode
     material = $finalMaterial
     color = $finalColor
     pvcMeters = $pvcMeters
@@ -584,6 +723,9 @@ foreach ($file in $files) {
   $newRecords++
   Write-Log "File done: $($file.FullName) (new record)"
 }
+
+$cutStatusRefresh = Update-RecordCutStatuses -Records $records.ToArray()
+Write-Log "Cut status refreshed: $($cutStatusRefresh.checked) records checked, $($cutStatusRefresh.changed) changed, $($cutStatusRefresh.unknown) unknown."
 
 $database = [ordered]@{
   generatedAt = (Get-Date).ToString("o")
