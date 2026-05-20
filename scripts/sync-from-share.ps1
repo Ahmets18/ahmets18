@@ -6,10 +6,16 @@ $ErrorActionPreference = "Stop"
 $rootDir = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $dataDir = Join-Path $rootDir "data"
 $logDir = Join-Path $rootDir "logs"
+$scriptsDir = Join-Path $rootDir "scripts"
+$exportsDir = Join-Path $rootDir "exports"
+$secretsPath = Join-Path $rootDir "secrets/supabase.local.json"
 $databasePath = Join-Path $dataDir "database.txt"
 $localDatabaseJsPath = Join-Path $rootDir "local-database.js"
+$exportScriptPath = Join-Path $scriptsDir "export-for-supabase.ps1"
+$pushScriptPath = Join-Path $scriptsDir "push-to-supabase.ps1"
 $logPath = Join-Path $logDir "sync.log"
-$cutoff = (Get-Date).AddDays(-1)
+$cutoff = (Get-Date).AddMonths(-1)
+$fileTimeoutSeconds = 20
 
 if (-not ("System.IO.Compression.ZipFile" -as [type])) {
   Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -82,6 +88,18 @@ function Is-MeasurementLike {
   $matchesPlate = $Value -match '^\d+M\s+\d+[xX]\d+$'
   $matchesMm = $Value -match '^\d+MM$'
   return ($matchesNumber -or $matchesSize -or $matchesPlate -or $matchesMm)
+}
+
+function Is-MeaningfulNoteValue {
+  param([object]$Value)
+  $text = Clean-Text $Value
+  if (-not $text) { return $false }
+  if ($text -eq "-") { return $false }
+  if (Is-MeasurementLike $text) { return $false }
+  if ($text -match '^[xX]$') { return $false }
+  if ($text -match '^\d+\*?$') { return $false }
+  $letters = ($text -replace '[^A-Za-zÇĞİÖŞÜçğıöşü]', '')
+  return ($letters.Length -ge 2)
 }
 
 function Get-CustomerFromFilename {
@@ -259,7 +277,7 @@ function Build-RangeNotes {
       $ref = ([char](64 + $c)) + $r
       $value = Get-CellValue $Map $ref
       if (-not $value) { continue }
-      if (Is-MeasurementLike $value) { continue }
+      if (-not (Is-MeaningfulNoteValue $value)) { continue }
       [void]$items.Add([ordered]@{
         cell = $ref
         label = $ref
@@ -282,7 +300,7 @@ function Build-Record {
   $material = Get-CellValue $Map "A15"
   $c46 = Get-CellValue $Map "C46"
   $d15 = Get-CellValue $Map "D15"
-  $pvcMeters = Parse-Number (Get-CellValue $Map "I15")
+  $pvcMeters = Parse-Number (Get-CellValue $Map "C53")
   $orderDate = Parse-Date (Get-CellValue $Map "O9") $FileDate
 
   $plaka = ""
@@ -306,7 +324,7 @@ function Build-Record {
   if ($c46) { $finalQuantity = Parse-Number $c46 }
   $notesText = "-"
   $highlights = @()
-  $rangeNotes = @()
+  $rangeNotes = Build-RangeNotes $Map
 
   $record = [ordered]@{
     id = ([Guid]::NewGuid().ToString("N"))
@@ -329,12 +347,131 @@ function Build-Record {
   return $record
 }
 
+function Get-WorkerScriptText {
+  param([string[]]$FunctionNames)
+
+  $definitionText = New-Object System.Collections.Generic.List[string]
+  foreach ($name in $FunctionNames) {
+    $command = Get-Command -Name $name -CommandType Function
+    [void]$definitionText.Add(("function {0} {{`n{1}`n}}" -f $name, $command.Definition))
+  }
+
+  $scriptHeader = @'
+param(
+  [string]$FilePath
+)
+
+if (-not ("System.IO.Compression.ZipFile" -as [type])) {
+  Add-Type -AssemblyName System.IO.Compression.FileSystem
+}
+'@
+
+  $scriptBody = @'
+if (-not (Test-Path -LiteralPath $FilePath)) {
+  throw "File not found: $FilePath"
+}
+
+$zip = [System.IO.Compression.ZipFile]::OpenRead($FilePath)
+try {
+  $sharedStrings = Get-SharedStrings $zip
+  $firstSheet = Get-WorkbookFirstSheetTarget $zip
+  if (-not $firstSheet) {
+    throw "workbook sheet bulunamadi"
+  }
+
+  $sheetText = Get-ZipText $zip $firstSheet.target
+  if (-not $sheetText) {
+    throw "sheet xml okunamadi"
+  }
+
+  $map = Get-CellMapFromSheetText -SheetText $sheetText -SharedStrings $sharedStrings
+  $file = Get-Item -LiteralPath $FilePath
+  return Build-Record -FileName $file.Name -FileDate $file.LastWriteTime -Map $map -SheetName $firstSheet.sheetName
+}
+finally {
+  $zip.Dispose()
+}
+'@
+
+  return ($scriptHeader + "`n`n" + ($definitionText -join "`n`n") + "`n`n" + $scriptBody)
+}
+
+$workerScriptText = Get-WorkerScriptText -FunctionNames @(
+  "Clean-Text",
+  "Normalize-Text",
+  "Parse-Number",
+  "Parse-Date",
+  "Is-MeasurementLike",
+  "Is-MeaningfulNoteValue",
+  "Get-CustomerFromFilename",
+  "Get-ZipText",
+  "Get-SharedStrings",
+  "Get-WorkbookFirstSheetTarget",
+  "Get-CellMapFromSheetText",
+  "Get-CellValue",
+  "Build-Highlights",
+  "Build-RangeNotes",
+  "Build-Record"
+)
+
+function Invoke-FileRecordWithTimeout {
+  param(
+    [string]$FilePath,
+    [int]$TimeoutSeconds = 20
+  )
+
+  $ps = [System.Management.Automation.PowerShell]::Create()
+  try {
+    [void]$ps.AddScript($workerScriptText).AddArgument($FilePath)
+    $asyncResult = $ps.BeginInvoke()
+
+    if (-not $asyncResult.AsyncWaitHandle.WaitOne([TimeSpan]::FromSeconds($TimeoutSeconds))) {
+      try { $ps.Stop() } catch {}
+      return [ordered]@{
+        timedOut = $true
+        success = $false
+        record = $null
+        error = "Processing exceeded $TimeoutSeconds seconds."
+      }
+    }
+
+    $result = $ps.EndInvoke($asyncResult)
+    if ($ps.Streams.Error.Count -gt 0) {
+      $message = ($ps.Streams.Error | Select-Object -First 1).Exception.Message
+      return [ordered]@{
+        timedOut = $false
+        success = $false
+        record = $null
+        error = $message
+      }
+    }
+
+    return [ordered]@{
+      timedOut = $false
+      success = $true
+      record = @($result | Select-Object -First 1)
+      error = $null
+    }
+  }
+  catch {
+    return [ordered]@{
+      timedOut = $false
+      success = $false
+      record = $null
+      error = $_.Exception.Message
+    }
+  }
+  finally {
+    $ps.Dispose()
+  }
+}
+
 if (-not (Test-Path -LiteralPath $SourcePath)) {
   throw "Source folder not found: $SourcePath"
 }
 
 $startTime = Get-Date
-Write-Log "Start: last 1 day scan from $SourcePath"
+Write-Log "Start: last 1 month scan from $SourcePath"
 
 $files = Get-ChildItem -LiteralPath $SourcePath -Recurse -File | Where-Object {
   $_.Extension -eq ".xlsm" -and $_.LastWriteTime -ge $cutoff
@@ -345,46 +482,20 @@ $records = New-Object System.Collections.Generic.List[object]
 
 foreach ($file in $files) {
   Write-Log "Reading file: $($file.FullName)"
-  try {
-    $zip = [System.IO.Compression.ZipFile]::OpenRead($file.FullName)
-    try {
-      Write-Log "Stage: shared strings"
-      $sharedStrings = Get-SharedStrings $zip
-      Write-Log "Stage: workbook"
-      $firstSheet = Get-WorkbookFirstSheetTarget $zip
-      if (-not $firstSheet) {
-        Write-Log "Failed file: $($file.FullName)"
-        Write-Log "Error: workbook sheet bulunamadi"
-        continue
-      }
-      if ($firstSheet.allSheetNames) {
-        Write-Log ("Sheets: {0}" -f (($firstSheet.allSheetNames) -join " | "))
-      }
-      Write-Log ("Sheet selected: {0}" -f $firstSheet.sheetName)
-
-      Write-Log "Stage: sheet xml"
-      $sheetText = Get-ZipText $zip $firstSheet.target
-      if (-not $sheetText) {
-        Write-Log "Failed file: $($file.FullName)"
-        Write-Log "Error: sheet xml okunamadi"
-        continue
-      }
-
-      Write-Log "Stage: cell map"
-      $map = Get-CellMapFromSheetText -SheetText $sheetText -SharedStrings $sharedStrings
-      Write-Log "Stage: record"
-      $record = Build-Record -FileName $file.Name -FileDate $file.LastWriteTime -Map $map -SheetName $firstSheet.sheetName
-      [void]$records.Add($record)
-      Write-Log "File done: $($file.FullName) (1 record)"
-    }
-    finally {
-      $zip.Dispose()
-    }
+  $fileResult = Invoke-FileRecordWithTimeout -FilePath $file.FullName -TimeoutSeconds $fileTimeoutSeconds
+  if ($fileResult.timedOut) {
+    Write-Log "Skipped file after $fileTimeoutSeconds seconds: $($file.FullName)"
+    continue
   }
-  catch {
+
+  if (-not $fileResult.success) {
     Write-Log "Failed file: $($file.FullName)"
-    Write-Log ("Error: {0}" -f $_.Exception.Message)
+    Write-Log ("Error: {0}" -f $fileResult.error)
+    continue
   }
+
+  [void]$records.Add($fileResult.record)
+  Write-Log "File done: $($file.FullName) (1 record)"
 }
 
 $database = [ordered]@{
@@ -401,9 +512,36 @@ if (-not (Test-Path -LiteralPath $dataDir)) {
 
 $databaseJson = $database | ConvertTo-Json -Depth 10
 $databaseJson | Set-Content -LiteralPath $databasePath -Encoding utf8
-$databaseEncoded = [uri]::EscapeDataString($databaseJson)
-("window.LOCAL_DATABASE_TEXT = decodeURIComponent('" + $databaseEncoded + "');") | Set-Content -LiteralPath $localDatabaseJsPath -Encoding utf8
+$databaseEncoded = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($databaseJson))
+("window.LOCAL_DATABASE_TEXT = atob('" + $databaseEncoded + "');") | Set-Content -LiteralPath $localDatabaseJsPath -Encoding utf8
 Write-Log "database.txt updated: $databasePath"
 Write-Log "local-database.js updated: $localDatabaseJsPath"
-Write-Log "Last 1 day: $($files.Count) files, $($records.Count) records."
+Write-Log "Last 1 month: $($files.Count) files, $($records.Count) records."
+
+try {
+  if (Test-Path -LiteralPath $exportScriptPath) {
+    Write-Log "Preparing Supabase export..."
+    & $exportScriptPath -DatabasePath $databasePath -OutputDir $exportsDir
+    Write-Log "Supabase export ready."
+  } else {
+    Write-Log "Supabase export skipped: script not found at $exportScriptPath"
+  }
+}
+catch {
+  Write-Log ("Supabase export failed: {0}" -f $_.Exception.Message)
+}
+
+try {
+  if (Test-Path -LiteralPath $pushScriptPath) {
+    Write-Log "Preparing Supabase upload..."
+    & $pushScriptPath -DatabasePath $databasePath -SecretsPath $secretsPath
+    Write-Log "Supabase upload finished."
+  } else {
+    Write-Log "Supabase upload skipped: script not found at $pushScriptPath"
+  }
+}
+catch {
+  Write-Log ("Supabase upload failed: {0}" -f $_.Exception.Message)
+}
+
 Write-Log ("Done in {0:n1} sec" -f ((Get-Date) - $startTime).TotalSeconds)

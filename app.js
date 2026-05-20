@@ -404,7 +404,7 @@ function renderRow(record) {
       <td>${formatNumber(extractPvcMeters(record.pvcMeters, record.cellHighlights, record.plaka))}</td>
       <td><span class="badge ${cutClass}">${escapeHtml(record.cutStatus || "Bilinmiyor")}</span></td>
       <td>${escapeHtml(record.opt || getCellValue(record.cellHighlights, "D12") || record.color || "-")}</td>
-      <td>${formatRangeNotes(record.rangeNotes || record.notes)}</td>
+      <td>${formatRangeNotes(record.rangeNotes)}</td>
     </tr>
   `;
 }
@@ -439,24 +439,9 @@ function buildMaterialDisplay(record) {
 }
 
 function extractPvcMeters(primaryValue, items, plakaValue) {
-  const fromHighlights = parseMetersFromText(getCellValue(items, "C53"));
+  const fromHighlights = parseNumericValue(getCellValue(items, "C53")) ?? parseMetersFromText(getCellValue(items, "C53"));
   if (Number.isFinite(fromHighlights) && fromHighlights > 0) {
     return fromHighlights;
-  }
-
-  const fromLegacyHighlight = parseMetersFromText(getCellValue(items, "D15"));
-  if (Number.isFinite(fromLegacyHighlight) && fromLegacyHighlight > 0) {
-    return fromLegacyHighlight;
-  }
-
-  const fromPlaka = parseMetersFromText(plakaValue);
-  if (Number.isFinite(fromPlaka) && fromPlaka > 0) {
-    return fromPlaka;
-  }
-
-  const parsedPrimary = parseNumericValue(primaryValue);
-  if (Number.isFinite(parsedPrimary) && parsedPrimary > 0) {
-    return parsedPrimary;
   }
 
   return null;
@@ -487,7 +472,15 @@ function sortRecords(records) {
 }
 
 function formatRangeNotes(items) {
-  const list = normalizeList(items);
+  const list = normalizeList(items).filter((item) => {
+    if (typeof item === "string") {
+      return isMeaningfulNoteValue(item);
+    }
+    if (!item || typeof item !== "object") {
+      return false;
+    }
+    return isMeaningfulNoteValue(item.value);
+  });
   if (!list.length) return "<span class='muted'>-</span>";
   return `<div class="cell-list">${list
     .map((item) => {
@@ -506,6 +499,13 @@ function formatRangeNotes(items) {
 function normalizeList(items) {
   if (!items) return [];
   return Array.isArray(items) ? items : [items];
+}
+
+function isMeaningfulNoteValue(value) {
+  const text = String(value ?? "").trim();
+  if (!text || text === "-") return false;
+  const letters = text.replace(/[^A-Za-zÇĞİÖŞÜçğıöşü]/g, "");
+  return letters.length >= 2;
 }
 
 function textifyItems(items) {
