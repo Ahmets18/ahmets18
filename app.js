@@ -1,11 +1,5 @@
-const AUTH_EMAIL = "artiebatlama18@local.invalid";
-const AUTH_CONFIRM_MESSAGE = "Supabase Authentication ayarlarında e-posta onayı kapalı olmalı.";
-const SESSION_STORAGE_KEY = "siparis_supabase_session";
-const SUPABASE_CONFIG = {
-  url: "https://svhmejuufiwqtwhlvxzc.supabase.co",
-  anonKey: "sb_publishable_A7kHP4ezS8WZmabvGIKtDQ_6e0kt1WN",
-  table: "orders"
-};
+const AUTH_PASSWORD = "artiebatlama18";
+const AUTH_ERROR_MESSAGE = "Giriş sırasında bir hata oluştu. Şifreyi kontrol et ve tekrar dene.";
 
 const state = {
   database: null,
@@ -34,7 +28,7 @@ const elements = {
 bootstrap().catch((error) => {
   console.error(error);
   if (elements.resultsBody) {
-    elements.resultsBody.innerHTML = `<tr><td colspan="8" class="empty">Canlı veri yüklenemedi. Supabase bağlantısını kontrol et.</td></tr>`;
+    elements.resultsBody.innerHTML = `<tr><td colspan="7" class="empty">Canlı veri yüklenemedi. Supabase bağlantısını kontrol et.</td></tr>`;
   }
   if (elements.resultLabel) {
     elements.resultLabel.textContent = "Canlı veri kaynağı okunamadı.";
@@ -45,15 +39,10 @@ async function bootstrap() {
   setupAuth();
 
   state.session = loadStoredSession();
-  if (state.session?.access_token) {
-    const valid = await verifySession(state.session.access_token);
-    if (valid) {
-      unlockApp();
-      await startApp();
-      return;
-    }
-    clearStoredSession();
-    state.session = null;
+  if (state.session?.unlocked) {
+    unlockApp();
+    await startApp();
+    return;
   }
 
   lockApp();
@@ -74,33 +63,19 @@ async function handleLogin(event) {
     return;
   }
 
-  if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) {
-    setAuthError("Supabase bağlantısı bulunamadı.");
+  setAuthError("");
+
+  if (password !== AUTH_PASSWORD) {
+    setAuthError("Şifre yanlış.");
+    elements.passwordInput?.focus();
+    elements.passwordInput?.select?.();
     return;
   }
 
-  setAuthError("");
-
-  try {
-    let session = await signInWithSupabase(password);
-    if (!session) {
-      session = await signUpWithSupabase(password);
-    }
-    if (!session) {
-      setAuthError("Şifre yanlış.");
-      elements.passwordInput?.focus();
-      elements.passwordInput?.select?.();
-      return;
-    }
-
-    state.session = session;
-    saveStoredSession(session);
-    unlockApp();
-    await startApp();
-  } catch (error) {
-    console.error(error);
-    setAuthError(AUTH_CONFIRM_MESSAGE);
-  }
+  state.session = { unlocked: true };
+  saveStoredSession(state.session);
+  unlockApp();
+  await startApp();
 }
 
 function setAuthError(message) {
@@ -177,94 +152,6 @@ function emptyDatabase() {
   };
 }
 
-function loadStoredSession() {
-  try {
-    const raw = sessionStorage.getItem(SESSION_STORAGE_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch (error) {
-    console.warn("Stored session okunamadi.", error);
-    return null;
-  }
-}
-
-function saveStoredSession(session) {
-  sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
-}
-
-function clearStoredSession() {
-  sessionStorage.removeItem(SESSION_STORAGE_KEY);
-}
-
-async function signInWithSupabase(password) {
-  const response = await fetch(`${SUPABASE_CONFIG.url}/auth/v1/token?grant_type=password`, {
-    method: "POST",
-    headers: {
-      apikey: SUPABASE_CONFIG.anonKey,
-      Authorization: `Bearer ${SUPABASE_CONFIG.anonKey}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email: AUTH_EMAIL, password })
-  });
-
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    return null;
-  }
-
-  return {
-    access_token: payload.access_token,
-    refresh_token: payload.refresh_token,
-    expires_at: payload.expires_at,
-    token_type: payload.token_type,
-    user: payload.user ?? null
-  };
-}
-
-async function signUpWithSupabase(password) {
-  const response = await fetch(`${SUPABASE_CONFIG.url}/auth/v1/signup`, {
-    method: "POST",
-    headers: {
-      apikey: SUPABASE_CONFIG.anonKey,
-      Authorization: `Bearer ${SUPABASE_CONFIG.anonKey}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email: AUTH_EMAIL, password })
-  });
-
-  const payload = await response.json().catch(() => ({}));
-  if (!response.ok) {
-    return null;
-  }
-
-  const session = payload.session ?? payload.data?.session ?? null;
-  if (!session?.access_token) {
-    return null;
-  }
-
-  return {
-    access_token: session.access_token,
-    refresh_token: session.refresh_token,
-    expires_at: session.expires_at,
-    token_type: session.token_type,
-    user: session.user ?? payload.user ?? null
-  };
-}
-
-async function verifySession(accessToken) {
-  try {
-    const response = await fetch(`${SUPABASE_CONFIG.url}/auth/v1/user`, {
-      headers: {
-        apikey: SUPABASE_CONFIG.anonKey,
-        Authorization: `Bearer ${accessToken}`
-      }
-    });
-    return response.ok;
-  } catch (error) {
-    console.warn("Session doğrulanamadı.", error);
-    return false;
-  }
-}
-
 function loadEmbeddedDatabase() {
   const text = window.LOCAL_DATABASE_TEXT;
   if (!text || typeof text !== "string" || !text.trim()) {
@@ -316,15 +203,16 @@ async function loadDatabaseTxt() {
 }
 
 async function loadSupabaseDatabase() {
-  if (!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey || !state.session?.access_token || !SUPABASE_CONFIG.table) {
+  const config = window.SUPABASE_CONFIG;
+  if (!config?.url || !config?.anonKey || !config?.table) {
     return null;
   }
 
   try {
-    const response = await fetch(`${SUPABASE_CONFIG.url}/rest/v1/${SUPABASE_CONFIG.table}?select=*`, {
+    const response = await fetch(`${config.url}/rest/v1/${config.table}?select=*`, {
       headers: {
-        apikey: SUPABASE_CONFIG.anonKey,
-        Authorization: `Bearer ${state.session.access_token}`,
+        apikey: config.anonKey,
+        Authorization: `Bearer ${config.anonKey}`,
         Accept: "application/json"
       },
       cache: "no-store"
@@ -404,14 +292,13 @@ function filterAndRender(query) {
         const haystack = normalize(
           [
             record.customerName,
+            buildMaterialDisplay(record),
             record.material,
             record.color,
             record.opt,
             record.plaka,
             record.cutStatus,
             record.notes,
-            textifyItems(record.cellHighlights),
-            textifyItems(record.rangeNotes),
             record.sourceFile,
             record.sheetName
           ].join(" ")
@@ -421,88 +308,84 @@ function filterAndRender(query) {
     : allRecords;
 
   state.currentPage = 1;
+  renderSummary();
   renderResults(query);
-  elements.matchedRecords.textContent = formatCount(state.filtered.length);
 }
 
 function renderResults(query = "") {
-  const count = state.filtered.length;
-  if (!count) {
+  if (!elements.resultsBody) {
+    return;
+  }
+
+  const total = state.filtered.length;
+  const pageSize = state.pageSize;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const currentPage = Math.min(Math.max(state.currentPage, 1), totalPages);
+  state.currentPage = currentPage;
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const pageRecords = state.filtered.slice(startIndex, startIndex + pageSize);
+
+  if (!total) {
     const message = query ? `"${query}" için sonuç bulunamadı.` : "Henüz içe aktarılmış kayıt yok.";
     elements.resultLabel.textContent = message;
-    elements.resultsBody.innerHTML = `<tr><td colspan="8" class="empty">${escapeHtml(message)}</td></tr>`;
+    elements.resultsBody.innerHTML = `<tr><td colspan="7" class="empty">${escapeHtml(message)}</td></tr>`;
     renderPager(0, 0);
     return;
   }
 
-  const totalPages = Math.max(1, Math.ceil(count / state.pageSize));
-  if (state.currentPage > totalPages) {
-    state.currentPage = totalPages;
-  }
-
-  const start = (state.currentPage - 1) * state.pageSize;
-  const end = start + state.pageSize;
-  const pageItems = state.filtered.slice(start, end);
-  const shown = pageItems.length;
-
-  const label = query
-    ? `"${query}" için ${count} kayıt bulundu.`
-    : `En yeni ${Math.min(count, state.pageSize)} kayıt gösteriliyor.`;
-  elements.resultLabel.textContent = label;
-
-  const rows = pageItems.map(renderRow).join("");
-  elements.resultsBody.innerHTML = rows;
-  renderPager(totalPages, shown);
+  const suffix = query ? ` "${query}" için ${total} sonuç bulundu.` : ` Toplam ${total} sonuç listeleniyor.`;
+  elements.resultLabel.textContent = `En güncel kayıtlar gösteriliyor.${suffix}`;
+  elements.resultsBody.innerHTML = pageRecords.map((record) => renderRow(record)).join("");
+  renderPager(total, totalPages);
 }
 
-function renderPager(totalPages, shownCount) {
-  if (!totalPages) {
+function renderPager(total, totalPages) {
+  if (!elements.pager) {
+    return;
+  }
+
+  if (!total) {
     elements.pager.innerHTML = "";
     return;
   }
 
-  const prevDisabled = state.currentPage <= 1 ? "disabled" : "";
-  const nextDisabled = state.currentPage >= totalPages ? "disabled" : "";
-  const pageText = `Sayfa ${state.currentPage} / ${totalPages}`;
-  const rowsText = `${formatCount(shownCount)} kayıt`;
-
+  const currentPage = state.currentPage;
+  const start = (currentPage - 1) * state.pageSize + 1;
+  const end = Math.min(currentPage * state.pageSize, total);
   elements.pager.innerHTML = `
-    <button class="pager-btn" type="button" data-page="prev" ${prevDisabled}>Önceki</button>
-    <span class="pager-info">${escapeHtml(pageText)} · ${escapeHtml(rowsText)}</span>
-    <button class="pager-btn" type="button" data-page="next" ${nextDisabled}>Sonraki</button>
+    <span class="pager-info">${formatCount(total)} kayıttan ${start}-${end} arası gösteriliyor</span>
+    <div>
+      <button class="pager-btn" data-action="prev" ${currentPage <= 1 ? "disabled" : ""}>Önceki</button>
+      <button class="pager-btn" data-action="next" ${currentPage >= totalPages ? "disabled" : ""}>Sonraki</button>
+    </div>
   `;
 
-  elements.pager.querySelectorAll("button[data-page]").forEach((button) => {
+  elements.pager.querySelectorAll(".pager-btn").forEach((button) => {
     button.addEventListener("click", () => {
-      if (button.dataset.page === "prev" && state.currentPage > 1) {
+      const action = button.dataset.action;
+      if (action === "prev" && state.currentPage > 1) {
         state.currentPage -= 1;
-      }
-      if (button.dataset.page === "next" && state.currentPage < totalPages) {
+      } else if (action === "next" && state.currentPage < totalPages) {
         state.currentPage += 1;
       }
-      renderResults(elements.searchInput.value);
+      renderResults(elements.searchInput?.value ?? "");
     });
   });
 }
 
 function renderRow(record) {
+  const cutStatus = String(record.cutStatus || "Bilinmiyor").toLowerCase();
+  const cutClass = cutStatus.includes("kesildi") ? "done" : cutStatus.includes("kesilmedi") ? "waiting" : "unknown";
   const date = formatDate(record.orderDate);
-  const cutClass =
-    record.cutStatus === "Kesildi"
-      ? "done"
-      : record.cutStatus === "Kesilmedi"
-      ? "waiting"
-      : "unknown";
-
   return `
     <tr>
       <td>${escapeHtml(date)}</td>
       <td>${escapeHtml(displayFileName(record.sourceFile))}</td>
-      <td>${escapeHtml(record.opt || getCellValue(record.cellHighlights, "D12") || record.color || "-")}</td>
-      <td>${escapeHtml(record.material || getCellValue(record.cellHighlights, "A15") || "-")}</td>
-      <td>${escapeHtml(record.plaka || buildPlakaValue(record.cellHighlights) || "-")}</td>
+      <td>${escapeHtml(buildMaterialDisplay(record))}</td>
       <td>${formatNumber(extractPvcMeters(record.pvcMeters, record.cellHighlights, record.plaka))}</td>
       <td><span class="badge ${cutClass}">${escapeHtml(record.cutStatus || "Bilinmiyor")}</span></td>
+      <td>${escapeHtml(record.opt || getCellValue(record.cellHighlights, "D12") || record.color || "-")}</td>
       <td>${formatRangeNotes(record.rangeNotes || record.notes)}</td>
     </tr>
   `;
@@ -521,47 +404,10 @@ function getCellValue(items, cellName) {
 function buildPlakaValue(items) {
   const c46 = getCellValue(items, "C46");
   const d15 = getCellValue(items, "D15");
-  if (c46 && c46 !== "-" && d15 && d15 !== "-") {
-    return `${c46} PLK ${d15}`;
-  }
   const parts = [];
   if (c46 && c46 !== "-") parts.push(c46);
   if (d15 && d15 !== "-") parts.push(d15);
   return parts.length ? parts.join(" ") : "-";
-}
-
-function extractPvcMeters(primaryValue, items, plakaValue) {
-  const fromHighlights = parseMetersFromText(getCellValue(items, "D15"));
-  if (Number.isFinite(fromHighlights) && fromHighlights > 0) {
-    return fromHighlights;
-  }
-
-  const fromPlaka = parseMetersFromText(plakaValue);
-  if (Number.isFinite(fromPlaka) && fromPlaka > 0) {
-    return fromPlaka;
-  }
-
-  const parsedPrimary = parseNumericValue(primaryValue);
-  if (Number.isFinite(parsedPrimary) && parsedPrimary > 0) {
-    return parsedPrimary;
-  }
-
-  return null;
-}
-
-function parseMetersFromText(value) {
-  const text = String(value ?? "");
-  const match = text.match(/(\d+(?:[.,]\d+)?)\s*M\b/i);
-  if (!match) return null;
-  return parseNumericValue(match[1]);
-}
-
-function parseNumericValue(value) {
-  if (value == null || value === "") return null;
-  if (typeof value === "number" && Number.isFinite(value)) return value;
-  const text = String(value).replace(",", ".").trim();
-  const num = Number(text);
-  return Number.isFinite(num) ? num : null;
 }
 
 function sortRecords(records) {
