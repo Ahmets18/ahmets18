@@ -143,11 +143,6 @@ async function startApp() {
 }
 
 async function loadDatabase() {
-  const supabaseDatabase = await loadSupabaseDatabase();
-  if (supabaseDatabase && Array.isArray(supabaseDatabase.records) && supabaseDatabase.records.length) {
-    return supabaseDatabase;
-  }
-
   const embeddedDatabase = loadEmbeddedDatabase();
   if (embeddedDatabase && Array.isArray(embeddedDatabase.records) && embeddedDatabase.records.length) {
     return embeddedDatabase;
@@ -156,6 +151,11 @@ async function loadDatabase() {
   const localDatabase = await loadDatabaseTxt();
   if (localDatabase && Array.isArray(localDatabase.records) && localDatabase.records.length) {
     return localDatabase;
+  }
+
+  const supabaseDatabase = await loadSupabaseDatabase();
+  if (supabaseDatabase && Array.isArray(supabaseDatabase.records) && supabaseDatabase.records.length) {
+    return supabaseDatabase;
   }
 
   return emptyDatabase();
