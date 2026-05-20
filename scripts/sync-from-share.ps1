@@ -253,6 +253,25 @@ function Get-CellValue {
   return ""
 }
 
+function Get-CutStatus {
+  param([hashtable]$Map)
+  $jobCode = Clean-Text (Get-CellValue $Map "D5")
+  if (-not $jobCode) {
+    return "Bilinmiyor"
+  }
+
+  $cutFilePath = "\\Schelling01\d\Schelling\SchellingData\NCData\$jobCode.l\0000.ipz"
+  try {
+    if (Test-Path -LiteralPath $cutFilePath) {
+      return "Kesildi"
+    }
+    return "Kesilmedi"
+  }
+  catch {
+    return "Bilinmiyor"
+  }
+}
+
 function Build-Highlights {
   param([hashtable]$Map)
   $targets = @("D5","D9","D10","D11","D12","O9","A15","D15","I15","C46")
@@ -325,6 +344,7 @@ function Build-Record {
   $notesText = "-"
   $highlights = @()
   $rangeNotes = Build-RangeNotes $Map
+  $cutStatus = Get-CutStatus $Map
 
   $record = [ordered]@{
     id = ([Guid]::NewGuid().ToString("N"))
@@ -333,7 +353,7 @@ function Build-Record {
     color = $finalColor
     pvcMeters = $pvcMeters
     quantity = $finalQuantity
-    cutStatus = "Bilinmiyor"
+    cutStatus = $cutStatus
     notes = $notesText
     cellHighlights = $highlights
     rangeNotes = $rangeNotes
@@ -409,6 +429,7 @@ $workerScriptText = Get-WorkerScriptText -FunctionNames @(
   "Get-WorkbookFirstSheetTarget",
   "Get-CellMapFromSheetText",
   "Get-CellValue",
+  "Get-CutStatus",
   "Build-Highlights",
   "Build-RangeNotes",
   "Build-Record"
