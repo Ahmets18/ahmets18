@@ -1,7 +1,7 @@
 ﻿{
-    "generatedAt":  "2026-05-20T11:50:04.4013784+03:00",
-    "cutoffDate":  "2026-04-20T11:49:54.4825386+03:00",
-    "totalRecords":  953,
+    "generatedAt":  "2026-05-20T11:59:19.9637581+03:00",
+    "cutoffDate":  "2026-04-20T11:59:09.2937662+03:00",
+    "totalRecords":  954,
     "totalFiles":  952,
     "records":  [
                     {
@@ -21640,6 +21640,28 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "48619b0f98114d8a988db83f1d9407a0",
+                        "customerName":  "K643 SERDAR KESICI",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesildi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-18T17:15:39.0000000",
+                        "sourceFile":  "K643 SERDAR KESICI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 3M 2100X1700"
                     }
                 ]
 }
