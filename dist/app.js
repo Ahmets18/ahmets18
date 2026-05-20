@@ -1,5 +1,6 @@
-const AUTH_EMAIL = "artiebatlama18@local.invalid";
-const AUTH_CONFIRM_MESSAGE = "Supabase Authentication ayarlarında e-posta onayı kapalı olmalı.";
+const AUTH_PASSWORD = "artiebatlama18";
+const AUTH_ERROR_MESSAGE = "Giriş sırasında bir hata oluştu. Şifreyi kontrol et ve tekrar dene.";
+const SESSION_STORAGE_KEY = "siparis_supabase_session";
 
 const state = {
   database: null,
@@ -25,12 +26,10 @@ const elements = {
   matchedRecords: document.getElementById("matchedRecords")
 };
 
-let supabaseClient = null;
-
 bootstrap().catch((error) => {
   console.error(error);
   if (elements.resultsBody) {
-    elements.resultsBody.innerHTML = `<tr><td colspan="8" class="empty">Canlı veri yüklenemedi. Supabase bağlantısını kontrol et.</td></tr>`;
+    elements.resultsBody.innerHTML = `<tr><td colspan="7" class="empty">Canlı veri yüklenemedi. Supabase bağlantısını kontrol et.</td></tr>`;
   }
   if (elements.resultLabel) {
     elements.resultLabel.textContent = "Canlı veri kaynağı okunamadı.";
@@ -40,31 +39,8 @@ bootstrap().catch((error) => {
 async function bootstrap() {
   setupAuth();
 
-  const client = getSupabaseClient();
-  if (!client) {
-    lockApp();
-    setAuthError("Supabase bağlantısı bulunamadı.");
-    return;
-  }
-
-  const { data } = await client.auth.getSession();
-  state.session = data?.session ?? null;
-
-  client.auth.onAuthStateChange(async (_event, session) => {
-    state.session = session ?? null;
-    if (state.session) {
-      unlockApp();
-      await startApp();
-      return;
-    }
-
-    state.appReady = false;
-    state.database = null;
-    state.filtered = [];
-    lockApp();
-  });
-
-  if (state.session) {
+  state.session = loadStoredSession();
+  if (state.session?.unlocked) {
     unlockApp();
     await startApp();
     return;
@@ -79,27 +55,6 @@ function setupAuth() {
   elements.loginForm?.addEventListener("submit", handleLogin);
 }
 
-function getSupabaseClient() {
-  if (supabaseClient) {
-    return supabaseClient;
-  }
-
-  const config = window.SUPABASE_CONFIG;
-  if (!window.supabase || !config?.url || !config?.anonKey) {
-    return null;
-  }
-
-  supabaseClient = window.supabase.createClient(config.url, config.anonKey, {
-    auth: {
-      autoRefreshToken: true,
-      persistSession: true,
-      detectSessionInUrl: false
-    }
-  });
-
-  return supabaseClient;
-}
-
 async function handleLogin(event) {
   event.preventDefault();
 
@@ -109,49 +64,19 @@ async function handleLogin(event) {
     return;
   }
 
-  const client = getSupabaseClient();
-  if (!client) {
-    setAuthError("Supabase bağlantısı bulunamadı.");
-    return;
-  }
-
   setAuthError("");
 
-  const signIn = await client.auth.signInWithPassword({
-    email: AUTH_EMAIL,
-    password
-  });
-
-  if (signIn.data?.session) {
-    state.session = signIn.data.session;
-    unlockApp();
-    await startApp();
-    return;
-  }
-
-  const signUp = await client.auth.signUp({
-    email: AUTH_EMAIL,
-    password
-  });
-
-  if (signUp.data?.session) {
-    state.session = signUp.data.session;
-    unlockApp();
-    await startApp();
-    return;
-  }
-
-  const message = signUp.error?.message || signIn.error?.message || AUTH_CONFIRM_MESSAGE;
-  if (/email/i.test(message) || /confirm/i.test(message)) {
-    setAuthError(AUTH_CONFIRM_MESSAGE);
-  } else if (/already registered/i.test(message)) {
+  if (password !== AUTH_PASSWORD) {
     setAuthError("Şifre yanlış.");
-  } else {
-    setAuthError(message);
+    elements.passwordInput?.focus();
+    elements.passwordInput?.select?.();
+    return;
   }
 
-  elements.passwordInput?.focus();
-  elements.passwordInput?.select?.();
+  state.session = { unlocked: true };
+  saveStoredSession(state.session);
+  unlockApp();
+  await startApp();
 }
 
 function setAuthError(message) {
@@ -179,6 +104,23 @@ function unlockApp() {
   }
   if (elements.appShell) {
     elements.appShell.hidden = false;
+  }
+}
+
+function loadStoredSession() {
+  try {
+    const raw = sessionStorage.getItem(SESSION_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (error) {
+    return null;
+  }
+}
+
+function saveStoredSession(session) {
+  try {
+    sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
+  } catch (error) {
+    console.warn("Session kaydedilemedi.", error);
   }
 }
 
@@ -279,22 +221,26 @@ async function loadDatabaseTxt() {
 }
 
 async function loadSupabaseDatabase() {
-  const client = getSupabaseClient();
   const config = window.SUPABASE_CONFIG;
-  if (!client || !config?.table) {
+  if (!config?.url || !config?.anonKey || !config?.table) {
     return null;
   }
 
   try {
-    const { data: rows, error } = await client
-      .from(config.table)
-      .select("*")
-      .order("order_date", { ascending: false });
+    const response = await fetch(`${config.url}/rest/v1/${config.table}?select=*`, {
+      headers: {
+        apikey: config.anonKey,
+        Authorization: `Bearer ${config.anonKey}`,
+        Accept: "application/json"
+      },
+      cache: "no-store"
+    });
 
-    if (error) {
-      throw error;
+    if (!response.ok) {
+      return null;
     }
 
+    const rows = await response.json().catch(() => []);
     if (!Array.isArray(rows) || !rows.length) {
       return emptyDatabase();
     }
@@ -326,21 +272,25 @@ function buildDatabaseFromRows(rows) {
 
 function normalizeSupabaseRow(row) {
   if (!row || typeof row !== "object") return null;
+  const cellHighlights = Array.isArray(row.cell_highlights) ? row.cell_highlights : [];
+  const plaka = row.plaka ?? buildPlakaValue(cellHighlights);
   return {
     id: row.id ?? "",
     customerName: row.customer_name ?? "",
     material: row.material ?? "",
     color: row.color ?? "",
-    pvcMeters: row.pvc_meters ?? null,
+    pvcMeters: extractPvcMeters(row.pvc_meters, cellHighlights, plaka),
     quantity: row.quantity ?? null,
     cutStatus: row.cut_status ?? "Bilinmiyor",
     notes: row.notes ?? "",
-    cellHighlights: row.cell_highlights ?? [],
+    cellHighlights,
     rangeNotes: row.range_notes ?? [],
     orderDate: row.order_date ?? "",
     sourceFile: row.source_file ?? "",
     sheetName: row.sheet_name ?? "",
-    sourceRow: row.source_row ?? null
+    sourceRow: row.source_row ?? null,
+    opt: row.opt ?? row.color ?? "",
+    plaka
   };
 }
 
@@ -360,14 +310,13 @@ function filterAndRender(query) {
         const haystack = normalize(
           [
             record.customerName,
+            buildMaterialDisplay(record),
             record.material,
             record.color,
             record.opt,
             record.plaka,
             record.cutStatus,
             record.notes,
-            textifyItems(record.cellHighlights),
-            textifyItems(record.rangeNotes),
             record.sourceFile,
             record.sheetName
           ].join(" ")
@@ -377,88 +326,84 @@ function filterAndRender(query) {
     : allRecords;
 
   state.currentPage = 1;
+  renderSummary();
   renderResults(query);
-  elements.matchedRecords.textContent = formatCount(state.filtered.length);
 }
 
 function renderResults(query = "") {
-  const count = state.filtered.length;
-  if (!count) {
+  if (!elements.resultsBody) {
+    return;
+  }
+
+  const total = state.filtered.length;
+  const pageSize = state.pageSize;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const currentPage = Math.min(Math.max(state.currentPage, 1), totalPages);
+  state.currentPage = currentPage;
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const pageRecords = state.filtered.slice(startIndex, startIndex + pageSize);
+
+  if (!total) {
     const message = query ? `"${query}" için sonuç bulunamadı.` : "Henüz içe aktarılmış kayıt yok.";
     elements.resultLabel.textContent = message;
-    elements.resultsBody.innerHTML = `<tr><td colspan="8" class="empty">${escapeHtml(message)}</td></tr>`;
+    elements.resultsBody.innerHTML = `<tr><td colspan="7" class="empty">${escapeHtml(message)}</td></tr>`;
     renderPager(0, 0);
     return;
   }
 
-  const totalPages = Math.max(1, Math.ceil(count / state.pageSize));
-  if (state.currentPage > totalPages) {
-    state.currentPage = totalPages;
-  }
-
-  const start = (state.currentPage - 1) * state.pageSize;
-  const end = start + state.pageSize;
-  const pageItems = state.filtered.slice(start, end);
-  const shown = pageItems.length;
-
-  const label = query
-    ? `"${query}" için ${count} kayıt bulundu.`
-    : `En yeni ${Math.min(count, state.pageSize)} kayıt gösteriliyor.`;
-  elements.resultLabel.textContent = label;
-
-  const rows = pageItems.map(renderRow).join("");
-  elements.resultsBody.innerHTML = rows;
-  renderPager(totalPages, shown);
+  const suffix = query ? ` "${query}" için ${total} sonuç bulundu.` : ` Toplam ${total} sonuç listeleniyor.`;
+  elements.resultLabel.textContent = `En güncel kayıtlar gösteriliyor.${suffix}`;
+  elements.resultsBody.innerHTML = pageRecords.map((record) => renderRow(record)).join("");
+  renderPager(total, totalPages);
 }
 
-function renderPager(totalPages, shownCount) {
-  if (!totalPages) {
+function renderPager(total, totalPages) {
+  if (!elements.pager) {
+    return;
+  }
+
+  if (!total) {
     elements.pager.innerHTML = "";
     return;
   }
 
-  const prevDisabled = state.currentPage <= 1 ? "disabled" : "";
-  const nextDisabled = state.currentPage >= totalPages ? "disabled" : "";
-  const pageText = `Sayfa ${state.currentPage} / ${totalPages}`;
-  const rowsText = `${formatCount(shownCount)} kayıt`;
-
+  const currentPage = state.currentPage;
+  const start = (currentPage - 1) * state.pageSize + 1;
+  const end = Math.min(currentPage * state.pageSize, total);
   elements.pager.innerHTML = `
-    <button class="pager-btn" type="button" data-page="prev" ${prevDisabled}>Önceki</button>
-    <span class="pager-info">${escapeHtml(pageText)} · ${escapeHtml(rowsText)}</span>
-    <button class="pager-btn" type="button" data-page="next" ${nextDisabled}>Sonraki</button>
+    <span class="pager-info">${formatCount(total)} kayıttan ${start}-${end} arası gösteriliyor</span>
+    <div>
+      <button class="pager-btn" data-action="prev" ${currentPage <= 1 ? "disabled" : ""}>Önceki</button>
+      <button class="pager-btn" data-action="next" ${currentPage >= totalPages ? "disabled" : ""}>Sonraki</button>
+    </div>
   `;
 
-  elements.pager.querySelectorAll("button[data-page]").forEach((button) => {
+  elements.pager.querySelectorAll(".pager-btn").forEach((button) => {
     button.addEventListener("click", () => {
-      if (button.dataset.page === "prev" && state.currentPage > 1) {
+      const action = button.dataset.action;
+      if (action === "prev" && state.currentPage > 1) {
         state.currentPage -= 1;
-      }
-      if (button.dataset.page === "next" && state.currentPage < totalPages) {
+      } else if (action === "next" && state.currentPage < totalPages) {
         state.currentPage += 1;
       }
-      renderResults(elements.searchInput.value);
+      renderResults(elements.searchInput?.value ?? "");
     });
   });
 }
 
 function renderRow(record) {
+  const cutStatus = String(record.cutStatus || "Bilinmiyor").toLowerCase();
+  const cutClass = cutStatus.includes("kesildi") ? "done" : cutStatus.includes("kesilmedi") ? "waiting" : "unknown";
   const date = formatDate(record.orderDate);
-  const cutClass =
-    record.cutStatus === "Kesildi"
-      ? "done"
-      : record.cutStatus === "Kesilmedi"
-      ? "waiting"
-      : "unknown";
-
   return `
     <tr>
       <td>${escapeHtml(date)}</td>
       <td>${escapeHtml(displayFileName(record.sourceFile))}</td>
-      <td>${escapeHtml(record.opt || getCellValue(record.cellHighlights, "D12") || "-")}</td>
-      <td>${escapeHtml(record.material || getCellValue(record.cellHighlights, "A15") || "-")}</td>
-      <td>${escapeHtml(record.plaka || buildPlakaValue(record.cellHighlights) || "-")}</td>
-      <td>${formatNumber(record.pvcMeters)}</td>
+      <td>${escapeHtml(buildMaterialDisplay(record))}</td>
+      <td>${formatNumber(extractPvcMeters(record.pvcMeters, record.cellHighlights, record.plaka))}</td>
       <td><span class="badge ${cutClass}">${escapeHtml(record.cutStatus || "Bilinmiyor")}</span></td>
+      <td>${escapeHtml(record.opt || getCellValue(record.cellHighlights, "D12") || record.color || "-")}</td>
       <td>${formatRangeNotes(record.rangeNotes || record.notes)}</td>
     </tr>
   `;
@@ -481,6 +426,55 @@ function buildPlakaValue(items) {
   if (c46 && c46 !== "-") parts.push(c46);
   if (d15 && d15 !== "-") parts.push(d15);
   return parts.length ? parts.join(" ") : "-";
+}
+
+function buildMaterialDisplay(record) {
+  const material = String(record.material || getCellValue(record.cellHighlights, "A15") || "-").trim();
+  const quantity = record.quantity ?? getCellValue(record.cellHighlights, "C46");
+  const quantityText = String(quantity ?? "").trim();
+  if (quantityText && material && material !== "-") {
+    return `${quantityText} PLK ${material}`;
+  }
+  return material || "-";
+}
+
+function extractPvcMeters(primaryValue, items, plakaValue) {
+  const fromHighlights = parseMetersFromText(getCellValue(items, "C53"));
+  if (Number.isFinite(fromHighlights) && fromHighlights > 0) {
+    return fromHighlights;
+  }
+
+  const fromLegacyHighlight = parseMetersFromText(getCellValue(items, "D15"));
+  if (Number.isFinite(fromLegacyHighlight) && fromLegacyHighlight > 0) {
+    return fromLegacyHighlight;
+  }
+
+  const fromPlaka = parseMetersFromText(plakaValue);
+  if (Number.isFinite(fromPlaka) && fromPlaka > 0) {
+    return fromPlaka;
+  }
+
+  const parsedPrimary = parseNumericValue(primaryValue);
+  if (Number.isFinite(parsedPrimary) && parsedPrimary > 0) {
+    return parsedPrimary;
+  }
+
+  return null;
+}
+
+function parseMetersFromText(value) {
+  const text = String(value ?? "");
+  const match = text.match(/(\d+(?:[.,]\d+)?)\s*M\b/i);
+  if (!match) return null;
+  return parseNumericValue(match[1]);
+}
+
+function parseNumericValue(value) {
+  if (value == null || value === "") return null;
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  const text = String(value).replace(",", ".").trim();
+  const num = Number(text);
+  return Number.isFinite(num) ? num : null;
 }
 
 function sortRecords(records) {

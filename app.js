@@ -428,6 +428,55 @@ function buildPlakaValue(items) {
   return parts.length ? parts.join(" ") : "-";
 }
 
+function buildMaterialDisplay(record) {
+  const material = String(record.material || getCellValue(record.cellHighlights, "A15") || "-").trim();
+  const quantity = record.quantity ?? getCellValue(record.cellHighlights, "C46");
+  const quantityText = String(quantity ?? "").trim();
+  if (quantityText && material && material !== "-") {
+    return `${quantityText} PLK ${material}`;
+  }
+  return material || "-";
+}
+
+function extractPvcMeters(primaryValue, items, plakaValue) {
+  const fromHighlights = parseMetersFromText(getCellValue(items, "C53"));
+  if (Number.isFinite(fromHighlights) && fromHighlights > 0) {
+    return fromHighlights;
+  }
+
+  const fromLegacyHighlight = parseMetersFromText(getCellValue(items, "D15"));
+  if (Number.isFinite(fromLegacyHighlight) && fromLegacyHighlight > 0) {
+    return fromLegacyHighlight;
+  }
+
+  const fromPlaka = parseMetersFromText(plakaValue);
+  if (Number.isFinite(fromPlaka) && fromPlaka > 0) {
+    return fromPlaka;
+  }
+
+  const parsedPrimary = parseNumericValue(primaryValue);
+  if (Number.isFinite(parsedPrimary) && parsedPrimary > 0) {
+    return parsedPrimary;
+  }
+
+  return null;
+}
+
+function parseMetersFromText(value) {
+  const text = String(value ?? "");
+  const match = text.match(/(\d+(?:[.,]\d+)?)\s*M\b/i);
+  if (!match) return null;
+  return parseNumericValue(match[1]);
+}
+
+function parseNumericValue(value) {
+  if (value == null || value === "") return null;
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  const text = String(value).replace(",", ".").trim();
+  const num = Number(text);
+  return Number.isFinite(num) ? num : null;
+}
+
 function sortRecords(records) {
   return [...records].sort((left, right) => {
     const rightTime = new Date(right.orderDate ?? 0).getTime();
