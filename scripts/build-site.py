@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT_DIR = Path.cwd()
 DIST_DIR = ROOT_DIR / "dist"
-SITE_FILES = ["index.html", "styles.css", "app.js", "supabase.config.js"]
+SITE_FILES = ["index.html", "styles.css", "app.js", "supabase.config.js", "local-database.js"]
 DATA_FILES = []
 
 
