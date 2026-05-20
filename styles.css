@@ -178,7 +178,7 @@ body.authenticated .auth-screen {
 
 .mini-stats {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 4px;
   margin-top: 2px;
 }
@@ -195,7 +195,7 @@ body.authenticated .auth-screen {
   color: var(--muted);
   font-size: 0.73rem;
   line-height: 1.15;
-  flex: 1 1 0;
+  flex: 1 1 140px;
   min-width: 0;
 }
 

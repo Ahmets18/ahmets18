@@ -10,6 +10,7 @@ $scriptsDir = Join-Path $rootDir "scripts"
 $exportsDir = Join-Path $rootDir "exports"
 $secretsPath = Join-Path $rootDir "secrets/supabase.local.json"
 $databasePath = Join-Path $dataDir "database.txt"
+$syncStatePath = Join-Path $dataDir "sync-state.json"
 $localDatabaseJsPath = Join-Path $rootDir "local-database.js"
 $exportScriptPath = Join-Path $scriptsDir "export-for-supabase.ps1"
 $pushScriptPath = Join-Path $scriptsDir "push-to-supabase.ps1"
@@ -253,9 +254,21 @@ function Get-CellValue {
   return ""
 }
 
-function Get-CutStatus {
-  param([hashtable]$Map)
-  $jobCode = Clean-Text (Get-CellValue $Map "D5")
+function Get-SourceKeyFromName {
+  param([string]$Name)
+  $baseName = Clean-Text ([IO.Path]::GetFileNameWithoutExtension($Name))
+  if ($baseName -match '(?i)\b([A-Z]\d{3})\b') {
+    return $Matches[1].ToUpperInvariant()
+  }
+  if ($baseName -match '(?i)([A-Z]\d{3})') {
+    return $Matches[1].ToUpperInvariant()
+  }
+  return $baseName.ToUpperInvariant()
+}
+
+function Get-CutStatusByCode {
+  param([string]$JobCode)
+  $jobCode = Clean-Text $JobCode
   if (-not $jobCode) {
     return "Bilinmiyor"
   }
@@ -270,6 +283,11 @@ function Get-CutStatus {
   catch {
     return "Bilinmiyor"
   }
+}
+
+function Get-CutStatus {
+  param([hashtable]$Map)
+  return Get-CutStatusByCode (Get-CellValue $Map "D5")
 }
 
 function Build-Highlights {
@@ -429,6 +447,8 @@ $workerScriptText = Get-WorkerScriptText -FunctionNames @(
   "Get-WorkbookFirstSheetTarget",
   "Get-CellMapFromSheetText",
   "Get-CellValue",
+  "Get-SourceKeyFromName",
+  "Get-CutStatusByCode",
   "Get-CutStatus",
   "Build-Highlights",
   "Build-RangeNotes",
@@ -505,23 +525,63 @@ $files = Get-ChildItem -LiteralPath $SourcePath -Recurse -File | Where-Object {
 Write-Log "Files found: $($files.Count)"
 
 $records = New-Object System.Collections.Generic.List[object]
+$processedKeys = @{}
+$existingRecordCount = 0
 
+if (Test-Path -LiteralPath $databasePath) {
+  try {
+    $existingDatabase = Get-Content -LiteralPath $databasePath -Raw | ConvertFrom-Json
+    foreach ($record in @($existingDatabase.records)) {
+      if ($null -eq $record) { continue }
+      $sourceKey = Get-SourceKeyFromName ([string]$record.sourceFile)
+      if (-not $sourceKey -or $processedKeys.ContainsKey($sourceKey)) { continue }
+
+      [void]$records.Add($record)
+      $processedKeys[$sourceKey] = $true
+      $existingRecordCount++
+    }
+    Write-Log "Existing database loaded: $existingRecordCount records."
+  }
+  catch {
+    Write-Log ("Existing database could not be read, starting fresh: {0}" -f $_.Exception.Message)
+  }
+}
+
+$processed = 0
+$skippedCached = 0
+$newRecords = 0
+$failedFiles = 0
+$timedOutFiles = 0
 foreach ($file in $files) {
+  $sourceKey = Get-SourceKeyFromName $file.Name
+  if ($sourceKey -and $processedKeys.ContainsKey($sourceKey)) {
+    $skippedCached++
+    Write-Log "Skipping cached source key: $sourceKey ($($file.FullName))"
+    continue
+  }
+
   Write-Log "Reading file: $($file.FullName)"
   $fileResult = Invoke-FileRecordWithTimeout -FilePath $file.FullName -TimeoutSeconds $fileTimeoutSeconds
   if ($fileResult.timedOut) {
+    $timedOutFiles++
     Write-Log "Skipped file after $fileTimeoutSeconds seconds: $($file.FullName)"
     continue
   }
 
   if (-not $fileResult.success) {
+    $failedFiles++
     Write-Log "Failed file: $($file.FullName)"
     Write-Log ("Error: {0}" -f $fileResult.error)
     continue
   }
 
   [void]$records.Add($fileResult.record)
-  Write-Log "File done: $($file.FullName) (1 record)"
+  if ($sourceKey) {
+    $processedKeys[$sourceKey] = $true
+  }
+  $processed++
+  $newRecords++
+  Write-Log "File done: $($file.FullName) (new record)"
 }
 
 $database = [ordered]@{
@@ -540,9 +600,17 @@ $databaseJson = $database | ConvertTo-Json -Depth 10
 $databaseJson | Set-Content -LiteralPath $databasePath -Encoding utf8
 $databaseEncoded = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($databaseJson))
 ("window.LOCAL_DATABASE_TEXT = atob('" + $databaseEncoded + "');") | Set-Content -LiteralPath $localDatabaseJsPath -Encoding utf8
+$syncState = [ordered]@{
+  processedKeys = @($processedKeys.Keys | Sort-Object)
+  lastRunAt = $database.generatedAt
+  totalRecords = $records.Count
+  totalFilesSeen = $files.Count
+}
+$syncState | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $syncStatePath -Encoding utf8
 Write-Log "database.txt updated: $databasePath"
 Write-Log "local-database.js updated: $localDatabaseJsPath"
-Write-Log "Last 1 month: $($files.Count) files, $($records.Count) records."
+Write-Log "sync-state.json updated: $syncStatePath"
+Write-Log "Last 1 month: $($files.Count) files, $processed processed, $skippedCached cached skipped, $newRecords new records, $timedOutFiles timed out, $failedFiles failed, $($records.Count) total records."
 
 try {
   if (Test-Path -LiteralPath $exportScriptPath) {

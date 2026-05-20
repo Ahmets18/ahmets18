@@ -23,7 +23,8 @@ const elements = {
   pager: document.getElementById("pager"),
   totalRecords: document.getElementById("totalRecords"),
   totalFiles: document.getElementById("totalFiles"),
-  matchedRecords: document.getElementById("matchedRecords")
+  matchedRecords: document.getElementById("matchedRecords"),
+  lastUpdated: document.getElementById("lastUpdated")
 };
 
 bootstrap().catch((error) => {
@@ -142,6 +143,11 @@ async function startApp() {
 }
 
 async function loadDatabase() {
+  const supabaseDatabase = await loadSupabaseDatabase();
+  if (supabaseDatabase && Array.isArray(supabaseDatabase.records) && supabaseDatabase.records.length) {
+    return supabaseDatabase;
+  }
+
   const embeddedDatabase = loadEmbeddedDatabase();
   if (embeddedDatabase && Array.isArray(embeddedDatabase.records) && embeddedDatabase.records.length) {
     return embeddedDatabase;
@@ -150,11 +156,6 @@ async function loadDatabase() {
   const localDatabase = await loadDatabaseTxt();
   if (localDatabase && Array.isArray(localDatabase.records) && localDatabase.records.length) {
     return localDatabase;
-  }
-
-  const supabaseDatabase = await loadSupabaseDatabase();
-  if (supabaseDatabase && Array.isArray(supabaseDatabase.records) && supabaseDatabase.records.length) {
-    return supabaseDatabase;
   }
 
   return emptyDatabase();
@@ -255,10 +256,15 @@ async function loadSupabaseDatabase() {
 function buildDatabaseFromRows(rows) {
   const records = rows.map(normalizeSupabaseRow).filter(Boolean);
   const totalFiles = new Set(records.map((record) => record.sourceFile).filter(Boolean)).size;
+  const updateTimes = records
+    .map((record) => new Date(record.updatedAt ?? 0).getTime())
+    .filter((value) => Number.isFinite(value) && value > 0);
   const orderDates = records
     .map((record) => new Date(record.orderDate ?? 0).getTime())
     .filter((value) => Number.isFinite(value) && value > 0);
-  const generatedAt = orderDates.length ? new Date(Math.max(...orderDates)).toISOString() : new Date().toISOString();
+  const generatedAt = updateTimes.length
+    ? new Date(Math.max(...updateTimes)).toISOString()
+    : orderDates.length ? new Date(Math.max(...orderDates)).toISOString() : new Date().toISOString();
   const cutoffDate = orderDates.length ? new Date(Math.min(...orderDates)).toISOString() : "";
 
   return {
@@ -286,6 +292,7 @@ function normalizeSupabaseRow(row) {
     cellHighlights,
     rangeNotes: row.range_notes ?? [],
     orderDate: row.order_date ?? "",
+    updatedAt: row.updated_at ?? "",
     sourceFile: row.source_file ?? "",
     sheetName: row.sheet_name ?? "",
     sourceRow: row.source_row ?? null,
@@ -299,6 +306,9 @@ function renderSummary() {
   elements.totalRecords.textContent = formatCount(totalRecords);
   elements.totalFiles.textContent = formatCount(totalFiles);
   elements.matchedRecords.textContent = formatCount(state.filtered.length);
+  if (elements.lastUpdated) {
+    elements.lastUpdated.textContent = formatDateTime(state.database.generatedAt);
+  }
 }
 
 function filterAndRender(query) {
@@ -539,6 +549,18 @@ function formatDate(value) {
     year: "numeric",
     month: "2-digit",
     day: "2-digit"
+  }).format(date);
+}
+
+function formatDateTime(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "-";
+  return new Intl.DateTimeFormat("tr-TR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
   }).format(date);
 }
 
