@@ -439,6 +439,11 @@ function buildMaterialDisplay(record) {
 }
 
 function extractPvcMeters(primaryValue, items, plakaValue) {
+  const directValue = parseNumericValue(primaryValue);
+  if (Number.isFinite(directValue)) {
+    return directValue;
+  }
+
   const fromHighlights = parseNumericValue(getCellValue(items, "C53")) ?? parseMetersFromText(getCellValue(items, "C53"));
   if (Number.isFinite(fromHighlights) && fromHighlights > 0) {
     return fromHighlights;
