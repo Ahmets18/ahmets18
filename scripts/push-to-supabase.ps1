@@ -1,47 +1,21 @@
 param(
-  [string]$DatabasePath = (Join-Path $PSScriptRoot "..\data\database.txt")
+  [string]$DatabasePath = (Join-Path $PSScriptRoot "..\data\database.txt"),
+  [string]$SecretsPath = (Join-Path $PSScriptRoot "..\secrets\supabase.local.json")
 )
 
 $ErrorActionPreference = "Stop"
-$rootDir = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
-$localConfigPath = Join-Path $rootDir "secrets\supabase.local.json"
 
 if (-not (Test-Path -LiteralPath $DatabasePath)) {
   throw "Database not found: $DatabasePath"
 }
 
-function Read-LocalConfig {
+if (-not (Test-Path -LiteralPath $SecretsPath)) {
+  throw "Supabase secrets not found: $SecretsPath"
+}
+
+function Read-JsonFile {
   param([string]$Path)
-  if (-not (Test-Path -LiteralPath $Path)) {
-    return $null
-  }
-
-  try {
-    return Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
-  }
-  catch {
-    throw "Could not read local Supabase config: $Path"
-  }
-}
-
-$localConfig = Read-LocalConfig -Path $localConfigPath
-$supabaseUrl = if ($env:SUPABASE_URL) { $env:SUPABASE_URL } elseif ($null -ne $localConfig -and $localConfig.url) { $localConfig.url } else { $null }
-$supabaseServiceKey = if ($env:SUPABASE_SERVICE_KEY) { $env:SUPABASE_SERVICE_KEY } elseif ($null -ne $localConfig -and $localConfig.serviceKey) { $localConfig.serviceKey } else { $null }
-$supabaseTable = if ($env:SUPABASE_TABLE) { $env:SUPABASE_TABLE } elseif ($null -ne $localConfig -and $localConfig.table) { $localConfig.table } else { "orders" }
-
-if (-not $supabaseUrl -or -not $supabaseServiceKey) {
-  throw "SUPABASE_URL and SUPABASE_SERVICE_KEY must be set, or secrets\supabase.local.json must exist."
-}
-
-Write-Host "Supabase target: $supabaseUrl"
-Write-Host "Supabase table: $supabaseTable"
-
-$database = Get-Content -LiteralPath $DatabasePath -Raw | ConvertFrom-Json
-$rows = @($database.records)
-
-if (-not $rows.Count) {
-  Write-Host "No records to publish."
-  return
+  return Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json
 }
 
 function Convert-ToSupabaseRow {
@@ -66,97 +40,117 @@ function Convert-ToSupabaseRow {
   }
 }
 
-$payload = @($rows | ForEach-Object { Convert-ToSupabaseRow $_ }) | ConvertTo-Json -Depth 12
-$endpoint = "$($supabaseUrl.TrimEnd('/'))/rest/v1/$supabaseTable"
-$tempPayload = $null
-$tempScript = $null
-try {
-  $tempPayload = New-TemporaryFile
-  [System.IO.File]::WriteAllText($tempPayload.FullName, $payload, [System.Text.UTF8Encoding]::new($false))
-  $tempScript = Join-Path $env:TEMP ("supabase-push-" + ([Guid]::NewGuid().ToString("N")) + ".cjs")
+$config = Read-JsonFile -Path $SecretsPath
+$supabaseUrl = ([string]$config.url).Trim()
+$supabaseServiceKey = ([string]$config.serviceKey).Trim()
+$supabaseTable = if ([string]::IsNullOrWhiteSpace([string]$config.table)) { "orders" } else { ([string]$config.table).Trim() }
 
-  $env:SUPABASE_PAYLOAD_FILE = $tempPayload.FullName
-  $env:SUPABASE_ENDPOINT = $endpoint
-  $env:SUPABASE_SERVICE_KEY = $supabaseServiceKey
-
-  $nodeScript = @'
-const fs = require("node:fs");
-
-const payloadPath = process.env.SUPABASE_PAYLOAD_FILE;
-const endpoint = process.env.SUPABASE_ENDPOINT;
-const serviceKey = process.env.SUPABASE_SERVICE_KEY;
-
-(async () => {
-  try {
-    const payload = fs.readFileSync(payloadPath, "utf8");
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        apikey: serviceKey,
-        Authorization: `Bearer ${serviceKey}`,
-        "Content-Type": "application/json",
-        Prefer: "resolution=merge-duplicates,return=minimal"
-      },
-      body: payload
-    });
-    const body = await response.text();
-    process.stdout.write(JSON.stringify({ status: response.status, body }));
-    if (!response.ok) {
-      process.exitCode = 1;
-    }
-  }
-  catch (error) {
-    process.stdout.write(JSON.stringify({ status: 0, body: String(error && error.stack ? error.stack : error) }));
-    process.exitCode = 1;
-  }
-})();
-'@
-
-  Set-Content -LiteralPath $tempScript -Value $nodeScript -Encoding utf8
-  $nodeResult = & node $tempScript
-  $nodeExitCode = $LASTEXITCODE
-  $nodeOutput = ($nodeResult | Out-String).Trim()
-  $response = $null
-  if ($nodeOutput) {
-    try {
-      $response = $nodeOutput | ConvertFrom-Json
-    }
-    catch {
-      $response = $null
-    }
-  }
-
-  if ($nodeExitCode -ne 0 -and $null -eq $response) {
-    throw "node exit code $nodeExitCode. Raw output: $nodeOutput"
-  }
-
-  if ($nodeExitCode -ne 0) {
-    if ($response.body) {
-      throw "Supabase publish failed with HTTP $($response.status). Response: $($response.body)"
-    }
-    throw "node exit code $nodeExitCode"
-  }
-
-  if ($response.status -notin @(200, 201, 204)) {
-    if ($response.body) {
-      throw "Supabase publish failed with HTTP $($response.status). Response: $($response.body)"
-    }
-    throw "Supabase publish failed with HTTP $($response.status)."
-  }
+if ([string]::IsNullOrWhiteSpace($supabaseUrl) -or [string]::IsNullOrWhiteSpace($supabaseServiceKey)) {
+  throw "Supabase url and service key are required."
 }
-catch {
-  throw
+
+$database = Read-JsonFile -Path $DatabasePath
+$rows = @($database.records)
+
+if (-not $rows.Count) {
+  Write-Host "No records to publish."
+  return
+}
+
+$baseEndpoint = "$($supabaseUrl.TrimEnd('/'))/rest/v1/$supabaseTable"
+$batchSize = 100
+$published = 0
+$cleanupResponse = $null
+
+try {
+  $cleanupResponse = New-TemporaryFile
+  $cleanupEndpoint = "$($supabaseUrl.TrimEnd('/'))/rest/v1/${supabaseTable}?id=neq.__no_such_id__"
+  $cleanupArgs = @(
+    "--globoff",
+    "-s",
+    "-o", $cleanupResponse.FullName,
+    "-w", "%{http_code}",
+    "-X", "DELETE",
+    $cleanupEndpoint,
+    "-H", ("apikey: " + $supabaseServiceKey),
+    "-H", ("Authorization: Bearer " + $supabaseServiceKey),
+    "-H", "Prefer: return=minimal",
+    "-H", "Accept: application/json"
+  )
+  $deleteCode = & curl.exe @cleanupArgs
+
+  if ($LASTEXITCODE -ne 0) {
+    $responseBody = Get-Content -LiteralPath $cleanupResponse.FullName -Raw -ErrorAction SilentlyContinue
+    throw "Supabase cleanup failed. curl exit code $LASTEXITCODE. Response: $responseBody"
+  }
+
+  if ($deleteCode -notin @("200", "204")) {
+    $responseBody = Get-Content -LiteralPath $cleanupResponse.FullName -Raw -ErrorAction SilentlyContinue
+    if ($responseBody) {
+      throw "Supabase cleanup failed with HTTP $deleteCode. Response: $responseBody"
+    }
+    throw "Supabase cleanup failed with HTTP $deleteCode."
+  }
+
+  Write-Host "Supabase table cleared."
+
+  for ($offset = 0; $offset -lt $rows.Count; $offset += $batchSize) {
+    $batch = $rows | Select-Object -Skip $offset -First $batchSize
+    if (-not $batch.Count) {
+      continue
+    }
+
+    $payload = @($batch | ForEach-Object { Convert-ToSupabaseRow $_ }) | ConvertTo-Json -Depth 12
+    $payloadFile = New-TemporaryFile
+    $responseFile = New-TemporaryFile
+    try {
+      [System.IO.File]::WriteAllText($payloadFile.FullName, $payload, [System.Text.UTF8Encoding]::new($false))
+      $postArgs = @(
+        "--globoff",
+        "-s",
+        "-o", $responseFile.FullName,
+        "-w", "%{http_code}",
+        "-X", "POST",
+        $baseEndpoint,
+        "-H", ("apikey: " + $supabaseServiceKey),
+        "-H", ("Authorization: Bearer " + $supabaseServiceKey),
+        "-H", "Prefer: return=minimal",
+        "-H", "Accept: application/json",
+        "-H", "Content-Type: application/json",
+        "--data-binary", "@$($payloadFile.FullName)"
+      )
+      $httpCode = & curl.exe @postArgs
+
+      if ($LASTEXITCODE -ne 0) {
+        $responseBody = Get-Content -LiteralPath $responseFile.FullName -Raw -ErrorAction SilentlyContinue
+        throw "curl exit code $LASTEXITCODE. Response: $responseBody"
+      }
+
+      if ($httpCode -notin @("200", "201", "204")) {
+        $responseBody = Get-Content -LiteralPath $responseFile.FullName -Raw -ErrorAction SilentlyContinue
+        if ($responseBody) {
+          throw "Supabase publish failed with HTTP $httpCode. Response: $responseBody"
+        }
+        throw "Supabase publish failed with HTTP $httpCode."
+      }
+    }
+    finally {
+      if (Test-Path -LiteralPath $payloadFile.FullName) {
+        Remove-Item -LiteralPath $payloadFile.FullName -Force
+      }
+      if (Test-Path -LiteralPath $responseFile.FullName) {
+        Remove-Item -LiteralPath $responseFile.FullName -Force
+      }
+    }
+
+    $published += $batch.Count
+    Write-Host "Published rows $($offset + 1)-$($offset + $batch.Count)"
+  }
+
+  Write-Host "Supabase upload complete. $published rows published."
 }
 finally {
-  if ($null -ne $tempPayload -and (Test-Path -LiteralPath $tempPayload)) {
-    Remove-Item -LiteralPath $tempPayload -Force
+  if ($cleanupResponse -and (Test-Path -LiteralPath $cleanupResponse.FullName)) {
+    Remove-Item -LiteralPath $cleanupResponse.FullName -Force
   }
-  if ($null -ne $tempScript -and (Test-Path -LiteralPath $tempScript)) {
-    Remove-Item -LiteralPath $tempScript -Force
-  }
-  Remove-Item Env:\SUPABASE_PAYLOAD_FILE -ErrorAction SilentlyContinue
-  Remove-Item Env:\SUPABASE_ENDPOINT -ErrorAction SilentlyContinue
-  Remove-Item Env:\SUPABASE_SERVICE_KEY -ErrorAction SilentlyContinue
 }
-
-Write-Host "Published $($rows.Count) rows to Supabase table '$supabaseTable'."

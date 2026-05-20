@@ -446,10 +446,15 @@ function Invoke-FileRecordWithTimeout {
       }
     }
 
+    $record = $null
+    if ($null -ne $result -and $result.Count -gt 0) {
+      $record = $result[0]
+    }
+
     return [ordered]@{
       timedOut = $false
       success = $true
-      record = @($result | Select-Object -First 1)
+      record = $record
       error = $null
     }
   }
