@@ -1,6 +1,6 @@
 ﻿{
-    "generatedAt":  "2026-05-20T15:30:30.6869221+03:00",
-    "cutoffDate":  "2026-04-20T15:30:01.4998197+03:00",
+    "generatedAt":  "2026-05-20T16:00:25.5440279+03:00",
+    "cutoffDate":  "2026-04-20T16:00:01.4923497+03:00",
     "totalRecords":  967,
     "totalFiles":  955,
     "records":  [
@@ -13430,7 +13430,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  44,
                         "quantity":  3,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
