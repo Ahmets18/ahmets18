@@ -14,6 +14,7 @@ $syncStatePath = Join-Path $dataDir "sync-state.json"
 $localDatabaseJsPath = Join-Path $rootDir "local-database.js"
 $exportScriptPath = Join-Path $scriptsDir "export-for-supabase.ps1"
 $pushScriptPath = Join-Path $scriptsDir "push-to-supabase.ps1"
+$publishScriptPath = Join-Path $scriptsDir "publish-live-data.ps1"
 $logPath = Join-Path $logDir "sync.log"
 $cutoff = (Get-Date).AddMonths(-1)
 $fileTimeoutSeconds = 20
@@ -625,17 +626,34 @@ catch {
   Write-Log ("Supabase export failed: {0}" -f $_.Exception.Message)
 }
 
+$uploadSucceeded = $false
 try {
   if (Test-Path -LiteralPath $pushScriptPath) {
     Write-Log "Preparing Supabase upload..."
     & $pushScriptPath -DatabasePath $databasePath -SecretsPath $secretsPath
     Write-Log "Supabase upload finished."
+    $uploadSucceeded = $true
   } else {
     Write-Log "Supabase upload skipped: script not found at $pushScriptPath"
   }
 }
 catch {
   Write-Log ("Supabase upload failed: {0}" -f $_.Exception.Message)
+}
+
+try {
+  if ($uploadSucceeded -and (Test-Path -LiteralPath $publishScriptPath)) {
+    Write-Log "Preparing live data publish..."
+    & $publishScriptPath -RootDir $rootDir -DatabasePath $databasePath
+    Write-Log "Live data publish finished."
+  } elseif (-not $uploadSucceeded) {
+    Write-Log "Live data publish skipped: Supabase upload did not finish."
+  } else {
+    Write-Log "Live data publish skipped: script not found at $publishScriptPath"
+  }
+}
+catch {
+  Write-Log ("Live data publish failed: {0}" -f $_.Exception.Message)
 }
 
 Write-Log ("Done in {0:n1} sec" -f ((Get-Date) - $startTime).TotalSeconds)

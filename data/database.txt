@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-20T11:30:36.5838067+03:00",
-    "cutoffDate":  "2026-04-20T11:30:25.7951094+03:00",
-    "totalRecords":  948,
-    "totalFiles":  947,
+    "generatedAt":  "2026-05-20T11:50:04.4013784+03:00",
+    "cutoffDate":  "2026-04-20T11:49:54.4825386+03:00",
+    "totalRecords":  953,
+    "totalFiles":  952,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -21530,6 +21530,116 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "3 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "a4ca0e04e7bc4cc3b05e78a2ff3eba28",
+                        "customerName":  "K702 KARADENIZ",
+                        "material":  "GRİ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  26,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T11:31:28.0000000",
+                        "sourceFile":  "K702 KARADENIZ.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "26db648843824f60b367bb185ea35d54",
+                        "customerName":  "K703 KARADENIZ",
+                        "material":  "ANTRASİT MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  26,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T11:33:09.0000000",
+                        "sourceFile":  "K703 KARADENIZ.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "3aec5f698fdb40bca141ff6a38e94c5c",
+                        "customerName":  "K704 KARADENIZ",
+                        "material":  "AYTAŞI MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  71,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T11:36:25.0000000",
+                        "sourceFile":  "K704 KARADENIZ.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "5fbe3a4ba54f4abd9d025dc76e647ec1",
+                        "customerName":  "K705 KARADENIZ",
+                        "material":  "AGT",
+                        "color":  "ARTI",
+                        "pvcMeters":  27,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T11:47:54.0000000",
+                        "sourceFile":  "K705 KARADENIZ.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X1220"
+                    },
+                    {
+                        "id":  "d7deebeb516d46aebf50c2cc5cffeab9",
+                        "customerName":  "K706 KARADENIZ",
+                        "material":  "AYTAŞI ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T11:44:29.0000000",
+                        "sourceFile":  "K706 KARADENIZ.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 8M 2800X2100"
                     }
                 ]
 }
