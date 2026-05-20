@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-20T12:40:42.6105979+03:00",
-    "cutoffDate":  "2026-04-20T12:40:19.4354081+03:00",
-    "totalRecords":  954,
-    "totalFiles":  952,
+    "generatedAt":  "2026-05-20T13:00:29.9093958+03:00",
+    "cutoffDate":  "2026-04-20T13:00:01.4098459+03:00",
+    "totalRecords":  957,
+    "totalFiles":  955,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -14383,7 +14383,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  42,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -23570,6 +23570,78 @@
                         "plaka":  "1 PLK 3M 2100X1700",
                         "jobCode":  "K643",
                         "d5":  "K643"
+                    },
+                    {
+                        "id":  "0a9be08686dd4e1ca53aca24ec6013ff",
+                        "customerName":  "K710 EYMEN ZREK",
+                        "jobCode":  "K710 EYMEN ZREK",
+                        "d5":  "K710 EYMEN ZREK",
+                        "material":  "P267 BRONZ İNOX KEAS",
+                        "color":  "ARTI",
+                        "pvcMeters":  58,
+                        "quantity":  4,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T12:59:40.0000000",
+                        "sourceFile":  "K710 EYMEN ZREK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 2800X1220"
+                    },
+                    {
+                        "id":  "1ab6985328f3409da3b0d0c0096c66ad",
+                        "customerName":  "K708 ISMAIL BALCI",
+                        "jobCode":  "K708 ISMAIL BALCI",
+                        "d5":  "K708 ISMAIL BALCI",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  48,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T12:47:09.0000000",
+                        "sourceFile":  "K708 ISMAIL BALCI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "d6467727bb9a4b2fb770d491dfd04af2",
+                        "customerName":  "K709 ISMAIL BALCI",
+                        "jobCode":  "K709 ISMAIL BALCI",
+                        "d5":  "K709 ISMAIL BALCI",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-20T12:48:54.0000000",
+                        "sourceFile":  "K709 ISMAIL BALCI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 3M 2100X1700"
                     }
                 ]
 }
