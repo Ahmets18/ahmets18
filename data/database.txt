@@ -1,7 +1,7 @@
 ﻿{
-    "generatedAt":  "2026-05-21T17:00:22.9499188+03:00",
-    "cutoffDate":  "2026-04-21T17:00:01.9042864+03:00",
-    "totalRecords":  992,
+    "generatedAt":  "2026-05-21T17:30:22.6454599+03:00",
+    "cutoffDate":  "2026-04-21T17:30:01.8905209+03:00",
+    "totalRecords":  993,
     "totalFiles":  915,
     "records":  [
                     {
@@ -14653,7 +14653,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24501,6 +24501,30 @@
                         "sourceRow":  1,
                         "opt":  "ERBAY",
                         "plaka":  "1 PLK 30M 3660X1830"
+                    },
+                    {
+                        "id":  "9f01b19d56904f2e854c5f35cbb31b88",
+                        "customerName":  "K746 EYMEN ZREK",
+                        "jobCode":  "K746 EYMEN ZREK",
+                        "d5":  "K746 EYMEN ZREK",
+                        "material":  "BEYAZ PARLAK ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T17:19:23.0000000",
+                        "sourceFile":  "K746 EYMEN ZREK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 8M 2800X2100"
                     }
                 ]
 }
