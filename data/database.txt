@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-21T13:00:24.4594707+03:00",
-    "cutoffDate":  "2026-04-21T13:00:01.8071441+03:00",
+    "generatedAt":  "2026-05-21T13:30:24.0219400+03:00",
+    "cutoffDate":  "2026-04-21T13:30:01.8286272+03:00",
     "totalRecords":  985,
-    "totalFiles":  922,
+    "totalFiles":  918,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -20905,7 +20905,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -23750,7 +23750,7 @@
                         "color":  "ERBAY",
                         "pvcMeters":  16,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
