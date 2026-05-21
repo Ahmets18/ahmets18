@@ -6,7 +6,7 @@ const state = {
   database: null,
   filtered: [],
   currentPage: 1,
-  pageSize: 10,
+  pageSize: 20,
   appReady: false,
   session: null
 };
@@ -382,11 +382,9 @@ function renderPager(total, totalPages) {
   const start = (currentPage - 1) * state.pageSize + 1;
   const end = Math.min(currentPage * state.pageSize, total);
   elements.pager.innerHTML = `
+    <button class="pager-btn pager-btn-left" data-action="prev" ${currentPage <= 1 ? "disabled" : ""}>Önceki</button>
     <span class="pager-info">${formatCount(total)} kayıttan ${start}-${end} arası gösteriliyor</span>
-    <div>
-      <button class="pager-btn" data-action="prev" ${currentPage <= 1 ? "disabled" : ""}>Önceki</button>
-      <button class="pager-btn" data-action="next" ${currentPage >= totalPages ? "disabled" : ""}>Sonraki</button>
-    </div>
+    <button class="pager-btn pager-btn-right" data-action="next" ${currentPage >= totalPages ? "disabled" : ""}>Sonraki</button>
   `;
 
   elements.pager.querySelectorAll(".pager-btn").forEach((button) => {
@@ -502,11 +500,8 @@ function formatRangeNotes(items) {
       if (typeof item === "string") {
         return `<div>${escapeHtml(item)}</div>`;
       }
-      const cell = escapeHtml(item.cell || "");
-      const label = escapeHtml(item.label || "");
       const value = escapeHtml(item.value ?? "");
-      const prefix = label ? `${cell} / ${label}` : cell;
-      return `<div>${prefix ? `<strong>${prefix}</strong> - ` : ""}${value}</div>`;
+      return `<div>${value}</div>`;
     })
     .join("")}</div>`;
 }
