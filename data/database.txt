@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-21T10:30:22.2000834+03:00",
-    "cutoffDate":  "2026-04-21T10:30:01.7477315+03:00",
-    "totalRecords":  976,
-    "totalFiles":  925,
+    "generatedAt":  "2026-05-21T11:00:21.7356651+03:00",
+    "cutoffDate":  "2026-04-21T11:00:01.7453285+03:00",
+    "totalRecords":  978,
+    "totalFiles":  927,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -5720,7 +5720,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -23992,7 +23992,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  11,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24016,7 +24016,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  20,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24104,6 +24104,54 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "20 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "f9ee68f82618473781b64d71c659af01",
+                        "customerName":  "K730 HAKKI KARAZIYAN",
+                        "jobCode":  "K730 HAKKI KARAZIYAN",
+                        "d5":  "K730 HAKKI KARAZIYAN",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  145,
+                        "quantity":  6,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T10:37:20.0000000",
+                        "sourceFile":  "K730 HAKKI KARAZIYAN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "6 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "5c788f021dad43899c716dc3e904c532",
+                        "customerName":  "K731 HAKKI KARAZIYAN",
+                        "jobCode":  "K731 HAKKI KARAZIYAN",
+                        "d5":  "K731 HAKKI KARAZIYAN",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T10:41:15.0000000",
+                        "sourceFile":  "K731 HAKKI KARAZIYAN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 5M 2800X2100"
                     }
                 ]
 }
