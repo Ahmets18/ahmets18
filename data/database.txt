@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-21T15:00:25.1989773+03:00",
-    "cutoffDate":  "2026-04-21T15:00:01.8786371+03:00",
-    "totalRecords":  988,
-    "totalFiles":  916,
+    "generatedAt":  "2026-05-21T15:30:28.7991344+03:00",
+    "cutoffDate":  "2026-04-21T15:30:01.8576993+03:00",
+    "totalRecords":  989,
+    "totalFiles":  917,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -9359,7 +9359,7 @@
                         "color":  "ERBAY",
                         "pvcMeters":  0,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -23870,7 +23870,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24403,6 +24403,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "ac8495c6cd3f4628a871b330391b82d4",
+                        "customerName":  "K742 BAYRAKTAR",
+                        "jobCode":  "K742 BAYRAKTAR",
+                        "d5":  "K742 BAYRAKTAR",
+                        "material":  "HAZAR MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  158,
+                        "quantity":  4,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T15:01:17.0000000",
+                        "sourceFile":  "K742 BAYRAKTAR.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 2800X2100"
                     }
                 ]
 }
