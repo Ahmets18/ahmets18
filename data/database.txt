@@ -1,7 +1,7 @@
 ﻿{
-    "generatedAt":  "2026-05-21T11:00:21.7356651+03:00",
-    "cutoffDate":  "2026-04-21T11:00:01.7453285+03:00",
-    "totalRecords":  978,
+    "generatedAt":  "2026-05-21T11:30:24.6753036+03:00",
+    "cutoffDate":  "2026-04-21T11:30:01.7841162+03:00",
+    "totalRecords":  980,
     "totalFiles":  927,
     "records":  [
                     {
@@ -24152,6 +24152,54 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "2 PLK 5M 2800X2100"
+                    },
+                    {
+                        "id":  "5f8cb0aff6f44be18c33cdfa9a9007ed",
+                        "customerName":  "K732 HALIL KARAKOC",
+                        "jobCode":  "K732 HALIL KARAKOC",
+                        "d5":  "K732 HALIL KARAKOC",
+                        "material":  "NTR BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  170,
+                        "quantity":  5,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T11:07:15.0000000",
+                        "sourceFile":  "K732 HALIL KARAKOC.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "5 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "f93166c1e0da4921b74d4aead91b6583",
+                        "customerName":  "K733 HALIL KARAKOC",
+                        "jobCode":  "K733 HALIL KARAKOC",
+                        "d5":  "K733 HALIL KARAKOC",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T11:10:46.0000000",
+                        "sourceFile":  "K733 HALIL KARAKOC.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 4M 2800X2100"
                     }
                 ]
 }
