@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-21T15:30:28.7991344+03:00",
-    "cutoffDate":  "2026-04-21T15:30:01.8576993+03:00",
-    "totalRecords":  989,
-    "totalFiles":  917,
+    "generatedAt":  "2026-05-21T16:00:27.6641606+03:00",
+    "cutoffDate":  "2026-04-21T16:00:01.8597269+03:00",
+    "totalRecords":  991,
+    "totalFiles":  919,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -11401,7 +11401,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  32,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -23652,7 +23652,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  56,
                         "quantity":  3,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24427,6 +24427,56 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "4 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "f1b57f4e6f6447babd76f8ffd0a796b4",
+                        "customerName":  "K743 SINAN GOZUBUYUK",
+                        "jobCode":  "K743 SINAN GOZUBUYUK",
+                        "d5":  "K743 SINAN GOZUBUYUK",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  514,
+                        "quantity":  16,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L45",
+                                           "label":  "L45",
+                                           "value":  "SAYFA 1/2 \u003e\u003e\u003e"
+                                       },
+                        "orderDate":  "2026-05-21T15:48:49.0000000",
+                        "sourceFile":  "K743 SINAN GOZUBUYUK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "16 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "2492f9da581544219a7f4205268b6507",
+                        "customerName":  "K744 SINAN GOZUBUYUK",
+                        "jobCode":  "K744 SINAN GOZUBUYUK",
+                        "d5":  "K744 SINAN GOZUBUYUK",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  4,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T15:50:40.0000000",
+                        "sourceFile":  "K744 SINAN GOZUBUYUK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 5M 2800X2100"
                     }
                 ]
 }
