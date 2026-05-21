@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-21T16:30:22.6491962+03:00",
-    "cutoffDate":  "2026-04-21T16:30:01.8620221+03:00",
-    "totalRecords":  991,
-    "totalFiles":  917,
+    "generatedAt":  "2026-05-21T17:00:22.9499188+03:00",
+    "cutoffDate":  "2026-04-21T17:00:01.9042864+03:00",
+    "totalRecords":  992,
+    "totalFiles":  915,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -24088,7 +24088,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  227,
                         "quantity":  20,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24317,7 +24317,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  23,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24477,6 +24477,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "4 PLK 5M 2800X2100"
+                    },
+                    {
+                        "id":  "869b885022bd4451815ba2f7ac0378ab",
+                        "customerName":  "K745 BEDRETTIN ABI",
+                        "jobCode":  "K745 BEDRETTIN ABI",
+                        "d5":  "K745 BEDRETTIN ABI",
+                        "material":  "BEYAZ SLAM",
+                        "color":  "ERBAY",
+                        "pvcMeters":  23,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T16:58:50.0000000",
+                        "sourceFile":  "K745 BEDRETTIN ABI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ERBAY",
+                        "plaka":  "1 PLK 30M 3660X1830"
                     }
                 ]
 }
