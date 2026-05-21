@@ -280,8 +280,8 @@ body.authenticated .auth-screen {
   background: rgba(255, 255, 255, 0.9);
   color: var(--accent-2);
   border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 0.74rem;
+  padding: 7px 12px;
+  font-size: 0.78rem;
   font-weight: 700;
   cursor: pointer;
 }
@@ -362,7 +362,7 @@ td:nth-child(3) {
 
 th:nth-child(4),
 td:nth-child(4) {
-  width: 96px;
+  width: 78px;
 }
 
 th:nth-child(5),
@@ -480,8 +480,8 @@ td:nth-child(7) {
   }
 
   .pager-btn {
-    padding: 5px 8px;
-    font-size: 0.68rem;
+    padding: 6px 10px;
+    font-size: 0.72rem;
   }
 
   th,
@@ -511,7 +511,7 @@ td:nth-child(7) {
 
   th:nth-child(4),
   td:nth-child(4) {
-    width: 84px;
+    width: 70px;
   }
 
   th:nth-child(5),
