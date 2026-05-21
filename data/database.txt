@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-21T14:30:24.6779549+03:00",
-    "cutoffDate":  "2026-04-21T14:30:01.8754001+03:00",
-    "totalRecords":  987,
-    "totalFiles":  915,
+    "generatedAt":  "2026-05-21T15:00:25.1989773+03:00",
+    "cutoffDate":  "2026-04-21T15:00:01.8786371+03:00",
+    "totalRecords":  988,
+    "totalFiles":  916,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -23434,7 +23434,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  26,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -23458,7 +23458,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  26,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -23530,7 +23530,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24210,7 +24210,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  24,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24379,6 +24379,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "6 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "510b8689ff48443d981dcdc9fb53753b",
+                        "customerName":  "K741 RIDVAN POLAT",
+                        "jobCode":  "K741 RIDVAN POLAT",
+                        "d5":  "K741 RIDVAN POLAT",
+                        "material":  "SAFİR MEŞE MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  34,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T14:37:37.0000000",
+                        "sourceFile":  "K741 RIDVAN POLAT.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
                     }
                 ]
 }
