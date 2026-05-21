@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-21T13:30:24.0219400+03:00",
-    "cutoffDate":  "2026-04-21T13:30:01.8286272+03:00",
-    "totalRecords":  985,
-    "totalFiles":  918,
+    "generatedAt":  "2026-05-21T14:00:22.7844546+03:00",
+    "cutoffDate":  "2026-04-21T14:00:01.8624274+03:00",
+    "totalRecords":  987,
+    "totalFiles":  917,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -1701,7 +1701,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  17,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -12035,7 +12035,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  127,
                         "quantity":  3,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24331,6 +24331,54 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "3b79a37d63e34a8095cf3cdab62df624",
+                        "customerName":  "K740 ANKA",
+                        "jobCode":  "K740 ANKA",
+                        "d5":  "K740 ANKA",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  12,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T13:45:00.0000000",
+                        "sourceFile":  "K740 ANKA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "fc34b3566da64eadbb485719609e39fd",
+                        "customerName":  "K739 BMD HASAN",
+                        "jobCode":  "K739 BMD HASAN",
+                        "d5":  "K739 BMD HASAN",
+                        "material":  "BEYAZ SUNTALAM",
+                        "color":  "ARTI",
+                        "pvcMeters":  97,
+                        "quantity":  6,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T13:34:22.0000000",
+                        "sourceFile":  "K739 BMD HASAN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "6 PLK 18M 2800X2100"
                     }
                 ]
 }
