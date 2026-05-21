@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-21T11:30:24.6753036+03:00",
-    "cutoffDate":  "2026-04-21T11:30:01.7841162+03:00",
-    "totalRecords":  980,
-    "totalFiles":  927,
+    "generatedAt":  "2026-05-21T12:00:24.8718724+03:00",
+    "cutoffDate":  "2026-04-21T12:00:01.8015096+03:00",
+    "totalRecords":  981,
+    "totalFiles":  925,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -24200,6 +24200,32 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "2 PLK 4M 2800X2100"
+                    },
+                    {
+                        "id":  "ee1ec7c297b54fa7af1b814e875262af",
+                        "customerName":  "K734 OMER SADIKER",
+                        "jobCode":  "K734 OMER SADIKER",
+                        "d5":  "K734 OMER SADIKER",
+                        "material":  "ÇÖL BEJİ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  24,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L21",
+                                           "label":  "L21",
+                                           "value":  "OSMAN KESER AYIR"
+                                       },
+                        "orderDate":  "2026-05-21T11:56:16.0000000",
+                        "sourceFile":  "K734 OMER SADIKER.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X1200"
                     }
                 ]
 }
