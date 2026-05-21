@@ -317,20 +317,7 @@ function filterAndRender(query) {
 
   state.filtered = normalizedQuery
     ? allRecords.filter((record) => {
-        const haystack = normalize(
-          [
-            record.customerName,
-            buildMaterialDisplay(record),
-            record.material,
-            record.color,
-            record.opt,
-            record.plaka,
-            record.cutStatus,
-            record.notes,
-            record.sourceFile,
-            record.sheetName
-          ].join(" ")
-        );
+        const haystack = normalize(buildSearchText(record));
         return haystack.includes(normalizedQuery);
       })
     : allRecords;
@@ -444,6 +431,29 @@ function buildMaterialDisplay(record) {
     return `${quantityText} PLK ${material}`;
   }
   return material || "-";
+}
+
+function buildSearchText(record) {
+  return [
+    record.customerName,
+    record.material,
+    record.color,
+    record.pvcMeters,
+    record.quantity,
+    record.cutStatus,
+    record.notes,
+    record.opt,
+    record.plaka,
+    record.orderDate,
+    record.sourceFile,
+    record.sheetName,
+    record.sourceRow,
+    record.jobCode,
+    record.d5,
+    buildMaterialDisplay(record),
+    textifyItems(record.cellHighlights),
+    textifyItems(record.rangeNotes)
+  ].join(" ");
 }
 
 function extractPvcMeters(primaryValue, items, plakaValue) {

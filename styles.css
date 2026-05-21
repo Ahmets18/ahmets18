@@ -299,6 +299,10 @@ body.authenticated .auth-screen {
   justify-self: end;
 }
 
+.pager-btn {
+  white-space: nowrap;
+}
+
 .table-wrap {
   overflow: auto;
   border-radius: 20px;
@@ -476,8 +480,8 @@ td:nth-child(7) {
   }
 
   .pager-btn {
-    padding: 5px 9px;
-    font-size: 0.7rem;
+    padding: 5px 8px;
+    font-size: 0.68rem;
   }
 
   th,
@@ -536,16 +540,16 @@ td:nth-child(7) {
   }
 
   .pager {
-    grid-template-columns: 1fr;
-    justify-items: stretch;
+    grid-template-columns: auto minmax(0, 1fr) auto;
   }
 
   .pager-info {
     text-align: center;
+    min-width: 0;
   }
 
   .pager-btn-left,
   .pager-btn-right {
-    width: 100%;
+    width: auto;
   }
 }
