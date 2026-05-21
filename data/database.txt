@@ -1,7 +1,7 @@
 ﻿{
-    "generatedAt":  "2026-05-21T12:30:25.6380692+03:00",
-    "cutoffDate":  "2026-04-21T12:30:01.8067435+03:00",
-    "totalRecords":  982,
+    "generatedAt":  "2026-05-21T13:00:24.4594707+03:00",
+    "cutoffDate":  "2026-04-21T13:00:01.8071441+03:00",
+    "totalRecords":  985,
     "totalFiles":  922,
     "records":  [
                     {
@@ -24259,6 +24259,78 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "2 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "abc535b4097a40b0a6f1103fd57be163",
+                        "customerName":  "K737 RIDVAN EROGLU",
+                        "jobCode":  "K737 RIDVAN EROGLU",
+                        "d5":  "K737 RIDVAN EROGLU",
+                        "material":  "BEYAZ SUNTA",
+                        "color":  "ARTI",
+                        "pvcMeters":  94,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T12:36:15.0000000",
+                        "sourceFile":  "K737 RIDVAN EROGLU.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "91ac1b0eca40478a9fd40ed8251e17bd",
+                        "customerName":  "K738 SAHABETTIN",
+                        "jobCode":  "K738 SAHABETTIN",
+                        "d5":  "K738 SAHABETTIN",
+                        "material":  "YILDIZ BAMBU MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  83,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T12:42:08.0000000",
+                        "sourceFile":  "K738 SAHABETTIN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "c0f90613ec3947a08c4eb80199b5ee8c",
+                        "customerName":  "K736 YCM",
+                        "jobCode":  "K736 YCM",
+                        "d5":  "K736 YCM",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  23,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-21T12:42:57.0000000",
+                        "sourceFile":  "K736 YCM.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
                     }
                 ]
 }
