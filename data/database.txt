@@ -1,6 +1,6 @@
 ﻿{
-    "generatedAt":  "2026-05-20T20:00:22.8284956+03:00",
-    "cutoffDate":  "2026-04-20T20:00:01.5118199+03:00",
+    "generatedAt":  "2026-05-21T07:59:15.1891957+03:00",
+    "cutoffDate":  "2026-04-21T07:58:56.1844703+03:00",
     "totalRecords":  969,
     "totalFiles":  934,
     "records":  [
@@ -3245,7 +3245,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  97,
                         "quantity":  3,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -3269,7 +3269,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -4028,7 +4028,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  114,
                         "quantity":  4,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -6352,7 +6352,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  120,
                         "quantity":  6,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -12786,7 +12786,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  35,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -13454,7 +13454,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  32,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -14629,7 +14629,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  113,
                         "quantity":  4,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -14847,7 +14847,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  183,
                         "quantity":  9,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -18832,7 +18832,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  122,
                         "quantity":  4,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -20687,7 +20687,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  10,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -20735,7 +20735,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  19,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -22717,7 +22717,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  59,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -22815,7 +22815,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  156,
                         "quantity":  8,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -22841,7 +22841,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
