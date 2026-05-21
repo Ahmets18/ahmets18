@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-21T12:00:24.8718724+03:00",
-    "cutoffDate":  "2026-04-21T12:00:01.8015096+03:00",
-    "totalRecords":  981,
-    "totalFiles":  925,
+    "generatedAt":  "2026-05-21T12:30:25.6380692+03:00",
+    "cutoffDate":  "2026-04-21T12:30:01.8067435+03:00",
+    "totalRecords":  982,
+    "totalFiles":  922,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -24226,6 +24226,39 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X1200"
+                    },
+                    {
+                        "id":  "d190416a5cae40cda67f728fa90d45e6",
+                        "customerName":  "K735 BINBASI",
+                        "jobCode":  "K735 BINBASI",
+                        "d5":  "K735 BINBASI",
+                        "material":  "LEGNANO MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  38,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+                                           {
+                                               "cell":  "L20",
+                                               "label":  "L20",
+                                               "value":  "KALINLAŞTIRMA"
+                                           },
+                                           {
+                                               "cell":  "L29",
+                                               "label":  "L29",
+                                               "value":  "GEÇENİ BİZDEN KES 2M² RENK FARKETMEZ KALINLAŞTIRMA ALTI"
+                                           }
+                                       ],
+                        "orderDate":  "2026-05-21T12:27:05.0000000",
+                        "sourceFile":  "K735 BINBASI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X2100"
                     }
                 ]
 }
