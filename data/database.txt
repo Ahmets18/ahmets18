@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-22T09:00:21.2403435+03:00",
-    "cutoffDate":  "2026-04-22T09:00:01.6471026+03:00",
-    "totalRecords":  993,
-    "totalFiles":  910,
+    "generatedAt":  "2026-05-22T09:30:24.5244087+03:00",
+    "cutoffDate":  "2026-04-22T09:30:01.6826210+03:00",
+    "totalRecords":  994,
+    "totalFiles":  907,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -24525,6 +24525,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "2 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "829daeb5e4ba45559da04f3239cc2a80",
+                        "customerName":  "K748 CIHAN MOBILYA",
+                        "jobCode":  "K748 CIHAN MOBILYA",
+                        "d5":  "K748 CIHAN MOBILYA",
+                        "material":  "KARİNA MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  82,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-22T09:10:55.0000000",
+                        "sourceFile":  "K748 CIHAN MOBILYA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
                     }
                 ]
 }
