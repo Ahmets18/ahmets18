@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-22T10:30:26.9644293+03:00",
-    "cutoffDate":  "2026-04-22T10:30:01.6825401+03:00",
-    "totalRecords":  995,
-    "totalFiles":  907,
+    "generatedAt":  "2026-05-22T11:00:25.6550599+03:00",
+    "cutoffDate":  "2026-04-22T11:00:01.7387194+03:00",
+    "totalRecords":  997,
+    "totalFiles":  906,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -7929,7 +7929,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  25,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24236,7 +24236,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  38,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24511,7 +24511,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24573,6 +24573,132 @@
                         "sourceRow":  1,
                         "opt":  "ERBAY",
                         "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "6ad64bf3f57b46ea8c19438abd6caae1",
+                        "customerName":  "K749 MERT ALBUM",
+                        "jobCode":  "K749 MERT ALBUM",
+                        "d5":  "K749 MERT ALBUM",
+                        "material":  "HAM MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  30,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+                                           {
+                                               "cell":  "L20",
+                                               "label":  "L20",
+                                               "value":  "K749---30 PLK"
+                                           },
+                                           {
+                                               "cell":  "L22",
+                                               "label":  "L22",
+                                               "value":  "K750---27PLK"
+                                           },
+                                           {
+                                               "cell":  "L24",
+                                               "label":  "L24",
+                                               "value":  "K751---12PLK"
+                                           },
+                                           {
+                                               "cell":  "L26",
+                                               "label":  "L26",
+                                               "value":  "K752---19PLK"
+                                           },
+                                           {
+                                               "cell":  "L28",
+                                               "label":  "L28",
+                                               "value":  "K753---35PLK"
+                                           },
+                                           {
+                                               "cell":  "L30",
+                                               "label":  "L30",
+                                               "value":  "K754---35PLK"
+                                           },
+                                           {
+                                               "cell":  "L32",
+                                               "label":  "L32",
+                                               "value":  "K755---40PLK"
+                                           },
+                                           {
+                                               "cell":  "L34",
+                                               "label":  "L34",
+                                               "value":  "K756---30PLK"
+                                           }
+                                       ],
+                        "orderDate":  "2026-05-22T10:35:40.0000000",
+                        "sourceFile":  "K749 MERT ALBUM.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "30 PLK 4M 2800X2200"
+                    },
+                    {
+                        "id":  "ff69c5d04678403798bad95bdb0775a0",
+                        "customerName":  "K757 MERT ALBUM",
+                        "jobCode":  "K757 MERT ALBUM",
+                        "d5":  "K757 MERT ALBUM",
+                        "material":  "HAM MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  787,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+                                           {
+                                               "cell":  "L20",
+                                               "label":  "L20",
+                                               "value":  "K757---159PLK"
+                                           },
+                                           {
+                                               "cell":  "L22",
+                                               "label":  "L22",
+                                               "value":  "K758---152PLK"
+                                           },
+                                           {
+                                               "cell":  "L24",
+                                               "label":  "L24",
+                                               "value":  "K759---123PLK"
+                                           },
+                                           {
+                                               "cell":  "L26",
+                                               "label":  "L26",
+                                               "value":  "K760---116PLK"
+                                           },
+                                           {
+                                               "cell":  "L28",
+                                               "label":  "L28",
+                                               "value":  "K761---50PLK"
+                                           },
+                                           {
+                                               "cell":  "L30",
+                                               "label":  "L30",
+                                               "value":  "K762---79PLK"
+                                           },
+                                           {
+                                               "cell":  "L32",
+                                               "label":  "L32",
+                                               "value":  "K763---52PLK"
+                                           },
+                                           {
+                                               "cell":  "L34",
+                                               "label":  "L34",
+                                               "value":  "K764---56PLK"
+                                           }
+                                       ],
+                        "orderDate":  "2026-05-22T10:47:06.0000000",
+                        "sourceFile":  "K757 MERT ALBUM.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "787 PLK 4M 2800X2200"
                     }
                 ]
 }
