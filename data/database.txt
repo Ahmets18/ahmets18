@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-22T13:00:22.9231640+03:00",
-    "cutoffDate":  "2026-04-22T13:00:01.7011237+03:00",
-    "totalRecords":  999,
-    "totalFiles":  904,
+    "generatedAt":  "2026-05-22T13:30:28.2228294+03:00",
+    "cutoffDate":  "2026-04-22T13:30:01.7512800+03:00",
+    "totalRecords":  1000,
+    "totalFiles":  899,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -24749,6 +24749,32 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "4 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "1437560827934e6aae495e7a6312be2c",
+                        "customerName":  "K769 YAHYA AKTAS",
+                        "jobCode":  "K769 YAHYA AKTAS",
+                        "d5":  "K769 YAHYA AKTAS",
+                        "material":  "KREM AKRİLİK",
+                        "color":  "ARTI",
+                        "pvcMeters":  28,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "A24",
+                                           "label":  "A24",
+                                           "value":  "2. PALAYA GEÇENİ KENDİSİ GETİRECEK. (2 NOLU ÖLÇÜ BİR ADETİ)"
+                                       },
+                        "orderDate":  "2026-05-22T13:26:51.0000000",
+                        "sourceFile":  "K769 YAHYA AKTAS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X1220"
                     }
                 ]
 }
