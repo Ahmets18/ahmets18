@@ -1,7 +1,7 @@
 ﻿{
-    "generatedAt":  "2026-05-22T12:30:27.6229385+03:00",
-    "cutoffDate":  "2026-04-22T12:30:01.7792994+03:00",
-    "totalRecords":  998,
+    "generatedAt":  "2026-05-22T13:00:22.9231640+03:00",
+    "cutoffDate":  "2026-04-22T13:00:01.7011237+03:00",
+    "totalRecords":  999,
     "totalFiles":  904,
     "records":  [
                     {
@@ -24725,6 +24725,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "7 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "9cde42bc44af49a09d495526e46f3170",
+                        "customerName":  "K767 YILMAZ BUJITERI",
+                        "jobCode":  "K767 YILMAZ BUJITERI",
+                        "d5":  "K767 YILMAZ BUJITERI",
+                        "material":  "TEKYÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  4,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-22T12:38:21.0000000",
+                        "sourceFile":  "K767 YILMAZ BUJITERI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 2800X2100"
                     }
                 ]
 }
