@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-22T15:00:22.6514114+03:00",
-    "cutoffDate":  "2026-04-22T15:00:01.7738130+03:00",
-    "totalRecords":  1004,
-    "totalFiles":  892,
+    "generatedAt":  "2026-05-22T15:30:24.9839796+03:00",
+    "cutoffDate":  "2026-04-22T15:30:01.8313005+03:00",
+    "totalRecords":  1006,
+    "totalFiles":  894,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -24875,6 +24875,54 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "68fb36f5822f45eb9600b72aac154022",
+                        "customerName":  "K773 YAHYA AKTAS",
+                        "jobCode":  "K773 YAHYA AKTAS",
+                        "d5":  "K773 YAHYA AKTAS",
+                        "material":  "AYTAŞI MDF D160",
+                        "color":  "ARTI",
+                        "pvcMeters":  98,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-22T15:19:57.0000000",
+                        "sourceFile":  "K773 YAHYA AKTAS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "feb85f3f792e475e84f52724a5f0fa2e",
+                        "customerName":  "K775 YAHYA AKTAS",
+                        "jobCode":  "K775 YAHYA AKTAS",
+                        "d5":  "K775 YAHYA AKTAS",
+                        "material":  "VARİO VİZON MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  90,
+                        "quantity":  4,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-22T15:22:53.0000000",
+                        "sourceFile":  "K775 YAHYA AKTAS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 2800X2100"
                     }
                 ]
 }
