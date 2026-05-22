@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-22T12:00:23.0395789+03:00",
-    "cutoffDate":  "2026-04-22T12:00:01.6924981+03:00",
-    "totalRecords":  997,
-    "totalFiles":  903,
+    "generatedAt":  "2026-05-22T12:30:27.6229385+03:00",
+    "cutoffDate":  "2026-04-22T12:30:01.7792994+03:00",
+    "totalRecords":  998,
+    "totalFiles":  904,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -24699,6 +24699,32 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "787 PLK 4M 2800X2200"
+                    },
+                    {
+                        "id":  "6cda52c93f9645c7b5a06fc0bc187a22",
+                        "customerName":  "K766 YILMAZ BUJITERI",
+                        "jobCode":  "K766 YILMAZ BUJITERI",
+                        "d5":  "K766 YILMAZ BUJITERI",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  315,
+                        "quantity":  7,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L24",
+                                           "label":  "L24",
+                                           "value":  "CNC"
+                                       },
+                        "orderDate":  "2026-05-22T12:29:41.0000000",
+                        "sourceFile":  "K766 YILMAZ BUJITERI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "7 PLK 18M 3660X1830"
                     }
                 ]
 }
