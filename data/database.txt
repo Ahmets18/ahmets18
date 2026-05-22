@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-22T15:30:24.9839796+03:00",
-    "cutoffDate":  "2026-04-22T15:30:01.8313005+03:00",
-    "totalRecords":  1006,
-    "totalFiles":  894,
+    "generatedAt":  "2026-05-22T16:00:29.2004264+03:00",
+    "cutoffDate":  "2026-04-22T16:00:01.8285015+03:00",
+    "totalRecords":  1009,
+    "totalFiles":  897,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -24923,6 +24923,78 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "4 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "bc00ca0e40454bfba42ad04552c54376",
+                        "customerName":  "K777 RAVZA",
+                        "jobCode":  "K777 RAVZA",
+                        "d5":  "K777 RAVZA",
+                        "material":  "D218 KAŞMİR MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  197,
+                        "quantity":  8,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-22T15:48:37.0000000",
+                        "sourceFile":  "K777 RAVZA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "8 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "8a042739d4e64a6b85f24976cbf53b6d",
+                        "customerName":  "K768 YILMAZ BUJITERI",
+                        "jobCode":  "K768 YILMAZ BUJITERI",
+                        "d5":  "K768 YILMAZ BUJITERI",
+                        "material":  "BEYAZ ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  22,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-22T15:35:20.0000000",
+                        "sourceFile":  "K768 YILMAZ BUJITERI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "22 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "1713b29d5278427293212fab22a562e1",
+                        "customerName":  "K776 YILMAZ BUJITERI",
+                        "jobCode":  "K776 YILMAZ BUJITERI",
+                        "d5":  "K776 YILMAZ BUJITERI",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-22T15:36:06.0000000",
+                        "sourceFile":  "K776 YILMAZ BUJITERI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 3M 2100X1700"
                     }
                 ]
 }
