@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-22T10:00:25.9987747+03:00",
-    "cutoffDate":  "2026-04-22T10:00:01.6388037+03:00",
-    "totalRecords":  994,
-    "totalFiles":  906,
+    "generatedAt":  "2026-05-22T10:30:26.9644293+03:00",
+    "cutoffDate":  "2026-04-22T10:30:01.6825401+03:00",
+    "totalRecords":  995,
+    "totalFiles":  907,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -8439,7 +8439,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  32,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24549,6 +24549,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "31c0594950724145a22782e8076f7c39",
+                        "customerName":  "K765 KAMIL ARSLAN",
+                        "jobCode":  "K765 KAMIL ARSLAN",
+                        "d5":  "K765 KAMIL ARSLAN",
+                        "material":  "DÜZ BEYAZ MDFLAM",
+                        "color":  "ERBAY",
+                        "pvcMeters":  4,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-22T10:14:49.0000000",
+                        "sourceFile":  "K765 KAMIL ARSLAN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ERBAY",
+                        "plaka":  "1 PLK 18M 2800X2100"
                     }
                 ]
 }
