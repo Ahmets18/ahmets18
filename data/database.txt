@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-22T14:30:23.1873980+03:00",
-    "cutoffDate":  "2026-04-22T14:30:01.7599059+03:00",
-    "totalRecords":  1003,
-    "totalFiles":  897,
+    "generatedAt":  "2026-05-22T15:00:22.6514114+03:00",
+    "cutoffDate":  "2026-04-22T15:00:01.7738130+03:00",
+    "totalRecords":  1004,
+    "totalFiles":  892,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -24851,6 +24851,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "8 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "9264f314c6e7475faeba8328d5426e8d",
+                        "customerName":  "K774 SUAT CANSU",
+                        "jobCode":  "K774 SUAT CANSU",
+                        "d5":  "K774 SUAT CANSU",
+                        "material":  "MAT BEYAZ ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-05-22T14:57:39.0000000",
+                        "sourceFile":  "K774 SUAT CANSU.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 8M 2800X2100"
                     }
                 ]
 }
