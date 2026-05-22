@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-22T18:00:22.9398867+03:00",
-    "cutoffDate":  "2026-04-22T18:00:01.4518793+03:00",
+    "generatedAt":  "2026-05-22T18:30:19.9686594+03:00",
+    "cutoffDate":  "2026-04-22T18:30:01.5070560+03:00",
     "totalRecords":  1009,
-    "totalFiles":  892,
+    "totalFiles":  891,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
