@@ -1,7 +1,7 @@
 ﻿{
-    "generatedAt":  "2026-05-22T14:00:28.4770412+03:00",
-    "cutoffDate":  "2026-04-22T14:00:01.7463944+03:00",
-    "totalRecords":  1002,
+    "generatedAt":  "2026-05-22T14:30:23.1873980+03:00",
+    "cutoffDate":  "2026-04-22T14:30:01.7599059+03:00",
+    "totalRecords":  1003,
     "totalFiles":  897,
     "records":  [
                     {
@@ -4052,7 +4052,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -4656,7 +4656,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -8487,7 +8487,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24138,7 +24138,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24186,7 +24186,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24825,6 +24825,32 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X800"
+                    },
+                    {
+                        "id":  "4dee8549e57a4c95ba83726266553bd4",
+                        "customerName":  "K772 YAHYA AKTAS",
+                        "jobCode":  "K772 YAHYA AKTAS",
+                        "d5":  "K772 YAHYA AKTAS",
+                        "material":  "SİYAH MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  176,
+                        "quantity":  8,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L45",
+                                           "label":  "L45",
+                                           "value":  "SAYFA 1/2 \u003e\u003e\u003e"
+                                       },
+                        "orderDate":  "2026-05-22T14:10:35.0000000",
+                        "sourceFile":  "K772 YAHYA AKTAS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "8 PLK 18M 2800X2100"
                     }
                 ]
 }
