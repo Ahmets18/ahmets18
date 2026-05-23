@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-23T10:00:24.9789643+03:00",
-    "cutoffDate":  "2026-04-23T10:00:01.5872921+03:00",
-    "totalRecords":  1009,
-    "totalFiles":  886,
+    "generatedAt":  "2026-05-23T10:30:25.0863212+03:00",
+    "cutoffDate":  "2026-04-23T10:30:01.6004741+03:00",
+    "totalRecords":  1010,
+    "totalFiles":  887,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -24995,6 +24995,32 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "3 PLK 3M 2100X1700"
+                    },
+                    {
+                        "id":  "18a1de03df804be7bda48983e865a390",
+                        "customerName":  "K778 SOZER MOBILYA",
+                        "jobCode":  "K778 SOZER MOBILYA",
+                        "d5":  "K778 SOZER MOBILYA",
+                        "material":  "YILDIZ BEJ MDF NTR",
+                        "color":  "ARTI",
+                        "pvcMeters":  187,
+                        "quantity":  5,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L43",
+                                           "label":  "L43",
+                                           "value":  "5CM KES"
+                                       },
+                        "orderDate":  "2026-05-23T10:21:29.0000000",
+                        "sourceFile":  "K778 SOZER MOBILYA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "5 PLK 18M 2800X2100"
                     }
                 ]
 }
