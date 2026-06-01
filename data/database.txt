@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-01T14:00:32.8210169+03:00",
-    "cutoffDate":  "2026-05-01T14:00:01.4078373+03:00",
-    "totalRecords":  665,
-    "totalFiles":  665,
+    "generatedAt":  "2026-06-01T14:30:27.5065222+03:00",
+    "cutoffDate":  "2026-05-01T14:30:01.4130329+03:00",
+    "totalRecords":  666,
+    "totalFiles":  666,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -16481,6 +16481,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "de19cb9496ef4ff993387167f4140ca5",
+                        "customerName":  "K817 ANKA",
+                        "jobCode":  "K817 ANKA",
+                        "d5":  "K817 ANKA",
+                        "material":  "ÇİZ BEYAZ AKRİLİK",
+                        "color":  "ARTI",
+                        "pvcMeters":  84,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T14:01:28.0000000",
+                        "sourceFile":  "K817 ANKA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X1220"
                     }
                 ]
 }
