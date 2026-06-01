@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-01T12:30:31.4130096+03:00",
-    "cutoffDate":  "2026-05-01T12:30:01.3289449+03:00",
-    "totalRecords":  660,
-    "totalFiles":  660,
+    "generatedAt":  "2026-06-01T13:00:31.1624861+03:00",
+    "cutoffDate":  "2026-05-01T13:00:01.4454317+03:00",
+    "totalRecords":  661,
+    "totalFiles":  661,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -557,54 +557,6 @@
                         "plaka":  "1 PLK 18M 2800X2100",
                         "jobCode":  "K553",
                         "d5":  "K553"
-                    },
-                    {
-                        "id":  "8ffdec830f5b4dbea1e52ac35b33877d",
-                        "customerName":  "J919 AHMET KIRIMLI",
-                        "material":  "SELENİT MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  59,
-                        "quantity":  2,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-05-01T12:38:30.0000000",
-                        "sourceFile":  "J919 AHMET KIRIMLI.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "2 PLK 18M 2800X2100",
-                        "jobCode":  "J919",
-                        "d5":  "J919"
-                    },
-                    {
-                        "id":  "94321ea90b1249c89a096061ff164b7a",
-                        "customerName":  "J920 AHMET KIRIMLI",
-                        "material":  "PARLAK BEYAZ MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  37,
-                        "quantity":  2,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-05-01T12:38:54.0000000",
-                        "sourceFile":  "J920 AHMET KIRIMLI.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "2 PLK 18M 2800X2100",
-                        "jobCode":  "J920",
-                        "d5":  "J920"
                     },
                     {
                         "id":  "166dd8061e324d6fb683f7189e2a7924",
@@ -15544,7 +15496,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  3,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -16343,7 +16295,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  8,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -16357,6 +16309,80 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X1570"
+                    },
+                    {
+                        "id":  "11c242b79a814b6cae67ec9fb1e6c4a4",
+                        "customerName":  "K811 EMRE AKSOY",
+                        "jobCode":  "K811 EMRE AKSOY",
+                        "d5":  "K811 EMRE AKSOY",
+                        "material":  "DÜZ BEYAZ MDFLAM",
+                        "color":  "ERBAY",
+                        "pvcMeters":  27,
+                        "quantity":  6,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "K21",
+                                           "label":  "K21",
+                                           "value":  "18+18 KALINLAŞTIRMA"
+                                       },
+                        "orderDate":  "2026-06-01T12:45:58.0000000",
+                        "sourceFile":  "K811 EMRE AKSOY.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ERBAY",
+                        "plaka":  "6 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "a8e901db990b46deb29d593776bcfd7a",
+                        "customerName":  "K810 KARADENIZ PC",
+                        "jobCode":  "K810 KARADENIZ PC",
+                        "d5":  "K810 KARADENIZ PC",
+                        "material":  "SELENİT SUNTA",
+                        "color":  "ARTI",
+                        "pvcMeters":  64,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T12:46:31.0000000",
+                        "sourceFile":  "K810 KARADENIZ PC.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "71692545aead4b97a90de3ba93ed1d77",
+                        "customerName":  "K812 KARADENIZ PC",
+                        "jobCode":  "K812 KARADENIZ PC",
+                        "d5":  "K812 KARADENIZ PC",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  87,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T12:51:12.0000000",
+                        "sourceFile":  "K812 KARADENIZ PC.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X2100"
                     }
                 ]
 }
