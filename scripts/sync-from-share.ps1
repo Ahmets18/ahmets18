@@ -784,12 +784,13 @@ catch {
 }
 
 try {
-  if ($uploadSucceeded -and (Test-Path -LiteralPath $publishScriptPath)) {
+  if (Test-Path -LiteralPath $publishScriptPath) {
+    if (-not $uploadSucceeded) {
+      Write-Log "Live data publish proceeding despite Supabase upload failure."
+    }
     Write-Log "Preparing live data publish..."
     & $publishScriptPath -RootDir $rootDir -DatabasePath $databasePath
     Write-Log "Live data publish finished."
-  } elseif (-not $uploadSucceeded) {
-    Write-Log "Live data publish skipped: Supabase upload did not finish."
   } else {
     Write-Log "Live data publish skipped: script not found at $publishScriptPath"
   }
