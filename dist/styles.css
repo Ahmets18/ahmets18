@@ -313,7 +313,7 @@ body.authenticated .auth-screen {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 910px;
+  min-width: 820px;
   table-layout: fixed;
 }
 
@@ -360,24 +360,19 @@ td:nth-child(3) {
   width: 188px;
 }
 
-th:nth-child(4),
-td:nth-child(4) {
-  width: 58px;
-}
-
 th:nth-child(5),
 td:nth-child(5) {
-  width: 80px;
+  width: 86px;
 }
 
 th:nth-child(6),
 td:nth-child(6) {
-  width: 72px;
+  width: 196px;
 }
 
-th:nth-child(7),
-td:nth-child(7) {
-  width: 194px;
+th:nth-child(4),
+td:nth-child(4) {
+  width: 80px;
 }
 
 .badge {
@@ -509,24 +504,19 @@ td:nth-child(7) {
     width: 156px;
   }
 
-  th:nth-child(4),
-  td:nth-child(4) {
-    width: 52px;
-  }
-
   th:nth-child(5),
   td:nth-child(5) {
-    width: 72px;
+    width: 78px;
   }
 
   th:nth-child(6),
   td:nth-child(6) {
-    width: 64px;
+    width: 150px;
   }
 
-  th:nth-child(7),
-  td:nth-child(7) {
-    width: 150px;
+  th:nth-child(4),
+  td:nth-child(4) {
+    width: 72px;
   }
 
   .badge {

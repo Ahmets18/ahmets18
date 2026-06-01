@@ -30,7 +30,7 @@ const elements = {
 bootstrap().catch((error) => {
   console.error(error);
   if (elements.resultsBody) {
-    elements.resultsBody.innerHTML = `<tr><td colspan="7" class="empty">Canlı veri yüklenemedi. Supabase bağlantısını kontrol et.</td></tr>`;
+    elements.resultsBody.innerHTML = `<tr><td colspan="6" class="empty">Canlı veri yüklenemedi. GitHub veri dosyasını kontrol et.</td></tr>`;
   }
   if (elements.resultLabel) {
     elements.resultLabel.textContent = "Canlı veri kaynağı okunamadı.";
@@ -255,7 +255,7 @@ function renderResults(query = "") {
   if (!total) {
     const message = query ? `"${query}" için sonuç bulunamadı.` : "Henüz içe aktarılmış kayıt yok.";
     elements.resultLabel.textContent = message;
-    elements.resultsBody.innerHTML = `<tr><td colspan="7" class="empty">${escapeHtml(message)}</td></tr>`;
+    elements.resultsBody.innerHTML = `<tr><td colspan="6" class="empty">${escapeHtml(message)}</td></tr>`;
     renderPager(0, 0);
     return;
   }
@@ -307,7 +307,6 @@ function renderRow(record) {
       <td>${escapeHtml(date)}</td>
       <td>${escapeHtml(displayFileName(record.sourceFile))}</td>
       <td>${escapeHtml(buildMaterialDisplay(record))}</td>
-      <td>${formatNumber(extractPvcMeters(record.pvcMeters, record.cellHighlights, record.plaka))}</td>
       <td><span class="badge ${cutClass}">${escapeHtml(record.cutStatus || "Bilinmiyor")}</span></td>
       <td>${escapeHtml(record.opt || getCellValue(record.cellHighlights, "D12") || record.color || "-")}</td>
       <td>${formatRangeNotes(record.rangeNotes)}</td>
