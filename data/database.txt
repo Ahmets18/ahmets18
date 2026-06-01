@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-01T14:30:27.5065222+03:00",
-    "cutoffDate":  "2026-05-01T14:30:01.4130329+03:00",
-    "totalRecords":  666,
-    "totalFiles":  666,
+    "generatedAt":  "2026-06-01T15:00:29.4165293+03:00",
+    "cutoffDate":  "2026-05-01T15:00:01.3955811+03:00",
+    "totalRecords":  670,
+    "totalFiles":  670,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -16505,6 +16505,113 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "3 PLK 18M 2800X1220"
+                    },
+                    {
+                        "id":  "c328f932d9664b5396318f0afd93e71f",
+                        "customerName":  "K820 BEHCET MUSLUM",
+                        "jobCode":  "K820 BEHCET MUSLUM",
+                        "d5":  "K820 BEHCET MUSLUM",
+                        "material":  "PARLAK BEYAZ SUNTA",
+                        "color":  "ARTI",
+                        "pvcMeters":  533,
+                        "quantity":  14,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T14:47:35.0000000",
+                        "sourceFile":  "K820 BEHCET MUSLUM.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "14 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "3a453988ee5e470084c2248c71dd7e7f",
+                        "customerName":  "K821 ERSAN SENGUN",
+                        "jobCode":  "K821 ERSAN SENGUN",
+                        "d5":  "K821 ERSAN SENGUN",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  118,
+                        "quantity":  5,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L38",
+                                           "label":  "L38",
+                                           "value":  "CNC"
+                                       },
+                        "orderDate":  "2026-06-01T14:56:45.0000000",
+                        "sourceFile":  "K821 ERSAN SENGUN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "5 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "4b41e7672dc54e16927d389bbf09e030",
+                        "customerName":  "K818 TEVFIK CATKAYA",
+                        "jobCode":  "K818 TEVFIK CATKAYA",
+                        "d5":  "K818 TEVFIK CATKAYA",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  35,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+                                           {
+                                               "cell":  "L24",
+                                               "label":  "L24",
+                                               "value":  "KALINLAŞTIRMA"
+                                           },
+                                           {
+                                               "cell":  "L25",
+                                               "label":  "L25",
+                                               "value":  "MENTEŞE"
+                                           }
+                                       ],
+                        "orderDate":  "2026-06-01T14:36:20.0000000",
+                        "sourceFile":  "K818 TEVFIK CATKAYA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "5cba6246f67a40c79b8c6219204e4875",
+                        "customerName":  "K819 TEVFIK CATKAYA",
+                        "jobCode":  "K819 TEVFIK CATKAYA",
+                        "d5":  "K819 TEVFIK CATKAYA",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T14:37:32.0000000",
+                        "sourceFile":  "K819 TEVFIK CATKAYA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 5M 2800X2100"
                     }
                 ]
 }
