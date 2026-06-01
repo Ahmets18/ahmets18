@@ -664,9 +664,18 @@ $files = Get-ChildItem -LiteralPath $SourcePath -Recurse -File | Where-Object {
 }
 Write-Log "Files found: $($files.Count)"
 
+$currentSourceKeys = @{}
+foreach ($file in $files) {
+  $sourceKey = Get-SourceKeyFromName $file.Name
+  if ($sourceKey -and -not $currentSourceKeys.ContainsKey($sourceKey)) {
+    $currentSourceKeys[$sourceKey] = $true
+  }
+}
+
 $records = New-Object System.Collections.Generic.List[object]
 $processedKeys = @{}
 $existingRecordCount = 0
+$staleRecordCount = 0
 
 if (Test-Path -LiteralPath $databasePath) {
   try {
@@ -674,13 +683,20 @@ if (Test-Path -LiteralPath $databasePath) {
     foreach ($record in @($existingDatabase.records)) {
       if ($null -eq $record) { continue }
       $sourceKey = Get-SourceKeyFromName ([string]$record.sourceFile)
-      if (-not $sourceKey -or $processedKeys.ContainsKey($sourceKey)) { continue }
+      if (-not $sourceKey -or -not $currentSourceKeys.ContainsKey($sourceKey)) {
+        $staleRecordCount++
+        continue
+      }
+      if ($processedKeys.ContainsKey($sourceKey)) { continue }
 
       [void]$records.Add($record)
       $processedKeys[$sourceKey] = $true
       $existingRecordCount++
     }
     Write-Log "Existing database loaded: $existingRecordCount records."
+    if ($staleRecordCount -gt 0) {
+      Write-Log "Stale database records skipped: $staleRecordCount"
+    }
   }
   catch {
     Write-Log ("Existing database could not be read, starting fresh: {0}" -f $_.Exception.Message)
