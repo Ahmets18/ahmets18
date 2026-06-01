@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-01T17:00:37.0008799+03:00",
-    "cutoffDate":  "2026-04-17T17:00:01.9184313+03:00",
-    "totalRecords":  1095,
-    "totalFiles":  1096,
+    "generatedAt":  "2026-06-01T17:30:35.2050284+03:00",
+    "cutoffDate":  "2026-04-17T17:30:01.9237718+03:00",
+    "totalRecords":  1098,
+    "totalFiles":  1099,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -27126,6 +27126,78 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "2 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "7c1e4bc453c84a59b0a6b7390e54dd19",
+                        "customerName":  "K834 ASLAN DEMIREL",
+                        "jobCode":  "K834 ASLAN DEMIREL",
+                        "d5":  "K834 ASLAN DEMIREL",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  52,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T17:02:45.0000000",
+                        "sourceFile":  "K834 ASLAN DEMIREL.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "6cc28933d55c4b72891e8cb204d7303f",
+                        "customerName":  "K835 SENTURK",
+                        "jobCode":  "K835 SENTURK",
+                        "d5":  "K835 SENTURK",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  34,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T17:18:56.0000000",
+                        "sourceFile":  "K835 SENTURK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "896f25def48741ad98ce59e23a957dc1",
+                        "customerName":  "K836 SENTURK",
+                        "jobCode":  "K836 SENTURK",
+                        "d5":  "K836 SENTURK",
+                        "material":  "HG BEYAZ",
+                        "color":  "ARTI",
+                        "pvcMeters":  29,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T17:18:42.0000000",
+                        "sourceFile":  "K836 SENTURK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X1220"
                     }
                 ]
 }
