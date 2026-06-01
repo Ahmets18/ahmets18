@@ -317,7 +317,6 @@ table {
   table-layout: fixed;
 }
 
-th,
 td {
   text-align: left;
   padding: 9px 10px;
@@ -338,6 +337,9 @@ th {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--muted);
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 tbody tr:hover {
@@ -496,27 +498,27 @@ td:nth-child(4) {
 
   th:nth-child(2),
   td:nth-child(2) {
-    width: 104px;
+    width: 98px;
   }
 
   th:nth-child(3),
   td:nth-child(3) {
-    width: 156px;
+    width: 138px;
   }
 
   th:nth-child(5),
   td:nth-child(5) {
-    width: 78px;
+    width: 70px;
   }
 
   th:nth-child(6),
   td:nth-child(6) {
-    width: 150px;
+    width: 148px;
   }
 
   th:nth-child(4),
   td:nth-child(4) {
-    width: 72px;
+    width: 68px;
   }
 
   .badge {
