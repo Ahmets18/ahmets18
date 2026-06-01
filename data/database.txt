@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-01T10:30:29.7539630+03:00",
-    "cutoffDate":  "2026-05-01T10:30:01.3595302+03:00",
-    "totalRecords":  645,
-    "totalFiles":  645,
+    "generatedAt":  "2026-06-01T11:00:31.3337987+03:00",
+    "cutoffDate":  "2026-05-01T11:00:01.3239907+03:00",
+    "totalRecords":  651,
+    "totalFiles":  651,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -14143,7 +14143,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  58,
                         "quantity":  4,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -15988,6 +15988,150 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "18 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "798d8e6b4d5547bd88f143e403d60082",
+                        "customerName":  "K795 LIDER MUHENDIS",
+                        "jobCode":  "K795 LIDER MUHENDIS",
+                        "d5":  "K795 LIDER MUHENDIS",
+                        "material":  "D107 SİYAH MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  409,
+                        "quantity":  12,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T10:38:28.0000000",
+                        "sourceFile":  "K795 LIDER MUHENDIS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "12 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "8e708817c86440c9a5cfe85ca92f72e1",
+                        "customerName":  "K796 LIDER MUHENDIS",
+                        "jobCode":  "K796 LIDER MUHENDIS",
+                        "d5":  "K796 LIDER MUHENDIS",
+                        "material":  "KARİNA MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  35,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T10:44:04.0000000",
+                        "sourceFile":  "K796 LIDER MUHENDIS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "1eb475f7ac414997b041627ea3b57ead",
+                        "customerName":  "K797 LIDER MUHENDIS",
+                        "jobCode":  "K797 LIDER MUHENDIS",
+                        "d5":  "K797 LIDER MUHENDIS",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  5,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T10:46:14.0000000",
+                        "sourceFile":  "K797 LIDER MUHENDIS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "5 PLK 4M 2800X2100"
+                    },
+                    {
+                        "id":  "5683a3c6c9f6419c815603097b1c0a16",
+                        "customerName":  "K800 MERT OZER",
+                        "jobCode":  "K800 MERT OZER",
+                        "d5":  "K800 MERT OZER",
+                        "material":  "DÜZ RENK MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  45,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T10:59:11.0000000",
+                        "sourceFile":  "K800 MERT OZER.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "fc75176b7b6e4c72a71de96a20280195",
+                        "customerName":  "K798 SULEYMAN TURK",
+                        "jobCode":  "K798 SULEYMAN TURK",
+                        "d5":  "K798 SULEYMAN TURK",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  19,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T10:50:54.0000000",
+                        "sourceFile":  "K798 SULEYMAN TURK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "6cd147bab8b841c0ae11e67852ad0628",
+                        "customerName":  "K799 SULEYMAN TURK",
+                        "jobCode":  "K799 SULEYMAN TURK",
+                        "d5":  "K799 SULEYMAN TURK",
+                        "material":  "BEYAZ HG",
+                        "color":  "ARTI",
+                        "pvcMeters":  9,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T10:52:15.0000000",
+                        "sourceFile":  "K799 SULEYMAN TURK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X1220"
                     }
                 ]
 }
