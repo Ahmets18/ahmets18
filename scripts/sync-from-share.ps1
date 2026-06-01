@@ -7,13 +7,9 @@ $rootDir = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $dataDir = Join-Path $rootDir "data"
 $logDir = Join-Path $rootDir "logs"
 $scriptsDir = Join-Path $rootDir "scripts"
-$exportsDir = Join-Path $rootDir "exports"
-$secretsPath = Join-Path $rootDir "secrets/supabase.local.json"
 $databasePath = Join-Path $dataDir "database.txt"
 $syncStatePath = Join-Path $dataDir "sync-state.json"
 $localDatabaseJsPath = Join-Path $rootDir "local-database.js"
-$exportScriptPath = Join-Path $scriptsDir "export-for-supabase.ps1"
-$pushScriptPath = Join-Path $scriptsDir "push-to-supabase.ps1"
 $publishScriptPath = Join-Path $scriptsDir "publish-live-data.ps1"
 $logPath = Join-Path $logDir "sync.log"
 $cutoff = (Get-Date).AddMonths(-1)
@@ -772,38 +768,7 @@ Write-Log "sync-state.json updated: $syncStatePath"
 Write-Log "Last 1 month: $($files.Count) files, $processed processed, $skippedCached cached skipped, $newRecords new records, $timedOutFiles timed out, $failedFiles failed, $($records.Count) total records."
 
 try {
-  if (Test-Path -LiteralPath $exportScriptPath) {
-    Write-Log "Preparing Supabase export..."
-    & $exportScriptPath -DatabasePath $databasePath -OutputDir $exportsDir
-    Write-Log "Supabase export ready."
-  } else {
-    Write-Log "Supabase export skipped: script not found at $exportScriptPath"
-  }
-}
-catch {
-  Write-Log ("Supabase export failed: {0}" -f $_.Exception.Message)
-}
-
-$uploadSucceeded = $false
-try {
-  if (Test-Path -LiteralPath $pushScriptPath) {
-    Write-Log "Preparing Supabase upload..."
-    & $pushScriptPath -DatabasePath $databasePath -SecretsPath $secretsPath
-    Write-Log "Supabase upload finished."
-    $uploadSucceeded = $true
-  } else {
-    Write-Log "Supabase upload skipped: script not found at $pushScriptPath"
-  }
-}
-catch {
-  Write-Log ("Supabase upload failed: {0}" -f $_.Exception.Message)
-}
-
-try {
   if (Test-Path -LiteralPath $publishScriptPath) {
-    if (-not $uploadSucceeded) {
-      Write-Log "Live data publish proceeding despite Supabase upload failure."
-    }
     Write-Log "Preparing live data publish..."
     & $publishScriptPath -RootDir $rootDir -DatabasePath $databasePath
     Write-Log "Live data publish finished."

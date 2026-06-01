@@ -27,9 +27,8 @@
     <main class="shell" id="appShell" hidden>
       <section class="hero">
         <aside class="hero-panel">
-          <label class="search-label" for="searchInput">Müşteri adı ara</label>
-          <input id="searchInput" type="search" placeholder="Örn. Ahmet Demirel" autocomplete="off" />
-          <p class="hint">Kısmını yaz. Son siparişler listelenir.</p>
+          <label class="search-label" for="searchInput">Kayıtlarda ara</label>
+          <input id="searchInput" type="search" placeholder="Örn. müşteri, not, malzeme, renk" autocomplete="off" />
           <div class="mini-stats" aria-label="Özet bilgiler">
             <span><strong id="totalRecords">0</strong> Toplam kayıt</span>
             <span><strong id="totalFiles">0</strong> İşlenen dosya</span>
@@ -50,11 +49,11 @@
             <thead>
               <tr>
                 <th>Tarih</th>
-                <th>Dosya</th>
+                <th>Müşteri</th>
                 <th>MALZEME</th>
-                <th>PVC Metraj</th>
+                <th>PVC</th>
                 <th>Kesim</th>
-                <th>OPT</th>
+                <th>OPT PC</th>
                 <th>Notlar</th>
               </tr>
             </thead>
@@ -64,8 +63,7 @@
       </section>
     </main>
 
-    <script src="./supabase.config.js"></script>
     <script src="./local-database.js"></script>
-    <script src="./app.js?v=20260520e"></script>
+    <script src="./app.js?v=20260521e"></script>
   </body>
 </html>

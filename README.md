@@ -1,13 +1,13 @@
 # Siparis Sunucusu
 
-Bu proje, `xlsm` dosyalarindan ureyen siparis verisini Supabase'te tutan ve GitHub Pages uzerinde arayuz olarak yayinlayan takip sitesidir.
+Bu proje, `xlsm` dosyalarindan uretilen siparis verisini GitHub Pages uzerinde yayinlayan takip sitesidir.
 
 ## Akis
 
-1. `scripts/sync-from-share.ps1` son 1 gunluk `xlsm` dosyalarini tarar.
+1. `scripts/sync-from-share.ps1` son 1 aylik `xlsm` dosyalarini tarar.
 2. Script `data/database.txt` dosyasini gunceller.
-3. Veri Supabase'e aktarilir.
-4. GitHub Pages login sonrasinda Supabase verisini okur.
+3. `local-database.js` ve site paketi ayni veriyle yenilenir.
+4. GitHub Pages, `data/database.txt` uzerinden son veriyi okur.
 
 ## Calistirma
 
@@ -17,16 +17,6 @@ Yerel build uretmek icin:
 & 'C:\Users\PC\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' .\scripts\build-site.py
 ```
 
-## Supabase
-
-`supabase.config.js` icine:
-
-- `url`
-- `anonKey`
-- `table`
-
-degerlerini gir.
-
 ## Not
 
-Arayuz, giris yapildiktan sonra Supabase'teki `orders` tablosundan veri okur.
+Arayuz, giris yapildiktan sonra yerel/GitHub veri dosyasini okur.

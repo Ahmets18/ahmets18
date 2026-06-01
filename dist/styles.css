@@ -262,17 +262,17 @@ body.authenticated .auth-screen {
 }
 
 .pager {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
   gap: 10px;
   margin-bottom: 8px;
-  flex-wrap: wrap;
 }
 
 .pager-info {
   color: var(--muted);
   font-size: 0.8rem;
+  text-align: center;
 }
 
 .pager-btn {
@@ -280,8 +280,8 @@ body.authenticated .auth-screen {
   background: rgba(255, 255, 255, 0.9);
   color: var(--accent-2);
   border-radius: 999px;
-  padding: 6px 10px;
-  font-size: 0.74rem;
+  padding: 7px 12px;
+  font-size: 0.78rem;
   font-weight: 700;
   cursor: pointer;
 }
@@ -289,6 +289,18 @@ body.authenticated .auth-screen {
 .pager-btn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+}
+
+.pager-btn-left {
+  justify-self: start;
+}
+
+.pager-btn-right {
+  justify-self: end;
+}
+
+.pager-btn {
+  white-space: nowrap;
 }
 
 .table-wrap {
@@ -334,7 +346,8 @@ tbody tr:hover {
 
 th:nth-child(1),
 td:nth-child(1) {
-  width: 88px;
+  width: 100px;
+  white-space: nowrap;
 }
 
 th:nth-child(2),
@@ -349,22 +362,22 @@ td:nth-child(3) {
 
 th:nth-child(4),
 td:nth-child(4) {
-  width: 112px;
+  width: 58px;
 }
 
 th:nth-child(5),
 td:nth-child(5) {
-  width: 92px;
+  width: 80px;
 }
 
 th:nth-child(6),
 td:nth-child(6) {
-  width: 86px;
+  width: 72px;
 }
 
 th:nth-child(7),
 td:nth-child(7) {
-  width: 172px;
+  width: 194px;
 }
 
 .badge {
@@ -467,8 +480,8 @@ td:nth-child(7) {
   }
 
   .pager-btn {
-    padding: 5px 9px;
-    font-size: 0.7rem;
+    padding: 6px 10px;
+    font-size: 0.72rem;
   }
 
   th,
@@ -483,7 +496,7 @@ td:nth-child(7) {
 
   th:nth-child(1),
   td:nth-child(1) {
-    width: 76px;
+    width: 88px;
   }
 
   th:nth-child(2),
@@ -498,22 +511,22 @@ td:nth-child(7) {
 
   th:nth-child(4),
   td:nth-child(4) {
-    width: 96px;
+    width: 52px;
   }
 
   th:nth-child(5),
   td:nth-child(5) {
-    width: 82px;
+    width: 72px;
   }
 
   th:nth-child(6),
   td:nth-child(6) {
-    width: 76px;
+    width: 64px;
   }
 
   th:nth-child(7),
   td:nth-child(7) {
-    width: 132px;
+    width: 150px;
   }
 
   .badge {
@@ -527,11 +540,16 @@ td:nth-child(7) {
   }
 
   .pager {
-    flex-direction: column;
-    align-items: stretch;
+    grid-template-columns: auto minmax(0, 1fr) auto;
   }
 
   .pager-info {
     text-align: center;
+    min-width: 0;
+  }
+
+  .pager-btn-left,
+  .pager-btn-right {
+    width: auto;
   }
 }

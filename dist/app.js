@@ -1,12 +1,12 @@
 const AUTH_PASSWORD = "artiebatlama18";
 const AUTH_ERROR_MESSAGE = "Giriş sırasında bir hata oluştu. Şifreyi kontrol et ve tekrar dene.";
-const SESSION_STORAGE_KEY = "siparis_supabase_session";
+const SESSION_STORAGE_KEY = "siparis_session";
 
 const state = {
   database: null,
   filtered: [],
   currentPage: 1,
-  pageSize: 10,
+  pageSize: 20,
   appReady: false,
   session: null
 };
@@ -153,11 +153,6 @@ async function loadDatabase() {
     return localDatabase;
   }
 
-  const supabaseDatabase = await loadSupabaseDatabase();
-  if (supabaseDatabase && Array.isArray(supabaseDatabase.records) && supabaseDatabase.records.length) {
-    return supabaseDatabase;
-  }
-
   return emptyDatabase();
 }
 
@@ -178,15 +173,7 @@ function loadEmbeddedDatabase() {
   }
 
   try {
-    const parsed = JSON.parse(text);
-    const records = Array.isArray(parsed.records) ? parsed.records : [];
-    return {
-      generatedAt: parsed.generatedAt ?? new Date().toISOString(),
-      cutoffDate: parsed.cutoffDate ?? "",
-      totalRecords: Number(parsed.totalRecords ?? records.length),
-      totalFiles: Number(parsed.totalFiles ?? 0),
-      records
-    };
+    return coerceDatabase(JSON.parse(text));
   } catch (error) {
     console.warn("Embedded database okunamadi.", error);
     return null;
@@ -203,101 +190,25 @@ async function loadDatabaseTxt() {
     if (!text.trim()) {
       return null;
     }
-    const parsed = JSON.parse(text);
-    if (!parsed || typeof parsed !== "object") {
-      return null;
-    }
-    const records = Array.isArray(parsed.records) ? parsed.records : [];
-    return {
-      generatedAt: parsed.generatedAt ?? new Date().toISOString(),
-      cutoffDate: parsed.cutoffDate ?? "",
-      totalRecords: Number(parsed.totalRecords ?? records.length),
-      totalFiles: Number(parsed.totalFiles ?? 0),
-      records
-    };
+    return coerceDatabase(JSON.parse(text));
   } catch (error) {
     console.warn("database.txt okunamadi.", error);
     return null;
   }
 }
 
-async function loadSupabaseDatabase() {
-  const config = window.SUPABASE_CONFIG;
-  if (!config?.url || !config?.anonKey || !config?.table) {
+function coerceDatabase(parsed) {
+  if (!parsed || typeof parsed !== "object") {
     return null;
   }
 
-  try {
-    const response = await fetch(`${config.url}/rest/v1/${config.table}?select=*`, {
-      headers: {
-        apikey: config.anonKey,
-        Authorization: `Bearer ${config.anonKey}`,
-        Accept: "application/json"
-      },
-      cache: "no-store"
-    });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    const rows = await response.json().catch(() => []);
-    if (!Array.isArray(rows) || !rows.length) {
-      return emptyDatabase();
-    }
-
-    return buildDatabaseFromRows(rows);
-  } catch (error) {
-    console.warn("Supabase verisi okunamadi.", error);
-    return null;
-  }
-}
-
-function buildDatabaseFromRows(rows) {
-  const records = rows.map(normalizeSupabaseRow).filter(Boolean);
-  const totalFiles = new Set(records.map((record) => record.sourceFile).filter(Boolean)).size;
-  const updateTimes = records
-    .map((record) => new Date(record.updatedAt ?? 0).getTime())
-    .filter((value) => Number.isFinite(value) && value > 0);
-  const orderDates = records
-    .map((record) => new Date(record.orderDate ?? 0).getTime())
-    .filter((value) => Number.isFinite(value) && value > 0);
-  const generatedAt = updateTimes.length
-    ? new Date(Math.max(...updateTimes)).toISOString()
-    : orderDates.length ? new Date(Math.max(...orderDates)).toISOString() : new Date().toISOString();
-  const cutoffDate = orderDates.length ? new Date(Math.min(...orderDates)).toISOString() : "";
-
+  const records = Array.isArray(parsed.records) ? parsed.records : [];
   return {
-    generatedAt,
-    cutoffDate,
-    totalRecords: records.length,
-    totalFiles,
+    generatedAt: parsed.generatedAt ?? new Date().toISOString(),
+    cutoffDate: parsed.cutoffDate ?? "",
+    totalRecords: Number(parsed.totalRecords ?? records.length),
+    totalFiles: Number(parsed.totalFiles ?? 0),
     records
-  };
-}
-
-function normalizeSupabaseRow(row) {
-  if (!row || typeof row !== "object") return null;
-  const cellHighlights = Array.isArray(row.cell_highlights) ? row.cell_highlights : [];
-  const plaka = row.plaka ?? buildPlakaValue(cellHighlights);
-  return {
-    id: row.id ?? "",
-    customerName: row.customer_name ?? "",
-    material: row.material ?? "",
-    color: row.color ?? "",
-    pvcMeters: extractPvcMeters(row.pvc_meters, cellHighlights, plaka),
-    quantity: row.quantity ?? null,
-    cutStatus: row.cut_status ?? "Bilinmiyor",
-    notes: row.notes ?? "",
-    cellHighlights,
-    rangeNotes: row.range_notes ?? [],
-    orderDate: row.order_date ?? "",
-    updatedAt: row.updated_at ?? "",
-    sourceFile: row.source_file ?? "",
-    sheetName: row.sheet_name ?? "",
-    sourceRow: row.source_row ?? null,
-    opt: row.opt ?? row.color ?? "",
-    plaka
   };
 }
 
@@ -317,20 +228,7 @@ function filterAndRender(query) {
 
   state.filtered = normalizedQuery
     ? allRecords.filter((record) => {
-        const haystack = normalize(
-          [
-            record.customerName,
-            buildMaterialDisplay(record),
-            record.material,
-            record.color,
-            record.opt,
-            record.plaka,
-            record.cutStatus,
-            record.notes,
-            record.sourceFile,
-            record.sheetName
-          ].join(" ")
-        );
+        const haystack = normalize(buildSearchText(record));
         return haystack.includes(normalizedQuery);
       })
     : allRecords;
@@ -382,11 +280,9 @@ function renderPager(total, totalPages) {
   const start = (currentPage - 1) * state.pageSize + 1;
   const end = Math.min(currentPage * state.pageSize, total);
   elements.pager.innerHTML = `
+    <button class="pager-btn pager-btn-left" data-action="prev" ${currentPage <= 1 ? "disabled" : ""}>Önceki</button>
     <span class="pager-info">${formatCount(total)} kayıttan ${start}-${end} arası gösteriliyor</span>
-    <div>
-      <button class="pager-btn" data-action="prev" ${currentPage <= 1 ? "disabled" : ""}>Önceki</button>
-      <button class="pager-btn" data-action="next" ${currentPage >= totalPages ? "disabled" : ""}>Sonraki</button>
-    </div>
+    <button class="pager-btn pager-btn-right" data-action="next" ${currentPage >= totalPages ? "disabled" : ""}>Sonraki</button>
   `;
 
   elements.pager.querySelectorAll(".pager-btn").forEach((button) => {
@@ -448,6 +344,29 @@ function buildMaterialDisplay(record) {
   return material || "-";
 }
 
+function buildSearchText(record) {
+  return [
+    record.customerName,
+    record.material,
+    record.color,
+    record.pvcMeters,
+    record.quantity,
+    record.cutStatus,
+    record.notes,
+    record.opt,
+    record.plaka,
+    record.orderDate,
+    record.sourceFile,
+    record.sheetName,
+    record.sourceRow,
+    record.jobCode,
+    record.d5,
+    buildMaterialDisplay(record),
+    textifyItems(record.cellHighlights),
+    textifyItems(record.rangeNotes)
+  ].join(" ");
+}
+
 function extractPvcMeters(primaryValue, items, plakaValue) {
   const directValue = parseNumericValue(primaryValue);
   if (Number.isFinite(directValue)) {
@@ -502,11 +421,8 @@ function formatRangeNotes(items) {
       if (typeof item === "string") {
         return `<div>${escapeHtml(item)}</div>`;
       }
-      const cell = escapeHtml(item.cell || "");
-      const label = escapeHtml(item.label || "");
       const value = escapeHtml(item.value ?? "");
-      const prefix = label ? `${cell} / ${label}` : cell;
-      return `<div>${prefix ? `<strong>${prefix}</strong> - ` : ""}${value}</div>`;
+      return `<div>${value}</div>`;
     })
     .join("")}</div>`;
 }
@@ -535,9 +451,10 @@ function textifyItems(items) {
 
 function normalize(value) {
   return String(value ?? "")
-    .toLocaleLowerCase("tr-TR")
-    .normalize("NFD")
-    .replace(/\p{Diacritic}/gu, "")
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/ı/g, "i")
     .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim();
 }
