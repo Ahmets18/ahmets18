@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-05-23T12:00:22.7304930+03:00",
-    "cutoffDate":  "2026-04-23T12:00:01.6295579+03:00",
-    "totalRecords":  1010,
-    "totalFiles":  883,
+    "generatedAt":  "2026-06-01T09:30:31.2963163+03:00",
+    "cutoffDate":  "2026-05-01T09:30:01.3887592+03:00",
+    "totalRecords":  1019,
+    "totalFiles":  638,
     "records":  [
                     {
                         "id":  "fa49eafa01654e8890503420d2db6fc2",
@@ -5227,7 +5227,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  175,
                         "quantity":  7,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -5299,7 +5299,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  120,
                         "quantity":  6,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -25021,6 +25021,228 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "5 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "7532f58bc73d44ea8dbd5d80c5ba669b",
+                        "customerName":  "K779 EMRAH DAG",
+                        "jobCode":  "K779 EMRAH DAG",
+                        "d5":  "K779 EMRAH DAG",
+                        "material":  "MAT BEYAZ AKRİLİK",
+                        "color":  "ARTI",
+                        "pvcMeters":  96,
+                        "quantity":  4,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L27",
+                                           "label":  "L27",
+                                           "value":  "CAM"
+                                       },
+                        "orderDate":  "2026-06-01T08:53:46.0000000",
+                        "sourceFile":  "K779 EMRAH DAG.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 2800X1220"
+                    },
+                    {
+                        "id":  "3ff04adea34d4e199791aea5a8cb81e7",
+                        "customerName":  "K780 YILDIZ DEKOR",
+                        "jobCode":  "K780 YILDIZ DEKOR",
+                        "d5":  "K780 YILDIZ DEKOR",
+                        "material":  "MAT BEYAZ SUNTA",
+                        "color":  "ARTI",
+                        "pvcMeters":  179,
+                        "quantity":  12,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L45",
+                                           "label":  "L45",
+                                           "value":  "SAYFA 1/2 \u003e\u003e\u003e"
+                                       },
+                        "orderDate":  "2026-06-01T08:58:50.0000000",
+                        "sourceFile":  "K780 YILDIZ DEKOR.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "12 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "421e9e193efc4a4bb9873ecb87f2e992",
+                        "customerName":  "K786 BINBASI",
+                        "jobCode":  "K786 BINBASI",
+                        "d5":  "K786 BINBASI",
+                        "material":  "EGZOTİK MEŞE MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  61,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L32",
+                                           "label":  "L32",
+                                           "value":  "KALINLAŞTIRMA"
+                                       },
+                        "orderDate":  "2026-06-01T09:23:27.0000000",
+                        "sourceFile":  "K786 BINBASI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "b2f8d84031374b829a501c9830a8e2f3",
+                        "customerName":  "K787 BINBASI",
+                        "jobCode":  "K787 BINBASI",
+                        "d5":  "K787 BINBASI",
+                        "material":  "VARİO VİZON MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  28,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T09:25:25.0000000",
+                        "sourceFile":  "K787 BINBASI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "2c4c71b8aee4480a87be8fd9337a252b",
+                        "customerName":  "K784 NIHAT ATAKAN",
+                        "jobCode":  "K784 NIHAT ATAKAN",
+                        "d5":  "K784 NIHAT ATAKAN",
+                        "material":  "KUMBEJİ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  36,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T09:12:16.0000000",
+                        "sourceFile":  "K784 NIHAT ATAKAN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "2dc95d8667bd426fadc0d6b5919b4ef3",
+                        "customerName":  "K785 NIHAT ATAKAN",
+                        "jobCode":  "K785 NIHAT ATAKAN",
+                        "d5":  "K785 NIHAT ATAKAN",
+                        "material":  "PARLAK BEYAZ SUNTA",
+                        "color":  "ARTI",
+                        "pvcMeters":  42,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T09:14:56.0000000",
+                        "sourceFile":  "K785 NIHAT ATAKAN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "383595c2d5324c4c86d7460222c31699",
+                        "customerName":  "K783 OCAKTAN",
+                        "jobCode":  "K783 OCAKTAN",
+                        "d5":  "K783 OCAKTAN",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  26,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T09:06:05.0000000",
+                        "sourceFile":  "K783 OCAKTAN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "d0a61b987f304fe1aa6f9963ce9ad419",
+                        "customerName":  "K781 YILDIZ DEKOR",
+                        "jobCode":  "K781 YILDIZ DEKOR",
+                        "d5":  "K781 YILDIZ DEKOR",
+                        "material":  "LEFKAS MEŞE SUNTA",
+                        "color":  "ARTI",
+                        "pvcMeters":  174,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T08:59:53.0000000",
+                        "sourceFile":  "K781 YILDIZ DEKOR.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "07f9b34874f04197920e0bb68ba95ec4",
+                        "customerName":  "K782 YILDIZ DEKOR",
+                        "jobCode":  "K782 YILDIZ DEKOR",
+                        "d5":  "K782 YILDIZ DEKOR",
+                        "material":  "KIRMIZI SUNTA",
+                        "color":  "ARTI",
+                        "pvcMeters":  3,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T09:00:51.0000000",
+                        "sourceFile":  "K782 YILDIZ DEKOR.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
                     }
                 ]
 }
