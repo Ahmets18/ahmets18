@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-01T11:00:31.3337987+03:00",
-    "cutoffDate":  "2026-05-01T11:00:01.3239907+03:00",
-    "totalRecords":  651,
-    "totalFiles":  651,
+    "generatedAt":  "2026-06-01T11:30:30.6894270+03:00",
+    "cutoffDate":  "2026-05-01T11:30:01.3902031+03:00",
+    "totalRecords":  653,
+    "totalFiles":  653,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -15950,7 +15950,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  75,
                         "quantity":  3,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -16132,6 +16132,54 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X1220"
+                    },
+                    {
+                        "id":  "6eb9e27b28744a59b57083e41dc4b3ac",
+                        "customerName":  "K802 HAYRETTIN ABI",
+                        "jobCode":  "K802 HAYRETTIN ABI",
+                        "d5":  "K802 HAYRETTIN ABI",
+                        "material":  "LATTE MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  27,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T11:24:37.0000000",
+                        "sourceFile":  "K802 HAYRETTIN ABI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "bf1316a81ec94e29929582422ea1ad3c",
+                        "customerName":  "K801 MERT OZER",
+                        "jobCode":  "K801 MERT OZER",
+                        "d5":  "K801 MERT OZER",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T11:00:30.0000000",
+                        "sourceFile":  "K801 MERT OZER.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 5M 2800X2100"
                     }
                 ]
 }
