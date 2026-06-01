@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-01T11:30:30.6894270+03:00",
-    "cutoffDate":  "2026-05-01T11:30:01.3902031+03:00",
-    "totalRecords":  653,
-    "totalFiles":  653,
+    "generatedAt":  "2026-06-01T12:00:32.1271388+03:00",
+    "cutoffDate":  "2026-05-01T12:00:01.3968920+03:00",
+    "totalRecords":  656,
+    "totalFiles":  656,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -14603,7 +14603,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  259,
                         "quantity":  4,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -15520,7 +15520,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  22,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -16180,6 +16180,78 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 5M 2800X2100"
+                    },
+                    {
+                        "id":  "810fe07ee04f45d68a6dcd9822619993",
+                        "customerName":  "K803 ISKENDER ARSLAN",
+                        "jobCode":  "K803 ISKENDER ARSLAN",
+                        "d5":  "K803 ISKENDER ARSLAN",
+                        "material":  "KUMTAŞI MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  30,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T11:30:30.0000000",
+                        "sourceFile":  "K803 ISKENDER ARSLAN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "d134af41d35e497d8f1c3b49ebbb2ee5",
+                        "customerName":  "K804 SELAMI YILDIZ",
+                        "jobCode":  "K804 SELAMI YILDIZ",
+                        "d5":  "K804 SELAMI YILDIZ",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  132,
+                        "quantity":  5,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T11:58:14.0000000",
+                        "sourceFile":  "K804 SELAMI YILDIZ.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "5 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "a455b9010cbe4a068e07ed4b910f0551",
+                        "customerName":  "K805 SELAMI YILDIZ",
+                        "jobCode":  "K805 SELAMI YILDIZ",
+                        "d5":  "K805 SELAMI YILDIZ",
+                        "material":  "HG BEYAZ",
+                        "color":  "ARTI",
+                        "pvcMeters":  53,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T11:55:57.0000000",
+                        "sourceFile":  "K805 SELAMI YILDIZ.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X1220"
                     }
                 ]
 }
