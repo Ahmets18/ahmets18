@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-01T10:00:34.1995898+03:00",
-    "cutoffDate":  "2026-05-01T10:00:01.3656745+03:00",
-    "totalRecords":  644,
-    "totalFiles":  644,
+    "generatedAt":  "2026-06-01T10:30:29.7539630+03:00",
+    "cutoffDate":  "2026-05-01T10:30:01.3595302+03:00",
+    "totalRecords":  645,
+    "totalFiles":  645,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -15964,6 +15964,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "75171a9778384496aa2631af75a9f24c",
+                        "customerName":  "K794 EFE TESHIR",
+                        "jobCode":  "K794 EFE TESHIR",
+                        "d5":  "K794 EFE TESHIR",
+                        "material":  "DESENLİ",
+                        "color":  "ARTI",
+                        "pvcMeters":  529,
+                        "quantity":  18,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T10:28:04.0000000",
+                        "sourceFile":  "K794 EFE TESHIR.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "18 PLK 18M 2800X2100"
                     }
                 ]
 }
