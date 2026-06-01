@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-01T17:30:35.2050284+03:00",
-    "cutoffDate":  "2026-04-17T17:30:01.9237718+03:00",
-    "totalRecords":  1098,
-    "totalFiles":  1099,
+    "generatedAt":  "2026-06-01T18:00:30.8352697+03:00",
+    "cutoffDate":  "2026-04-17T18:00:01.8750821+03:00",
+    "totalRecords":  1100,
+    "totalFiles":  1101,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -26788,30 +26788,6 @@
                         "plaka":  "1 PLK 18M 2800X1220"
                     },
                     {
-                        "id":  "c6c08ee85a0142a98f9cb6bc2db56743",
-                        "customerName":  "J473 YUSA",
-                        "jobCode":  "J473 YUSA",
-                        "d5":  "J473 YUSA",
-                        "material":  "BEYAZ ARKALIK",
-                        "color":  "ARTI",
-                        "pvcMeters":  0,
-                        "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-17T17:58:32.0000000",
-                        "sourceFile":  "J473 YUSA.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "1 PLK 3M 2100X1700"
-                    },
-                    {
                         "id":  "cc9ca6f6b5164a479ba192a86bfe5001",
                         "customerName":  "J681 ZAMIR",
                         "jobCode":  "J681 ZAMIR",
@@ -27198,6 +27174,87 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "2 PLK 18M 2800X1220"
+                    },
+                    {
+                        "id":  "1c89b188021c47c0847e72029209851a",
+                        "customerName":  "K841 OKEMOS",
+                        "jobCode":  "K841 OKEMOS",
+                        "d5":  "K841 OKEMOS",
+                        "material":  "BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T17:42:33.0000000",
+                        "sourceFile":  "K841 OKEMOS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "2aa20e30eb694e4394bbe91abf4b64b1",
+                        "customerName":  "K842 OKEMOS",
+                        "jobCode":  "K842 OKEMOS",
+                        "d5":  "K842 OKEMOS",
+                        "material":  "KAYIN MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  16,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-01T17:44:10.0000000",
+                        "sourceFile":  "K842 OKEMOS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "5adaa150a62c460998f8187b5c2519c6",
+                        "customerName":  "K838 TUNALI",
+                        "jobCode":  "K838 TUNALI",
+                        "d5":  "K838 TUNALI",
+                        "material":  "KAFKAS MEŞE MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  150,
+                        "quantity":  5,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+                                           {
+                                               "cell":  "L35",
+                                               "label":  "L35",
+                                               "value":  "1 VE 2 KALINLAŞTIRMA OLACAK"
+                                           },
+                                           {
+                                               "cell":  "L38",
+                                               "label":  "L38",
+                                               "value":  "25-26-27 HAVUZ OLACAK"
+                                           }
+                                       ],
+                        "orderDate":  "2026-06-01T17:50:08.0000000",
+                        "sourceFile":  "K838 TUNALI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "5 PLK 18M 2800X2100"
                     }
                 ]
 }
