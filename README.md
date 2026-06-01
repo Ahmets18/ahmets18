@@ -4,7 +4,7 @@ Bu proje, `xlsm` dosyalarindan uretilen siparis verisini GitHub Pages uzerinde y
 
 ## Akis
 
-1. `scripts/sync-from-share.ps1` son 1 aylik `xlsm` dosyalarini tarar.
+1. `scripts/sync-from-share.ps1` son 45 gunluk `xlsm` dosyalarini tarar.
 2. Script `data/database.txt` dosyasini gunceller.
 3. `local-database.js` ve site paketi ayni veriyle yenilenir.
 4. GitHub Pages, `data/database.txt` uzerinden son veriyi okur.

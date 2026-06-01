@@ -12,7 +12,7 @@ $syncStatePath = Join-Path $dataDir "sync-state.json"
 $localDatabaseJsPath = Join-Path $rootDir "local-database.js"
 $publishScriptPath = Join-Path $scriptsDir "publish-live-data.ps1"
 $logPath = Join-Path $logDir "sync.log"
-$cutoff = (Get-Date).AddMonths(-1)
+$cutoff = (Get-Date).AddDays(-45)
 $fileTimeoutSeconds = 20
 $cutDataRoot = "\\Schelling01\d\Schelling\SchellingData\NCData"
 $script:CutStatusIndex = $null
@@ -653,7 +653,7 @@ if (-not (Test-Path -LiteralPath $SourcePath)) {
 }
 
 $startTime = Get-Date
-Write-Log "Start: last 1 month scan from $SourcePath"
+Write-Log "Start: last 45 days scan from $SourcePath"
 
 $files = Get-ChildItem -LiteralPath $SourcePath -Recurse -File | Where-Object {
   $_.Extension -eq ".xlsm" -and $_.LastWriteTime -ge $cutoff
@@ -765,7 +765,7 @@ $syncState | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $syncStatePath -
 Write-Log "database.txt updated: $databasePath"
 Write-Log "local-database.js updated: $localDatabaseJsPath"
 Write-Log "sync-state.json updated: $syncStatePath"
-Write-Log "Last 1 month: $($files.Count) files, $processed processed, $skippedCached cached skipped, $newRecords new records, $timedOutFiles timed out, $failedFiles failed, $($records.Count) total records."
+Write-Log "Last 45 days: $($files.Count) files, $processed processed, $skippedCached cached skipped, $newRecords new records, $timedOutFiles timed out, $failedFiles failed, $($records.Count) total records."
 
 try {
   if (Test-Path -LiteralPath $publishScriptPath) {
