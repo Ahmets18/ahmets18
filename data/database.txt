@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-01T15:00:29.4165293+03:00",
-    "cutoffDate":  "2026-05-01T15:00:01.3955811+03:00",
-    "totalRecords":  670,
-    "totalFiles":  670,
+    "generatedAt":  "2026-06-01T15:30:27.2405276+03:00",
+    "cutoffDate":  "2026-05-01T15:30:01.4292471+03:00",
+    "totalRecords":  671,
+    "totalFiles":  671,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -16612,6 +16612,32 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 5M 2800X2100"
+                    },
+                    {
+                        "id":  "74d5ebbe679941498a4fde24cdb90579",
+                        "customerName":  "K822 DEKOR AHSAP",
+                        "jobCode":  "K822 DEKOR AHSAP",
+                        "d5":  "K822 DEKOR AHSAP",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  107,
+                        "quantity":  4,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L42",
+                                           "label":  "L42",
+                                           "value":  "İŞARETLİ HAVUZ OLACAK"
+                                       },
+                        "orderDate":  "2026-06-01T15:05:48.0000000",
+                        "sourceFile":  "K822 DEKOR AHSAP.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 3660X1830"
                     }
                 ]
 }
