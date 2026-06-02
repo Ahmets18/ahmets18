@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T11:00:31.7805059+03:00",
-    "cutoffDate":  "2026-04-18T11:00:01.6603764+03:00",
-    "totalRecords":  1106,
-    "totalFiles":  1107,
+    "generatedAt":  "2026-06-02T11:30:29.7380123+03:00",
+    "cutoffDate":  "2026-04-18T11:30:01.6682806+03:00",
+    "totalRecords":  1103,
+    "totalFiles":  1105,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -23275,32 +23275,6 @@
                         "plaka":  "1 PLK 18M 2800X2100"
                     },
                     {
-                        "id":  "c60666c690ab41ee93dd69f5daf9dfcb",
-                        "customerName":  "J488 RAVZA",
-                        "jobCode":  "J488 RAVZA",
-                        "d5":  "J488 RAVZA",
-                        "material":  "AYTAŞI MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  90,
-                        "quantity":  5,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-                                           "cell":  "L20",
-                                           "label":  "L20",
-                                           "value":  "2 PLAKA 8mm AYTAŞI"
-                                       },
-                        "orderDate":  "2026-04-18T11:00:25.0000000",
-                        "sourceFile":  "J488 RAVZA.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "5 PLK 18M 2800X2100"
-                    },
-                    {
                         "id":  "a2070207fed441fba3292dbed6f0505c",
                         "customerName":  "J552 RIDVAN",
                         "jobCode":  "J552 RIDVAN",
@@ -25341,54 +25315,6 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "3 PLK 5M 2800X2100"
-                    },
-                    {
-                        "id":  "2d182a1730a3423c9e336315066ad8d1",
-                        "customerName":  "J489 USTA TANITIM",
-                        "jobCode":  "J489 USTA TANITIM",
-                        "d5":  "J489 USTA TANITIM",
-                        "material":  "DÜZ BEYAZ MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  49,
-                        "quantity":  3,
-                        "cutStatus":  "Kesilmedi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T11:05:44.0000000",
-                        "sourceFile":  "J489 USTA TANITIM.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "3 PLK 18M 3660X1830"
-                    },
-                    {
-                        "id":  "bef6d41a2de24f4496d1f67a616f8e7b",
-                        "customerName":  "J490 USTA TANITIM",
-                        "jobCode":  "J490 USTA TANITIM",
-                        "d5":  "J490 USTA TANITIM",
-                        "material":  "HG BEYAZ",
-                        "color":  "ARTI",
-                        "pvcMeters":  42,
-                        "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T11:09:39.0000000",
-                        "sourceFile":  "J490 USTA TANITIM.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "2 PLK 18M 2800X1220"
                     },
                     {
                         "id":  "652ff0413244453abfd937b0636bc51b",
