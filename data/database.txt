@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T16:00:30.1439597+03:00",
-    "cutoffDate":  "2026-04-18T16:00:01.8476128+03:00",
-    "totalRecords":  1109,
-    "totalFiles":  1110,
+    "generatedAt":  "2026-06-02T16:30:32.3103592+03:00",
+    "cutoffDate":  "2026-04-18T16:30:01.7552239+03:00",
+    "totalRecords":  1112,
+    "totalFiles":  1113,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -27476,6 +27476,78 @@
                         "sheetName":  "HESAP1",
                         "sourceRow":  1,
                         "opt":  "ERBAY",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "03dbc6815dbe42af904e83588eab12d5",
+                        "customerName":  "K873 NIHAT ATAKAN",
+                        "jobCode":  "K873 NIHAT ATAKAN",
+                        "d5":  "K873 NIHAT ATAKAN",
+                        "material":  "PARLAK BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  59,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T16:27:18.0000000",
+                        "sourceFile":  "K873 NIHAT ATAKAN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "aa293b6d79c94bbd9dfb3d826ffeb499",
+                        "customerName":  "K871 SAFAK SEVEN",
+                        "jobCode":  "K871 SAFAK SEVEN",
+                        "d5":  "K871 SAFAK SEVEN",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  90,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T16:18:57.0000000",
+                        "sourceFile":  "K871 SAFAK SEVEN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "b3079d502c09480294488eff9ab1d163",
+                        "customerName":  "K872 SAFAK SEVEN",
+                        "jobCode":  "K872 SAFAK SEVEN",
+                        "d5":  "K872 SAFAK SEVEN",
+                        "material":  "KAPAK HAM MDF 2.KLT",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T16:19:48.0000000",
+                        "sourceFile":  "K872 SAFAK SEVEN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X2100"
                     }
                 ]
