@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T15:00:31.1047795+03:00",
-    "cutoffDate":  "2026-04-18T15:00:01.7113938+03:00",
-    "totalRecords":  1104,
-    "totalFiles":  1105,
+    "generatedAt":  "2026-06-02T15:30:31.4517336+03:00",
+    "cutoffDate":  "2026-04-18T15:30:01.7703214+03:00",
+    "totalRecords":  1108,
+    "totalFiles":  1109,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -27348,6 +27348,102 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "14 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "0b710700c5b1468e86dc8481cdd97cca",
+                        "customerName":  "K868 ARSLAN MOBILYA",
+                        "jobCode":  "K868 ARSLAN MOBILYA",
+                        "d5":  "K868 ARSLAN MOBILYA",
+                        "material":  "DESENLİ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  181,
+                        "quantity":  9,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T15:23:56.0000000",
+                        "sourceFile":  "K868 ARSLAN MOBILYA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "9 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "03b62a0e1c874e759a1b910a2460550e",
+                        "customerName":  "K869 ARSLAN MOBILYA",
+                        "jobCode":  "K869 ARSLAN MOBILYA",
+                        "d5":  "K869 ARSLAN MOBILYA",
+                        "material":  "DESENLİ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T15:26:46.0000000",
+                        "sourceFile":  "K869 ARSLAN MOBILYA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "f1d3ff0b3f7248dda5456ad8f3006be9",
+                        "customerName":  "K866 AYMODE",
+                        "jobCode":  "K866 AYMODE",
+                        "d5":  "K866 AYMODE",
+                        "material":  "KARİNA MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  84,
+                        "quantity":  4,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T14:51:50.0000000",
+                        "sourceFile":  "K866 AYMODE.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "df4312658d6f40859616fe3b8c7f03cd",
+                        "customerName":  "K867 AYMODE",
+                        "jobCode":  "K867 AYMODE",
+                        "d5":  "K867 AYMODE",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  null,
+                        "quantity":  5,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T15:08:59.0000000",
+                        "sourceFile":  "K867 AYMODE.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "5 PLK 5M 2800X2100"
                     }
                 ]
 }
