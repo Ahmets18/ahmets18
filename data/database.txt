@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T09:30:34.3042956+03:00",
-    "cutoffDate":  "2026-04-18T09:30:01.6489603+03:00",
-    "totalRecords":  1099,
-    "totalFiles":  1100,
+    "generatedAt":  "2026-06-02T10:00:34.4062806+03:00",
+    "cutoffDate":  "2026-04-18T10:00:01.6252168+03:00",
+    "totalRecords":  1102,
+    "totalFiles":  1103,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -5897,7 +5897,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  423,
                         "quantity":  10,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -23068,30 +23068,6 @@
                         "plaka":  "1 PLK 18M 2800X2100"
                     },
                     {
-                        "id":  "677f518182044112b306abc6d794c63d",
-                        "customerName":  "J487 OZKAN TRAK",
-                        "jobCode":  "J487 OZKAN TRAK",
-                        "d5":  "J487 OZKAN TRAK",
-                        "material":  "SARI MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  75,
-                        "quantity":  4,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T09:51:29.0000000",
-                        "sourceFile":  "J487 OZKAN TRAK.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "4 PLK 18M 2800X2100"
-                    },
-                    {
                         "id":  "98d8e71d9dda47379a28a231a6612524",
                         "customerName":  "J523 OZKAN TRAK",
                         "jobCode":  "J523 OZKAN TRAK",
@@ -27226,6 +27202,102 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "27390c29b7f94224afd9a38836a755b9",
+                        "customerName":  "K852 ERSIN ARI",
+                        "jobCode":  "K852 ERSIN ARI",
+                        "d5":  "K852 ERSIN ARI",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  23,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T09:43:29.0000000",
+                        "sourceFile":  "K852 ERSIN ARI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "85aa6c090ac34ab28646fea6947be58b",
+                        "customerName":  "K853 ERSIN ARI",
+                        "jobCode":  "K853 ERSIN ARI",
+                        "d5":  "K853 ERSIN ARI",
+                        "material":  "2.KLT HAM MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T09:45:49.0000000",
+                        "sourceFile":  "K853 ERSIN ARI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 8M 3660X1830"
+                    },
+                    {
+                        "id":  "222e3891c0b94872abe2a8c9e2891175",
+                        "customerName":  "K854 HARUN YILMAZ",
+                        "jobCode":  "K854 HARUN YILMAZ",
+                        "d5":  "K854 HARUN YILMAZ",
+                        "material":  "AÇIK GRİ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  1553,
+                        "quantity":  64,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T09:54:29.0000000",
+                        "sourceFile":  "K854 HARUN YILMAZ.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "64 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "b785346f55874eafa2491f89fa89b79a",
+                        "customerName":  "K851 SELCUK ABI",
+                        "jobCode":  "K851 SELCUK ABI",
+                        "d5":  "K851 SELCUK ABI",
+                        "material":  "BEYAZ SUNTA",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  4,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T09:41:08.0000000",
+                        "sourceFile":  "K851 SELCUK ABI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 3660X1830"
                     }
                 ]
 }
