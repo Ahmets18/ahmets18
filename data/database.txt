@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T11:30:29.7380123+03:00",
-    "cutoffDate":  "2026-04-18T11:30:01.6682806+03:00",
-    "totalRecords":  1103,
-    "totalFiles":  1105,
+    "generatedAt":  "2026-06-02T12:00:29.2004789+03:00",
+    "cutoffDate":  "2026-04-18T12:00:01.7037821+03:00",
+    "totalRecords":  1101,
+    "totalFiles":  1103,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -18125,54 +18125,6 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "2 PLK 30M 3660X1830"
-                    },
-                    {
-                        "id":  "dc728b2f9d134edaa5bc6853abdf79a2",
-                        "customerName":  "J491 BURAK ULUOCAK",
-                        "jobCode":  "J491 BURAK ULUOCAK",
-                        "d5":  "J491 BURAK ULUOCAK",
-                        "material":  "BEYAZ MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  136,
-                        "quantity":  3,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T11:48:03.0000000",
-                        "sourceFile":  "J491 BURAK ULUOCAK.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "3 PLK 18M 3660X1830"
-                    },
-                    {
-                        "id":  "04eb5429984f454a87503348452b0a45",
-                        "customerName":  "J492 BURAK ULUOCAK",
-                        "jobCode":  "J492 BURAK ULUOCAK",
-                        "d5":  "J492 BURAK ULUOCAK",
-                        "material":  "BEYAZ ARKALIK",
-                        "color":  "ARTI",
-                        "pvcMeters":  0,
-                        "quantity":  1,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T11:50:04.0000000",
-                        "sourceFile":  "J492 BURAK ULUOCAK.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "1 PLK 4M 2800X2100"
                     },
                     {
                         "id":  "9020be64ed25492297036b9e6ef825b8",
