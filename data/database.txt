@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T08:30:31.6985525+03:00",
-    "cutoffDate":  "2026-04-18T08:30:02.1912453+03:00",
-    "totalRecords":  1093,
-    "totalFiles":  1094,
+    "generatedAt":  "2026-06-02T09:00:37.5616057+03:00",
+    "cutoffDate":  "2026-04-18T09:00:02.5934580+03:00",
+    "totalRecords":  1097,
+    "totalFiles":  1098,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -15720,7 +15720,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  174,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -15744,7 +15744,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  3,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24347,30 +24347,6 @@
                         "plaka":  "19 PLK 18M 2800X2100"
                     },
                     {
-                        "id":  "cd4df251bde7417fb7bbcaa21dce151d",
-                        "customerName":  "J484 SELAM MOBILYA",
-                        "jobCode":  "J484 SELAM MOBILYA",
-                        "d5":  "J484 SELAM MOBILYA",
-                        "material":  "BEYAZ ARKALIK",
-                        "color":  "ARTI",
-                        "pvcMeters":  0,
-                        "quantity":  2,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T08:35:44.0000000",
-                        "sourceFile":  "J484 SELAM MOBILYA.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "2 PLK 5M 2800X2100"
-                    },
-                    {
                         "id":  "62e64ebfa0cc4d9fb4cedd8ffd348ea4",
                         "customerName":  "J765 SELAM MOBILYA",
                         "jobCode":  "J765 SELAM MOBILYA",
@@ -25957,30 +25933,6 @@
                         "plaka":  "5625 PLK 18M 2800X2100"
                     },
                     {
-                        "id":  "05e7aa76a43d492fa82b458f28e9d03b",
-                        "customerName":  "J485 YASIN AY",
-                        "jobCode":  "J485 YASIN AY",
-                        "d5":  "J485 YASIN AY",
-                        "material":  "BEYAZ SUNTA",
-                        "color":  "ERDAL",
-                        "pvcMeters":  7,
-                        "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T08:51:09.0000000",
-                        "sourceFile":  "J485 YASIN AY.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ERDAL",
-                        "plaka":  "1 PLK 30M 2800X2100"
-                    },
-                    {
                         "id":  "497d85ace84a4c648a408882988d86df",
                         "customerName":  "J634 YASIN NALBANT",
                         "jobCode":  "J634 YASIN NALBANT",
@@ -27064,7 +27016,7 @@
                         "color":  "ERBAY",
                         "pvcMeters":  13,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -27078,6 +27030,152 @@
                         "sourceRow":  1,
                         "opt":  "ERBAY",
                         "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "83cf90ad11ff4bf7a8e5ecee63dd4807",
+                        "customerName":  "K837 TUNALI",
+                        "jobCode":  "K837 TUNALI",
+                        "d5":  "K837 TUNALI",
+                        "material":  "KARİNA MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  13,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T08:58:19.0000000",
+                        "sourceFile":  "K837 TUNALI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "ff401b91d0b24a9c88f8423c08cc0cfe",
+                        "customerName":  "K844 TUNALI",
+                        "jobCode":  "K844 TUNALI",
+                        "d5":  "K844 TUNALI",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  231,
+                        "quantity":  11,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L45",
+                                           "label":  "L45",
+                                           "value":  "SAYFA 1/2 \u003e\u003e\u003e"
+                                       },
+                        "orderDate":  "2026-06-02T08:37:03.0000000",
+                        "sourceFile":  "K844 TUNALI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "11 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "e1315803711d4bea8c314d9b593bc099",
+                        "customerName":  "K845 TUNALI",
+                        "jobCode":  "K845 TUNALI",
+                        "d5":  "K845 TUNALI",
+                        "material":  "PARLAK BEJ MDF VT010",
+                        "color":  "ARTI",
+                        "pvcMeters":  53,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T08:39:53.0000000",
+                        "sourceFile":  "K845 TUNALI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "d97150e308fc4797bf839f86c6b0af88",
+                        "customerName":  "K846 TUNALI",
+                        "jobCode":  "K846 TUNALI",
+                        "d5":  "K846 TUNALI",
+                        "material":  "AYTAŞI MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  65,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T08:43:53.0000000",
+                        "sourceFile":  "K846 TUNALI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "1768ffb097e643eca4a0f5140c3391f5",
+                        "customerName":  "K847 TUNALI",
+                        "jobCode":  "K847 TUNALI",
+                        "d5":  "K847 TUNALI",
+                        "material":  "ACR144 KREM AKRİLİK",
+                        "color":  "ARTI",
+                        "pvcMeters":  43,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T08:47:37.0000000",
+                        "sourceFile":  "K847 TUNALI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 2800X1220"
+                    },
+                    {
+                        "id":  "e92a169617554d7d8312b271740dd3e0",
+                        "customerName":  "K848 TUNALI",
+                        "jobCode":  "K848 TUNALI",
+                        "d5":  "K848 TUNALI",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  5,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T08:56:01.0000000",
+                        "sourceFile":  "K848 TUNALI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "5 PLK 5M 2800X2100"
                     }
                 ]
 }
