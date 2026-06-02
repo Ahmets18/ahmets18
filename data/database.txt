@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T17:00:29.1740590+03:00",
-    "cutoffDate":  "2026-04-18T17:00:01.8241559+03:00",
-    "totalRecords":  1113,
-    "totalFiles":  1114,
+    "generatedAt":  "2026-06-02T17:30:32.1645925+03:00",
+    "cutoffDate":  "2026-04-18T17:30:01.8270838+03:00",
+    "totalRecords":  1119,
+    "totalFiles":  1120,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -27573,6 +27573,150 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "4 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "e87960f3e09f4864b71e5f637cb9f16a",
+                        "customerName":  "K880 EMRE GOK",
+                        "jobCode":  "K880 EMRE GOK",
+                        "d5":  "K880 EMRE GOK",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  22,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T17:14:46.0000000",
+                        "sourceFile":  "K880 EMRE GOK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "70b03c16ad9a458ebf581e51b4dac365",
+                        "customerName":  "K875 MUSTAFA BORA",
+                        "jobCode":  "K875 MUSTAFA BORA",
+                        "d5":  "K875 MUSTAFA BORA",
+                        "material":  "ÇÖL BEJİ ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T17:00:18.0000000",
+                        "sourceFile":  "K875 MUSTAFA BORA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "2583408ee417472eac847b0272ec6dd7",
+                        "customerName":  "K876 MUSTAFA BORA",
+                        "jobCode":  "K876 MUSTAFA BORA",
+                        "d5":  "K876 MUSTAFA BORA",
+                        "material":  "ÇÖL BEJİ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  216,
+                        "quantity":  8,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T17:05:56.0000000",
+                        "sourceFile":  "K876 MUSTAFA BORA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "8 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "4c71f7945fcd4b819b50bc85a3956050",
+                        "customerName":  "K877 MUSTAFA BORA",
+                        "jobCode":  "K877 MUSTAFA BORA",
+                        "d5":  "K877 MUSTAFA BORA",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  89,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T17:10:24.0000000",
+                        "sourceFile":  "K877 MUSTAFA BORA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "2 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "4e19c5075fcd41ab824ae82a147cb2be",
+                        "customerName":  "K878 MUSTAFA BORA",
+                        "jobCode":  "K878 MUSTAFA BORA",
+                        "d5":  "K878 MUSTAFA BORA",
+                        "material":  "DÜZ BEYAZ ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T17:09:54.0000000",
+                        "sourceFile":  "K878 MUSTAFA BORA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 8M 2800X2100"
+                    },
+                    {
+                        "id":  "f8edf0b812444007af2104a033c72be6",
+                        "customerName":  "K879 MUSTAFA BORA",
+                        "jobCode":  "K879 MUSTAFA BORA",
+                        "d5":  "K879 MUSTAFA BORA",
+                        "material":  "DESENLİ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  31,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T17:11:27.0000000",
+                        "sourceFile":  "K879 MUSTAFA BORA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
                     }
                 ]
 }
