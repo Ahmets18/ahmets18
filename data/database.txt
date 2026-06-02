@@ -1,6 +1,6 @@
 ﻿{
-    "generatedAt":  "2026-06-02T14:30:29.8063035+03:00",
-    "cutoffDate":  "2026-04-18T14:30:01.7198007+03:00",
+    "generatedAt":  "2026-06-02T15:00:31.1047795+03:00",
+    "cutoffDate":  "2026-04-18T15:00:01.7113938+03:00",
     "totalRecords":  1104,
     "totalFiles":  1105,
     "records":  [
@@ -1538,7 +1538,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -18632,7 +18632,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  6,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -27018,7 +27018,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
