@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-01T18:00:30.8352697+03:00",
-    "cutoffDate":  "2026-04-17T18:00:01.8750821+03:00",
-    "totalRecords":  1100,
-    "totalFiles":  1101,
+    "generatedAt":  "2026-06-02T08:00:32.3286124+03:00",
+    "cutoffDate":  "2026-04-18T08:00:02.6886237+03:00",
+    "totalRecords":  1097,
+    "totalFiles":  1098,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -1514,7 +1514,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  76,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -5923,7 +5923,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  168,
                         "quantity":  7,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -5975,7 +5975,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  76,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -7006,7 +7006,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -7599,7 +7599,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  231,
                         "quantity":  9,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -7623,7 +7623,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  42,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -15002,7 +15002,7 @@
                         "color":  "ERBAY",
                         "pvcMeters":  23,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -15050,7 +15050,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  82,
                         "quantity":  3,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -15224,7 +15224,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  315,
                         "quantity":  7,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -15274,7 +15274,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  28,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -15400,7 +15400,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  98,
                         "quantity":  3,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -15424,7 +15424,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  90,
                         "quantity":  4,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -15572,7 +15572,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  179,
                         "quantity":  12,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -16622,7 +16622,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  107,
                         "quantity":  4,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -18353,7 +18353,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  39,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -24661,30 +24661,6 @@
                         "plaka":  "4 PLK 18M 2800X1220"
                     },
                     {
-                        "id":  "37cc14ba5dbd4d9998fa8ee6cad0786d",
-                        "customerName":  "J476 SENTURK MOBILYA",
-                        "jobCode":  "J476 SENTURK MOBILYA",
-                        "d5":  "J476 SENTURK MOBILYA",
-                        "material":  "PARLAK BEYAZ MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  39,
-                        "quantity":  2,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-17T19:11:34.0000000",
-                        "sourceFile":  "J476 SENTURK MOBILYA.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "2 PLK 18M 3660X1830"
-                    },
-                    {
                         "id":  "ffcf96a160f743b6b405b37a909ae86e",
                         "customerName":  "J735 SENTURK MOBILYA",
                         "jobCode":  "J735 SENTURK MOBILYA",
@@ -25097,39 +25073,6 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "4 PLK 8M 2800X2100"
-                    },
-                    {
-                        "id":  "5ea61ae6dd8f45bda07003e62bb9eb44",
-                        "customerName":  "J477 TMA",
-                        "jobCode":  "J477 TMA",
-                        "d5":  "J477 TMA",
-                        "material":  "PAR.BEYAZ LAK PANEL",
-                        "color":  "ARTI",
-                        "pvcMeters":  57,
-                        "quantity":  2,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  [
-                                           {
-                                               "cell":  "L39",
-                                               "label":  "L39",
-                                               "value":  "KALINLAŞTIRMA"
-                                           },
-                                           {
-                                               "cell":  "L40",
-                                               "label":  "L40",
-                                               "value":  "KALINLAŞTIRMA"
-                                           }
-                                       ],
-                        "orderDate":  "2026-04-18T07:58:47.0000000",
-                        "sourceFile":  "J477 TMA.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "2 PLK 18M 2800X2100"
                     },
                     {
                         "id":  "52ad78be646a42fcab856c10bd3f923e",
@@ -26110,30 +26053,6 @@
                         "plaka":  "1 PLK 18M 2800X2100"
                     },
                     {
-                        "id":  "db1da1f20278408f8939715bd31ab8ae",
-                        "customerName":  "J474 YALCIN MOBILYA",
-                        "jobCode":  "J474 YALCIN MOBILYA",
-                        "d5":  "J474 YALCIN MOBILYA",
-                        "material":  "AYTAŞI MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  0,
-                        "quantity":  1,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-17T18:06:19.0000000",
-                        "sourceFile":  "J474 YALCIN MOBILYA.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "1 PLK 8M 2800X2100"
-                    },
-                    {
                         "id":  "07fccb1b03e947fb983c1900d3e17884",
                         "customerName":  "J615 YAMANLAR",
                         "jobCode":  "J615 YAMANLAR",
@@ -27112,7 +27031,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  52,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
