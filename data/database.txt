@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T16:30:32.3103592+03:00",
-    "cutoffDate":  "2026-04-18T16:30:01.7552239+03:00",
-    "totalRecords":  1112,
-    "totalFiles":  1113,
+    "generatedAt":  "2026-06-02T17:00:29.1740590+03:00",
+    "cutoffDate":  "2026-04-18T17:00:01.8241559+03:00",
+    "totalRecords":  1113,
+    "totalFiles":  1114,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -27454,7 +27454,7 @@
                         "color":  "ERBAY",
                         "pvcMeters":  11,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -27549,6 +27549,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "1d4d6aba1031402fb8c909f617584f0f",
+                        "customerName":  "K874 MUSTAFA BORA",
+                        "jobCode":  "K874 MUSTAFA BORA",
+                        "d5":  "K874 MUSTAFA BORA",
+                        "material":  "SEDEF KREM MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  117,
+                        "quantity":  4,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T16:59:20.0000000",
+                        "sourceFile":  "K874 MUSTAFA BORA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "4 PLK 18M 2800X2100"
                     }
                 ]
 }
