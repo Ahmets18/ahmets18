@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T08:00:32.3286124+03:00",
-    "cutoffDate":  "2026-04-18T08:00:02.6886237+03:00",
-    "totalRecords":  1097,
-    "totalFiles":  1098,
+    "generatedAt":  "2026-06-02T08:30:31.6985525+03:00",
+    "cutoffDate":  "2026-04-18T08:30:02.1912453+03:00",
+    "totalRecords":  1093,
+    "totalFiles":  1094,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -22874,30 +22874,6 @@
                         "plaka":  "1 PLK 18M 2800X2100"
                     },
                     {
-                        "id":  "95c011e8165e41d39bd4eeb36ee95222",
-                        "customerName":  "J482 OSMAN AYDOGMUS",
-                        "jobCode":  "J482 OSMAN AYDOGMUS",
-                        "d5":  "J482 OSMAN AYDOGMUS",
-                        "material":  "HG BEYAZ",
-                        "color":  "ARTI",
-                        "pvcMeters":  33,
-                        "quantity":  2,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T08:25:49.0000000",
-                        "sourceFile":  "J482 OSMAN AYDOGMUS.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "2 PLK 18M 2800X1220"
-                    },
-                    {
                         "id":  "b304d906228648869b549a4e16f76f2a",
                         "customerName":  "J483 OSMAN AYDOGMUS",
                         "jobCode":  "J483 OSMAN AYDOGMUS",
@@ -23395,30 +23371,6 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "5 PLK 18M 2800X2100"
-                    },
-                    {
-                        "id":  "222a2157c5ff4e20abfc7396fa918950",
-                        "customerName":  "J481 REVANZI",
-                        "jobCode":  "J481 REVANZI",
-                        "d5":  "J481 REVANZI",
-                        "material":  "KAMAN CEVİZ MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  554,
-                        "quantity":  24,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T08:18:56.0000000",
-                        "sourceFile":  "J481 REVANZI.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "24 PLK 18M 2800X2100"
                     },
                     {
                         "id":  "a2070207fed441fba3292dbed6f0505c",
@@ -25075,30 +25027,6 @@
                         "plaka":  "4 PLK 8M 2800X2100"
                     },
                     {
-                        "id":  "52ad78be646a42fcab856c10bd3f923e",
-                        "customerName":  "J478 TMA",
-                        "jobCode":  "J478 TMA",
-                        "d5":  "J478 TMA",
-                        "material":  "PARLAK BEYAZ MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  0,
-                        "quantity":  1,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T08:00:56.0000000",
-                        "sourceFile":  "J478 TMA.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "1 PLK 8M 2800X2100"
-                    },
-                    {
                         "id":  "353e21f5603442de9516b8bc2f9bfd7e",
                         "customerName":  "J653 TMA",
                         "jobCode":  "J653 TMA",
@@ -25701,54 +25629,6 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "3 PLK 18M 3660X1830"
-                    },
-                    {
-                        "id":  "9e8defb1cfa54e6abbb4f98d18be8d7d",
-                        "customerName":  "J479 VEDAT OZBAY",
-                        "jobCode":  "J479 VEDAT OZBAY",
-                        "d5":  "J479 VEDAT OZBAY",
-                        "material":  "BEYAZ TEK YÜZ",
-                        "color":  "ARTI",
-                        "pvcMeters":  0,
-                        "quantity":  2,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T08:06:17.0000000",
-                        "sourceFile":  "J479 VEDAT OZBAY.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "2 PLK 18M 2800X2100"
-                    },
-                    {
-                        "id":  "2fa986d1359e49a6a47df24c626bd6d8",
-                        "customerName":  "J480 VEDAT OZBAY",
-                        "jobCode":  "J480 VEDAT OZBAY",
-                        "d5":  "J480 VEDAT OZBAY",
-                        "material":  "Y.KOYU GRİ MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  30,
-                        "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T08:08:40.0000000",
-                        "sourceFile":  "J480 VEDAT OZBAY.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "1 PLK 18M 2800X2100"
                     },
                     {
                         "id":  "beacfdc281274b26825b3b0dfe1294ba",
@@ -27174,6 +27054,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "5 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "f59f25c0e6ec4712b00fdb8162ce864b",
+                        "customerName":  "K843 AHMET AKSOY",
+                        "jobCode":  "K843 AHMET AKSOY",
+                        "d5":  "K843 AHMET AKSOY",
+                        "material":  "DÜZ BEYAZ MDFLAM",
+                        "color":  "ERBAY",
+                        "pvcMeters":  13,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T08:20:53.0000000",
+                        "sourceFile":  "K843 AHMET AKSOY.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ERBAY",
+                        "plaka":  "1 PLK 18M 2800X2100"
                     }
                 ]
 }
