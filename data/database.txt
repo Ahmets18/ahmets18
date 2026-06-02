@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T12:00:29.2004789+03:00",
-    "cutoffDate":  "2026-04-18T12:00:01.7037821+03:00",
-    "totalRecords":  1101,
-    "totalFiles":  1103,
+    "generatedAt":  "2026-06-02T12:30:34.7623429+03:00",
+    "cutoffDate":  "2026-04-18T12:30:01.7189311+03:00",
+    "totalRecords":  1104,
+    "totalFiles":  1105,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -15300,7 +15300,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  20,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -15448,7 +15448,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  197,
                         "quantity":  8,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -17506,30 +17506,6 @@
                                        },
                         "orderDate":  "2026-04-28T18:09:05.0000000",
                         "sourceFile":  "J823 ALTAJER.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "1 PLK 18M 2800X2100"
-                    },
-                    {
-                        "id":  "86a750fd43bd481092a55611722c3739",
-                        "customerName":  "J493 ANADOORIA",
-                        "jobCode":  "J493 ANADOORIA",
-                        "d5":  "J493 ANADOORIA",
-                        "material":  "NAVARO MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  20,
-                        "quantity":  1,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T12:17:49.0000000",
-                        "sourceFile":  "J493 ANADOORIA.xlsm",
                         "sheetName":  "HESAP1",
                         "sourceRow":  1,
                         "opt":  "ARTI",
@@ -27272,6 +27248,106 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "8 PLK 5M 2800X2100"
+                    },
+                    {
+                        "id":  "5026d546dddd418983d945e783e936d7",
+                        "customerName":  "K861 AYMODE",
+                        "jobCode":  "K861 AYMODE",
+                        "d5":  "K861 AYMODE",
+                        "material":  "LAKELİK TEK YÜZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L20",
+                                           "label":  "L20",
+                                           "value":  "FİRELERİ ALACAK"
+                                       },
+                        "orderDate":  "2026-06-02T12:16:22.0000000",
+                        "sourceFile":  "K861 AYMODE.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "2c44415a10784858858664affd7987ee",
+                        "customerName":  "K862 HALIL KARAKOC",
+                        "jobCode":  "K862 HALIL KARAKOC",
+                        "d5":  "K862 HALIL KARAKOC",
+                        "material":  "OFİS GRİ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  31,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L24",
+                                           "label":  "L24",
+                                           "value":  "CNC"
+                                       },
+                        "orderDate":  "2026-06-02T12:24:02.0000000",
+                        "sourceFile":  "K862 HALIL KARAKOC.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "4df1c447c9d24f2d99c3277f6a7715a7",
+                        "customerName":  "K859 KOCLAR PLEKSI",
+                        "jobCode":  "K859 KOCLAR PLEKSI",
+                        "d5":  "K859 KOCLAR PLEKSI",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T11:12:52.0000000",
+                        "sourceFile":  "K859 KOCLAR PLEKSI.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "df66fcc8230046d4b7791bf1fc9689ba",
+                        "customerName":  "K860 YALCIN MOBILYA",
+                        "jobCode":  "K860 YALCIN MOBILYA",
+                        "d5":  "K860 YALCIN MOBILYA",
+                        "material":  "KAST. KREM MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  36,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T12:10:47.0000000",
+                        "sourceFile":  "K860 YALCIN MOBILYA.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
                     }
                 ]
 }
