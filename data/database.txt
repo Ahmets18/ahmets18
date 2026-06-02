@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T15:30:31.4517336+03:00",
-    "cutoffDate":  "2026-04-18T15:30:01.7703214+03:00",
-    "totalRecords":  1108,
-    "totalFiles":  1109,
+    "generatedAt":  "2026-06-02T16:00:30.1439597+03:00",
+    "cutoffDate":  "2026-04-18T16:00:01.8476128+03:00",
+    "totalRecords":  1109,
+    "totalFiles":  1110,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -27444,6 +27444,39 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "5 PLK 5M 2800X2100"
+                    },
+                    {
+                        "id":  "4ff223b2d6cd4381ace34026fc807f14",
+                        "customerName":  "K870 KOCLAR",
+                        "jobCode":  "K870 KOCLAR",
+                        "d5":  "K870 KOCLAR",
+                        "material":  "MAT DUZ BEYAZ",
+                        "color":  "ERBAY",
+                        "pvcMeters":  11,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  [
+                                           {
+                                               "cell":  "K20",
+                                               "label":  "K20",
+                                               "value":  "CNC"
+                                           },
+                                           {
+                                               "cell":  "K22",
+                                               "label":  "K22",
+                                               "value":  "CNC"
+                                           }
+                                       ],
+                        "orderDate":  "2026-06-02T15:58:23.0000000",
+                        "sourceFile":  "K870 KOCLAR.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ERBAY",
+                        "plaka":  "1 PLK 18M 2800X2100"
                     }
                 ]
 }
