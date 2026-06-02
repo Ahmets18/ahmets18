@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T10:30:32.0272100+03:00",
-    "cutoffDate":  "2026-04-18T10:30:01.6771090+03:00",
-    "totalRecords":  1103,
-    "totalFiles":  1104,
+    "generatedAt":  "2026-06-02T11:00:31.7805059+03:00",
+    "cutoffDate":  "2026-04-18T11:00:01.6603764+03:00",
+    "totalRecords":  1106,
+    "totalFiles":  1107,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -27308,7 +27308,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  0,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -27322,6 +27322,78 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 4M 2800X2100"
+                    },
+                    {
+                        "id":  "dc0c5b31d62b45b0ab5147aa51e339c4",
+                        "customerName":  "K856 HAMIT OZBAY",
+                        "jobCode":  "K856 HAMIT OZBAY",
+                        "d5":  "K856 HAMIT OZBAY",
+                        "material":  "KUMBEJİ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  632,
+                        "quantity":  20,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T10:38:13.0000000",
+                        "sourceFile":  "K856 HAMIT OZBAY.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "20 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "1d3025cccaf8487691ad8f1c052417d9",
+                        "customerName":  "K857 MUSTAFA YURTSEV",
+                        "jobCode":  "K857 MUSTAFA YURTSEV",
+                        "d5":  "K857 MUSTAFA YURTSEV",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  453,
+                        "quantity":  20,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T10:50:56.0000000",
+                        "sourceFile":  "K857 MUSTAFA YURTSEV.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "20 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "2dad685ea6ad4a8cb04763c5ecd4fa4e",
+                        "customerName":  "K858 MUSTAFA YURTSEV",
+                        "jobCode":  "K858 MUSTAFA YURTSEV",
+                        "d5":  "K858 MUSTAFA YURTSEV",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  8,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T10:53:22.0000000",
+                        "sourceFile":  "K858 MUSTAFA YURTSEV.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "8 PLK 5M 2800X2100"
                     }
                 ]
 }
