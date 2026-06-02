@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-02T09:00:37.5616057+03:00",
-    "cutoffDate":  "2026-04-18T09:00:02.5934580+03:00",
-    "totalRecords":  1097,
-    "totalFiles":  1098,
+    "generatedAt":  "2026-06-02T09:30:34.3042956+03:00",
+    "cutoffDate":  "2026-04-18T09:30:01.6489603+03:00",
+    "totalRecords":  1099,
+    "totalFiles":  1100,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -16345,7 +16345,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  64,
                         "quantity":  2,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -22874,54 +22874,6 @@
                         "plaka":  "1 PLK 18M 2800X2100"
                     },
                     {
-                        "id":  "b304d906228648869b549a4e16f76f2a",
-                        "customerName":  "J483 OSMAN AYDOGMUS",
-                        "jobCode":  "J483 OSMAN AYDOGMUS",
-                        "d5":  "J483 OSMAN AYDOGMUS",
-                        "material":  "BEYAZ MDFLAM",
-                        "color":  "ARTI",
-                        "pvcMeters":  77,
-                        "quantity":  3,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T09:05:39.0000000",
-                        "sourceFile":  "J483 OSMAN AYDOGMUS.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "3 PLK 18M 2800X2100"
-                    },
-                    {
-                        "id":  "4f1190bbf0074161bf790b3e77d529b9",
-                        "customerName":  "J486 OSMAN AYDOGMUS",
-                        "jobCode":  "J486 OSMAN AYDOGMUS",
-                        "d5":  "J486 OSMAN AYDOGMUS",
-                        "material":  "BEYAZ ARKALIK",
-                        "color":  "ARTI",
-                        "pvcMeters":  0,
-                        "quantity":  2,
-                        "cutStatus":  "Kesildi",
-                        "notes":  "-",
-                        "cellHighlights":  [
-
-                                           ],
-                        "rangeNotes":  {
-
-                                       },
-                        "orderDate":  "2026-04-18T09:10:26.0000000",
-                        "sourceFile":  "J486 OSMAN AYDOGMUS.xlsm",
-                        "sheetName":  "HESAP1",
-                        "sourceRow":  1,
-                        "opt":  "ARTI",
-                        "plaka":  "2 PLK 5M 2800X2100"
-                    },
-                    {
                         "id":  "ff890049bfc64012af11e77a46e1d4b5",
                         "customerName":  "J910 OSMAN AYDOGMUS",
                         "jobCode":  "J910 OSMAN AYDOGMUS",
@@ -27176,6 +27128,104 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "5 PLK 5M 2800X2100"
+                    },
+                    {
+                        "id":  "95df917671d54389aa148cc75740b584",
+                        "customerName":  "K849 CETIN UYANIK",
+                        "jobCode":  "K849 CETIN UYANIK",
+                        "d5":  "K849 CETIN UYANIK",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  27,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T09:03:16.0000000",
+                        "sourceFile":  "K849 CETIN UYANIK.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "123fd77f2dff43fcaf5969febcfb5ace",
+                        "customerName":  "K850 NIHAT ATAKAN",
+                        "jobCode":  "K850 NIHAT ATAKAN",
+                        "d5":  "K850 NIHAT ATAKAN",
+                        "material":  "PARLAK AYTAŞI SUNTA",
+                        "color":  "ARTI",
+                        "pvcMeters":  92,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T09:28:30.0000000",
+                        "sourceFile":  "K850 NIHAT ATAKAN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "8bcca38815bc41aaab8e87700d22403c",
+                        "customerName":  "K839 OKEMOS",
+                        "jobCode":  "K839 OKEMOS",
+                        "d5":  "K839 OKEMOS",
+                        "material":  "BUTE BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  224,
+                        "quantity":  6,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L25",
+                                           "label":  "L25",
+                                           "value":  "SİYAH PVC"
+                                       },
+                        "orderDate":  "2026-06-02T09:07:16.0000000",
+                        "sourceFile":  "K839 OKEMOS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "6 PLK 18M 3660X1830"
+                    },
+                    {
+                        "id":  "80c78d6e2d654b9991a3fc870d647968",
+                        "customerName":  "K840 OKEMOS",
+                        "jobCode":  "K840 OKEMOS",
+                        "d5":  "K840 OKEMOS",
+                        "material":  "TURUNCU MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  56,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-02T09:08:00.0000000",
+                        "sourceFile":  "K840 OKEMOS.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 18M 2800X2100"
                     }
                 ]
 }
