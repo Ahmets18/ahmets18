@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-03T08:30:29.9318073+03:00",
-    "cutoffDate":  "2026-04-19T08:30:01.8260701+03:00",
-    "totalRecords":  1119,
-    "totalFiles":  1120,
+    "generatedAt":  "2026-06-03T09:00:29.8209479+03:00",
+    "cutoffDate":  "2026-04-19T09:00:01.8148242+03:00",
+    "totalRecords":  1120,
+    "totalFiles":  1121,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -27334,7 +27334,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  191,
                         "quantity":  14,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -27717,6 +27717,32 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "1 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "a9754df4dd064c498e2bd9b91fb57556",
+                        "customerName":  "K883 DEKOR AHSAP",
+                        "jobCode":  "K883 DEKOR AHSAP",
+                        "d5":  "K883 DEKOR AHSAP",
+                        "material":  "OFİS GRİ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  224,
+                        "quantity":  8,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+                                           "cell":  "L45",
+                                           "label":  "L45",
+                                           "value":  "SAYFA 1/2 \u003e\u003e\u003e"
+                                       },
+                        "orderDate":  "2026-06-03T08:58:49.0000000",
+                        "sourceFile":  "K883 DEKOR AHSAP.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "8 PLK 18M 2800X2100"
                     }
                 ]
 }
