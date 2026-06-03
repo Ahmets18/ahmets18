@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-03T09:30:27.2610403+03:00",
-    "cutoffDate":  "2026-04-19T09:30:01.9033059+03:00",
-    "totalRecords":  1121,
-    "totalFiles":  1122,
+    "generatedAt":  "2026-06-03T10:00:29.9347137+03:00",
+    "cutoffDate":  "2026-04-19T10:00:01.8651321+03:00",
+    "totalRecords":  1123,
+    "totalFiles":  1124,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -15696,7 +15696,7 @@
                         "color":  "ARTI",
                         "pvcMeters":  26,
                         "quantity":  1,
-                        "cutStatus":  "Kesilmedi",
+                        "cutStatus":  "Kesildi",
                         "notes":  "-",
                         "cellHighlights":  [
 
@@ -27767,6 +27767,54 @@
                         "sourceRow":  1,
                         "opt":  "ERDAL",
                         "plaka":  "2 PLK 12M 2800X2100"
+                    },
+                    {
+                        "id":  "54a9bb5dbc59445cae02ab52e2a367e3",
+                        "customerName":  "K885 AHMET AKSOY",
+                        "jobCode":  "K885 AHMET AKSOY",
+                        "d5":  "K885 AHMET AKSOY",
+                        "material":  "DÜZ BEYAZ MDF",
+                        "color":  "ARTI",
+                        "pvcMeters":  72,
+                        "quantity":  3,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-03T09:54:39.0000000",
+                        "sourceFile":  "K885 AHMET AKSOY.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "3 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "c401dfb8592b4798880b685e17fcc45f",
+                        "customerName":  "K886 AHMET AKSOY",
+                        "jobCode":  "K886 AHMET AKSOY",
+                        "d5":  "K886 AHMET AKSOY",
+                        "material":  "ARKALIK",
+                        "color":  "ARTI",
+                        "pvcMeters":  0,
+                        "quantity":  1,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-03T09:56:12.0000000",
+                        "sourceFile":  "K886 AHMET AKSOY.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ARTI",
+                        "plaka":  "1 PLK 4M 2800X2100"
                     }
                 ]
 }
