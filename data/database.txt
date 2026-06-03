@@ -1,8 +1,8 @@
 ﻿{
-    "generatedAt":  "2026-06-03T09:00:29.8209479+03:00",
-    "cutoffDate":  "2026-04-19T09:00:01.8148242+03:00",
-    "totalRecords":  1120,
-    "totalFiles":  1121,
+    "generatedAt":  "2026-06-03T09:30:27.2610403+03:00",
+    "cutoffDate":  "2026-04-19T09:30:01.9033059+03:00",
+    "totalRecords":  1121,
+    "totalFiles":  1122,
     "records":  [
                     {
                         "id":  "52ea0a5fe6b44a9e885b32499d8552d9",
@@ -27743,6 +27743,30 @@
                         "sourceRow":  1,
                         "opt":  "ARTI",
                         "plaka":  "8 PLK 18M 2800X2100"
+                    },
+                    {
+                        "id":  "c5bd07e1410c48988811e353cb3ae645",
+                        "customerName":  "K884 SUAT OZKAN",
+                        "jobCode":  "K884 SUAT OZKAN",
+                        "d5":  "K884 SUAT OZKAN",
+                        "material":  "BEYAZ MDFLAM",
+                        "color":  "ERDAL",
+                        "pvcMeters":  33,
+                        "quantity":  2,
+                        "cutStatus":  "Kesilmedi",
+                        "notes":  "-",
+                        "cellHighlights":  [
+
+                                           ],
+                        "rangeNotes":  {
+
+                                       },
+                        "orderDate":  "2026-06-03T09:18:08.0000000",
+                        "sourceFile":  "K884 SUAT OZKAN.xlsm",
+                        "sheetName":  "HESAP1",
+                        "sourceRow":  1,
+                        "opt":  "ERDAL",
+                        "plaka":  "2 PLK 12M 2800X2100"
                     }
                 ]
 }
