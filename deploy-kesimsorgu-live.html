@@ -1,0 +1,2490 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Kesim Sorgulama</title>
+  <style>
+    :root{
+      --bg:#f4efe7;
+      --panel:#fffdf9;
+      --panel-strong:#ffffff;
+      --ink:#1f2937;
+      --muted:#6b7280;
+      --brand:#0f766e;
+      --brand-2:#0b4f4a;
+      --line:#dfd4c3;
+      --soft:#eef7f5;
+      --warn:#b91c1c;
+      --success:#0f7a4a;
+      --success-soft:#e6f7ef;
+      --danger:#b42318;
+      --danger-soft:#fdecec;
+      --unknown:#475569;
+      --unknown-soft:#eef2f6;
+      --shadow:0 20px 60px rgba(31,41,55,.12);
+    }
+    *{box-sizing:border-box}
+    html{overflow-x:hidden}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--ink);
+      background:linear-gradient(180deg,#f7f3ec 0%, #f0e8dc 100%);
+      position:relative;
+      overflow-x:hidden;
+    }
+    body:before,
+    body:after{
+      content:"";
+      position:fixed;
+      border-radius:50%;
+      pointer-events:none;
+      filter:blur(18px);
+      opacity:.28;
+      z-index:-1;
+    }
+    body:before{
+      width:52vw;height:52vw;
+      left:-14vw;top:-14vw;
+      background:radial-gradient(circle at 35% 35%, rgba(15,118,110,.28), rgba(15,118,110,0) 68%);
+    }
+    body:after{
+      width:58vw;height:58vw;
+      right:-18vw;bottom:-20vw;
+      background:radial-gradient(circle at 45% 45%, rgba(181,103,41,.18), rgba(181,103,41,0) 70%);
+    }
+    .wrap{max-width:1440px;margin:0 auto;padding:24px 18px 36px}
+    .hero{
+      background:linear-gradient(135deg,#162238 0%, #20324a 55%, #27465c 100%);
+      color:#fff;
+      border-radius:28px;
+      padding:24px 28px 22px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+      margin-bottom:16px;
+    }
+    .hero:after{
+      content:"";
+      position:absolute;
+      inset:auto -120px -90px auto;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.10), transparent 72%);
+      pointer-events:none;
+    }
+    .hero h1{margin:0 0 10px;font-size:clamp(28px, 3vw, 44px);line-height:1.05}
+    .grid{display:grid;grid-template-columns:1fr;gap:18px}
+    .card{
+      background:rgba(255,253,249,.98);
+      border:1px solid var(--line);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .auth{
+      width:100%;
+      max-width:520px;
+      margin:0 auto;
+      padding:38px 22px 42px;
+    }
+    .auth .kicker{font-size:20px;letter-spacing:.08em}
+    .kicker{
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--brand);
+      font-weight:700;
+      margin:0 0 10px;
+    }
+    .label{display:block;margin:18px 0 8px;font-weight:700}
+    .input, .button{
+      width:100%;
+      border-radius:14px;
+      font-size:16px;
+    }
+    .input{
+      border:1px solid #cbbca8;
+      padding:14px 16px;
+      outline:none;
+      background:#fff;
+    }
+    .input:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(15,118,110,.12)}
+    .button{
+      margin-top:16px;
+      border:0;
+      padding:14px 16px;
+      background:linear-gradient(135deg,var(--brand) 0%,var(--brand-2) 100%);
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .button.secondary{background:#e8f4f2;color:var(--brand)}
+    .muted{color:var(--muted)}
+    .error{color:var(--warn);min-height:20px;margin-top:10px}
+    .support-cta{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top:10px;
+      width:100%;
+      max-width:320px;
+    }
+    .support-cta a{
+      display:flex;
+      width:100%;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      text-align:center;
+      white-space:normal;
+      text-decoration:none;
+      border-radius:14px;
+      padding:14px 16px;
+      font-weight:700;
+      background:#25d366;
+      color:#fff;
+      box-shadow:0 12px 28px rgba(37,211,102,.24);
+    }
+    .support-cta a:hover{filter:brightness(.98)}
+    .support-cta small{
+      display:block;
+      max-width:none;
+      color:var(--muted);
+      line-height:1.45;
+      overflow-wrap:anywhere;
+    }
+    .shell{display:none}
+    .shell.open{display:block}
+    .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:12px;
+      flex-wrap:wrap;
+      padding:22px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,#fff 0%, #fcfaf6 100%);
+    }
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+      gap:10px;
+      padding:0 22px 18px;
+    }
+    .pill{
+      border:1px solid #cfe2dc;
+      background:var(--soft);
+      border-radius:999px;
+      padding:10px 14px;
+      font-size:14px;
+    }
+    .search{padding:0 22px 18px;max-width:470px}
+    .pager{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap:10px;
+      padding:0 22px 14px;
+      flex-wrap:wrap;
+    }
+    .pager-btn{
+      border:1px solid #cfe2dc;
+      border-radius:999px;
+      background:#fff;
+      color:var(--brand-2);
+      padding:10px 14px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .pager-btn:disabled{opacity:.45;cursor:not-allowed}
+    .pager-info{color:var(--muted);font-size:14px;white-space:nowrap;text-align:center;min-width:0}
+    .table-wrap{overflow:auto;border-top:1px solid var(--line)}
+    table{width:100%;border-collapse:collapse;min-width:820px;background:#fff;table-layout:fixed}
+    th,td{padding:12px 10px;border-bottom:1px solid #ece3d7;text-align:left;vertical-align:top;font-size:14px;word-break:break-word}
+    th:nth-child(1),td:nth-child(1){width:98px}
+    th:nth-child(2),td:nth-child(2){width:20%}
+    th:nth-child(3),td:nth-child(3){width:22%}
+    th:nth-child(4),td:nth-child(4){width:92px}
+    th:nth-child(5),td:nth-child(5){width:84px}
+    th:nth-child(6),td:nth-child(6){width:auto}
+    th{background:#faf7f2;position:sticky;top:0;z-index:1}
+    .empty{padding:26px 22px;color:var(--muted)}
+    .welcome{margin:6px 0 0;color:var(--muted)}
+    .logout{width:auto;white-space:nowrap}
+    .top-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .history-btn{width:auto;white-space:nowrap}
+    .support-btn{
+      width:56px;
+      min-height:44px;
+      padding:10px;
+      white-space:nowrap;
+      font-size:14px;
+      gap:8px;
+      border-radius:14px;
+    }
+    .support-btn svg{
+      width:22px;
+      height:22px;
+      display:block;
+      flex:none;
+    }
+    .support-btn span{display:none}
+    .support-btn.support-whatsapp{
+      background:#25d366;
+      color:#fff;
+      border-color:#25d366;
+      box-shadow:0 10px 20px rgba(37,211,102,.18);
+    }
+    .support-btn.support-call{
+      background:#eef7f5;
+      color:var(--brand);
+    }
+    .history-modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      z-index:60;
+    }
+    .history-modal.open{display:flex}
+    .history-backdrop{
+      position:absolute;
+      inset:0;
+      background:rgba(15,23,42,.48);
+      backdrop-filter:blur(4px);
+    }
+    .history-panel{
+      position:relative;
+      width:min(760px,100%);
+      max-height:min(80vh,760px);
+      display:flex;
+      flex-direction:column;
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+    }
+    .history-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      padding:20px 22px 14px;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,#fff 0%, #fcfaf6 100%);
+    }
+    .history-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .history-head h2{margin:0;font-size:24px;line-height:1.1}
+    .history-summary{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.4}
+    .history-close{
+      border:0;
+      border-radius:999px;
+      padding:10px 14px;
+      background:#e8f4f2;
+      color:var(--brand-2);
+      font-weight:700;
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+    .history-clear{
+      border:1px solid #cfe2dc;
+      border-radius:999px;
+      padding:10px 14px;
+      background:#fff;
+      color:var(--brand-2);
+      font-weight:700;
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+    .history-body{padding:18px 22px 22px;overflow:auto}
+    .history-toolbar{
+      display:flex;
+      justify-content:flex-end;
+      align-items:center;
+      gap:10px;
+      margin:0 0 12px;
+      flex-wrap:wrap;
+    }
+    .history-page-nav{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-left:auto;
+    }
+    .history-page-btn{
+      border:1px solid #cfe2dc;
+      border-radius:999px;
+      padding:9px 14px;
+      background:#fff;
+      color:var(--brand-2);
+      font-weight:700;
+      cursor:pointer;
+    }
+    .history-page-btn:disabled{opacity:.45;cursor:not-allowed}
+    .history-page-info{
+      color:var(--muted);
+      font-size:13px;
+      white-space:nowrap;
+    }
+    .history-list{display:flex;flex-direction:column;gap:10px}
+    .history-item{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding:14px 16px;
+      border:1px solid #e8dfd2;
+      border-radius:18px;
+      background:#fff;
+    }
+    .history-item-top{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto;
+      gap:12px;
+      align-items:start;
+    }
+    .history-item strong{display:block;font-size:15px}
+    .history-meta{margin-top:4px;color:var(--muted);font-size:13px;line-height:1.45}
+    .history-count{
+      align-self:start;
+      white-space:nowrap;
+      padding:8px 12px;
+      border-radius:999px;
+      background:var(--soft);
+      border:1px solid #cfe2dc;
+      color:var(--brand-2);
+      font-weight:700;
+      font-size:13px;
+      cursor:pointer;
+    }
+    .history-count:hover{filter:brightness(.98)}
+    .history-item.is-expanded{border-color:rgba(15,118,110,.28);box-shadow:0 8px 22px rgba(15,118,110,.08)}
+    .history-history{
+      border:1px solid #e8dfd2;
+      border-radius:14px;
+      background:#fcfaf6;
+      padding:12px 14px;
+    }
+    .history-history[hidden]{display:none}
+    .history-history-title{
+      margin:0 0 8px;
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--brand);
+      font-weight:700;
+    }
+    .history-history-list{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .history-history-entry{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .history-history-entry span:last-child{
+      color:var(--ink);
+    }
+    .history-empty{color:var(--muted);padding:12px 2px}
+    .row-toggle{
+      display:block;
+      width:100%;
+      padding:0;
+      border:0;
+      background:transparent;
+      color:inherit;
+      text-align:left;
+      font:inherit;
+      cursor:pointer;
+    }
+    .row-toggle:focus-visible{
+      outline:2px solid rgba(15,118,110,.35);
+      outline-offset:3px;
+      border-radius:10px;
+    }
+    .row-main{
+      display:block;
+      font-weight:700;
+      line-height:1.35;
+    }
+    .row-detail{
+      display:block;
+      margin-top:6px;
+      padding-top:6px;
+      border-top:1px dashed rgba(15,118,110,.18);
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.45;
+    }
+    .row-detail[hidden]{display:none}
+    .row-detail-line{display:block}
+    .shell.customer-view .table-wrap{overflow-x:hidden}
+    .shell.customer-view table{min-width:0;width:100%;table-layout:fixed}
+    .shell.customer-view th:nth-child(1),
+    .shell.customer-view td:nth-child(1){width:78px}
+    .shell.customer-view th:nth-child(3),
+    .shell.customer-view td:nth-child(3){width:auto}
+    .shell.customer-view th:nth-child(4),
+    .shell.customer-view td:nth-child(4){width:92px}
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      line-height:1;
+      border:1px solid transparent;
+      white-space:nowrap;
+      appearance:none;
+      -webkit-appearance:none;
+      font:inherit;
+      cursor:default;
+    }
+    .badge.cut-toggle{cursor:pointer}
+    .badge.done{background:var(--success-soft);color:var(--success);border-color:#b6ebce}
+    .badge.waiting{background:var(--danger-soft);color:var(--danger);border-color:#f5b5b5}
+    .badge.unknown{background:var(--unknown-soft);color:var(--unknown);border-color:#d7dde6}
+    .cut-status-wrap{
+      display:inline-flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:6px;
+      max-width:100%;
+    }
+    .cut-detail{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.35;
+      max-width:220px;
+    }
+    .notes-list{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      line-height:1.45;
+    }
+    .shell.customer-view th.note-col,
+    .shell.customer-view td.note-col,
+    .shell.customer-view th:nth-child(2),
+    .shell.customer-view td:nth-child(2),
+    .shell.customer-view th:nth-child(5),
+    .shell.customer-view td:nth-child(5){
+      display:none;
+    }
+    @media (max-width: 820px){
+      .wrap{padding:12px}
+      .hero{padding:18px 16px 14px;border-radius:20px}
+      .hero h1{font-size:26px}
+      .top{padding:18px;align-items:flex-start}
+      .card{border-radius:18px}
+      .auth{width:100%;padding:26px 14px 30px}
+      .stats{
+        padding:0 18px 16px;
+        grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+        gap:8px 10px;
+      }
+      .stats .pill{
+        font-size:13px;
+        padding:9px 10px;
+        min-width:0;
+        width:100%;
+        justify-self:stretch;
+      }
+      .stats .pill:last-child{
+        grid-column:1 / -1;
+        width:100%;
+        justify-self:stretch;
+        text-align:center;
+      }
+      .search{padding:0 18px 16px}
+      .pager{
+        padding:0 18px 12px;
+        display:grid;
+        grid-template-columns:auto minmax(0,1fr) auto;
+        align-items:center;
+        gap:8px;
+      }
+      .pager-btn[data-action="prev"]{justify-self:start}
+      .pager-btn[data-action="next"]{justify-self:end}
+      .pager-info{
+        font-size:13px;
+        white-space:normal;
+        line-height:1.2;
+      }
+      .top-actions{justify-content:flex-end}
+      table{min-width:680px}
+      th,td{
+        padding:6px 5px;
+        font-size:12px;
+        line-height:1.2;
+      }
+      .shell.customer-view table{min-width:0;width:100%}
+      .shell.customer-view th,
+      .shell.customer-view td{
+        padding:5px 3px;
+        font-size:10.5px;
+      }
+      .shell.customer-view th:nth-child(1),
+      .shell.customer-view td:nth-child(1){width:68px}
+      .shell.customer-view th:nth-child(3),
+      .shell.customer-view td:nth-child(3){width:auto}
+      .shell.customer-view th:nth-child(4),
+      .shell.customer-view td:nth-child(4){width:78px}
+      .shell.customer-view .badge{
+        padding:6px 7px;
+        font-size:11px;
+      }
+      .shell.customer-view .row-main{font-weight:600}
+      .cut-detail{max-width:none}
+      .history-head,.history-body{padding-left:16px;padding-right:16px}
+      .history-item-top{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Kesim Sorgulama</h1>
+    </section>
+
+    <div class="grid">
+      <section class="card auth" id="authCard">
+        <p class="kicker">Giriş</p>
+        <input id="identifier" class="input" type="password" inputmode="numeric" autocomplete="one-time-code" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Telefon numarası" placeholder="Telefon numaranızı girin">
+        <button id="loginBtn" class="button" type="button">Giriş Yap</button>
+        <div class="error" id="authError" aria-live="polite"></div>
+      </section>
+
+      <section class="card shell" id="shellCard" aria-live="polite" hidden>
+        <div class="top">
+          <div>
+            <p class="kicker">Sorgu Paneli</p>
+            <h1 style="margin:0;font-size:32px">Kayıtlar</h1>
+            <div class="welcome" id="welcome"></div>
+          </div>
+          <div class="top-actions">
+            <button id="historyBtn" class="button secondary history-btn" type="button" hidden>Kullanıcı Geçmişi</button>
+            <a id="supportWhatsappBtn" class="button secondary support-btn support-whatsapp" href="#" target="_blank" rel="noopener noreferrer" hidden aria-label="WhatsApp ile iletişime geç">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M12 2C6.48 2 2 6.35 2 11.71c0 1.93.59 3.73 1.62 5.24L2 22l5.13-1.52c1.45.78 3.11 1.22 4.87 1.22 5.52 0 10-4.35 10-9.71S17.52 2 12 2zm5.86 13.87c-.24.67-1.18 1.24-1.63 1.31-.42.06-.95.09-1.54-.1-.36-.11-.82-.26-1.4-.52-2.47-1.05-4.09-3.55-4.21-3.73-.12-.18-1-.8-1-1.53s.41-1.09.56-1.24c.14-.15.32-.18.43-.18h.31c.1 0 .25-.04.39.3.15.36.5 1.25.55 1.34.05.09.08.2.02.32-.06.12-.09.2-.18.31-.09.11-.19.24-.28.33-.09.09-.19.19-.08.37.12.18.53.87 1.14 1.41.78.69 1.43.91 1.62 1.01.19.09.3.07.41-.05.11-.12.47-.54.6-.73.12-.18.25-.15.43-.08.18.07 1.14.54 1.34.64.2.09.34.14.39.22.05.08.05.45-.19 1.12z"/>
+              </svg>
+              <span>WhatsApp</span>
+            </a>
+            <a id="supportCallBtn" class="button secondary support-btn support-call" href="tel:+905339604410" hidden aria-label="Ara">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1-.25 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.85 21 3 13.15 3 3c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.24.2 2.45.57 3.57.11.33.03.72-.25 1l-2.2 2.22z"/>
+              </svg>
+              <span>Ara</span>
+            </a>
+            <button id="logoutBtn" class="button secondary logout" type="button">Çıkış</button>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="pill">Toplam kayıt: <strong id="totalRecords">0</strong></div>
+          <div class="pill">Görünen kayıt: <strong id="matchedRecords">0</strong></div>
+          <div class="pill">Güncelleme: <strong id="generatedAt">-</strong></div>
+        </div>
+        <div class="search" id="searchWrap">
+          <label class="label" for="search" id="searchLabel">Kayıtlarda ara</label>
+          <input id="search" class="input" type="search" placeholder="Müşteri, malzeme, not...">
+        </div>
+        <div class="pager" id="pager" aria-label="Sayfalama"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tarih</th>
+                <th>Müşteri</th>
+                <th>Malzeme</th>
+                <th>Durum</th>
+                <th>Opt</th>
+        <th class="note-col">Not</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="empty" id="empty" hidden>Kayıt bulunamadı.</div>
+        <div class="error" id="pageError"></div>
+      </section>
+    </div>
+  </div>
+
+  <div class="history-modal" id="historyModal" hidden aria-hidden="true">
+    <div class="history-backdrop" id="historyBackdrop"></div>
+    <div class="history-panel" role="dialog" aria-modal="true" aria-labelledby="historyTitle">
+      <div class="history-head">
+        <div>
+          <h2 id="historyTitle">Kullanıcı Geçmişi</h2>
+          <p class="history-summary" id="historySummary">Son giriş yapanlar, son giriş zamanı ve toplam giriş sayıları burada görünür.</p>
+        </div>
+        <div class="history-actions">
+          <button id="historyClear" class="history-clear" type="button" title="Bu cihazdaki yerel geçmişi temizle">Temizle</button>
+          <button id="historyClose" class="history-close" type="button">Kapat</button>
+        </div>
+      </div>
+      <div class="history-body">
+        <div class="history-toolbar">
+          <div class="history-page-nav">
+            <button id="historyPrevPage" class="history-page-btn" type="button">Önceki</button>
+            <span class="history-page-info" id="historyPageInfo">Sayfa 1/1</span>
+            <button id="historyNextPage" class="history-page-btn" type="button">Sonraki</button>
+          </div>
+        </div>
+        <div class="history-list" id="historyList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var ADMIN_PASSWORDS = ['A12b12c12*', 'artiebatlama18'];
+    var CUSTOMER_SUPPORT_PHONE = '905339604410';
+    var CUSTOMER_SUPPORT_MESSAGE = 'Kesim sorgulama sistemine kayıt olmak istiyorum';
+    var els = {
+      authCard: document.getElementById('authCard'),
+      shellCard: document.getElementById('shellCard'),
+      identifier: document.getElementById('identifier'),
+      loginBtn: document.getElementById('loginBtn'),
+      logoutBtn: document.getElementById('logoutBtn'),
+      authError: document.getElementById('authError'),
+      pageError: document.getElementById('pageError'),
+      welcome: document.getElementById('welcome'),
+      historyBtn: document.getElementById('historyBtn'),
+      historyModal: document.getElementById('historyModal'),
+      historyBackdrop: document.getElementById('historyBackdrop'),
+      historyClose: document.getElementById('historyClose'),
+      historyClear: document.getElementById('historyClear'),
+      historyPrevPage: document.getElementById('historyPrevPage'),
+      historyNextPage: document.getElementById('historyNextPage'),
+      historyPageInfo: document.getElementById('historyPageInfo'),
+      historyList: document.getElementById('historyList'),
+      historySummary: document.getElementById('historySummary'),
+      supportWhatsappBtn: document.getElementById('supportWhatsappBtn'),
+      supportCallBtn: document.getElementById('supportCallBtn'),
+      searchWrap: document.getElementById('searchWrap'),
+      search: document.getElementById('search'),
+      pager: document.getElementById('pager'),
+      rows: document.getElementById('rows'),
+      empty: document.getElementById('empty'),
+      totalRecords: document.getElementById('totalRecords'),
+      matchedRecords: document.getElementById('matchedRecords'),
+      generatedAt: document.getElementById('generatedAt'),
+      searchLabel: document.getElementById('searchLabel')
+    };
+
+    var state = {
+      session: null,
+      database: null,
+      baseRecords: null,
+      visible: [],
+      currentPage: 1,
+      pageSize: 20,
+      historyPage: 1,
+      historyPageSize: 10,
+      historyStats: null,
+      historyLoading: false
+    };
+
+    var SESSION_STORAGE_KEY = 'kesim-session-v1';
+
+    var databasePromise = loadDatabase().then(function(db){
+      state.database = db;
+      return db;
+    });
+
+    if (els.supportWhatsappBtn) {
+      els.supportWhatsappBtn.href = 'https://wa.me/' + CUSTOMER_SUPPORT_PHONE + '?text=' + encodeURIComponent(CUSTOMER_SUPPORT_MESSAGE);
+    }
+    if (els.supportCallBtn) {
+      els.supportCallBtn.href = 'tel:+' + CUSTOMER_SUPPORT_PHONE;
+    }
+
+    function text(value){ return String(value == null ? '' : value); }
+    function trim(value){ return text(value).replace(/\s+/g,' ').trim(); }
+    function normalizePhone(value){
+      var digits = text(value).replace(/\D+/g,'');
+      if (!digits) return '';
+      if (digits.indexOf('00') === 0) {
+        digits = digits.slice(2);
+      }
+      if (digits.indexOf('90') === 0 && digits.length > 10) {
+        digits = digits.slice(2);
+      }
+      if (digits.length === 11 && digits.charAt(0) === '0') {
+        digits = digits.slice(1);
+      }
+      return digits.length > 10 ? digits.slice(-10) : digits;
+    }
+    function looksLikePhone(value){
+      var raw = trim(text(value));
+      if (!raw) return false;
+      if (/[A-Za-zçğıöşüÇĞİÖŞÜ]/.test(raw)) return false;
+      return /[\d+()\-.\s]/.test(raw);
+    }
+    function formatPhoneDisplay(value){
+      var digits = normalizePhone(value);
+      if (digits.length !== 10) return trim(text(value));
+      return '0' + digits.slice(0, 3) + ' ' + digits.slice(3, 6) + ' ' + digits.slice(6, 8) + ' ' + digits.slice(8, 10);
+    }
+    function normalize(value){
+      return trim(text(value).toLowerCase())
+        .replace(/[çğıöşü]/g, function(ch){ return ({'ç':'c','ğ':'g','ı':'i','ö':'o','ş':'s','ü':'u'})[ch] || ch; })
+        .replace(/[^a-z0-9]+/g,' ')
+        .replace(/\s+/g,' ')
+        .trim();
+    }
+    function escapeHtml(value){
+      return text(value).replace(/[&<>"']/g, function(ch){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];
+      });
+    }
+    function parseDateValue(value){
+      if (value === null || value === undefined || value === '') return null;
+      if (value instanceof Date) {
+        return isNaN(value.getTime()) ? null : value;
+      }
+      if (typeof value === 'number' && isFinite(value)) {
+        var numericDate = new Date(value);
+        return isNaN(numericDate.getTime()) ? null : numericDate;
+      }
+      var raw = trim(text(value));
+      if (!raw) return null;
+      var dotNetMatch = raw.match(/\/Date\(([-+]?\d+)(?:[-+]\d+)?\)\//i);
+      if (dotNetMatch) {
+        var ms = Number(dotNetMatch[1]);
+        if (isFinite(ms)) {
+          var dotNetDate = new Date(ms);
+          if (!isNaN(dotNetDate.getTime())) return dotNetDate;
+        }
+      }
+      if (/^\d{13}$/.test(raw) || /^\d{10}$/.test(raw)) {
+        var epoch = Number(raw);
+        if (raw.length === 10) epoch *= 1000;
+        var epochDate = new Date(epoch);
+        if (!isNaN(epochDate.getTime())) return epochDate;
+      }
+      var isoDate = new Date(raw);
+      if (!isNaN(isoDate.getTime())) return isoDate;
+      return null;
+    }
+    function formatDate(value){
+      if (!value) return '-';
+      var date = parseDateValue(value);
+      if (!date) return text(value);
+      return new Intl.DateTimeFormat('tr-TR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      }).format(date);
+    }
+    function formatDateTime(value){
+      if (!value) return '-';
+      var date = parseDateValue(value);
+      if (!date) return text(value);
+      var datePart = new Intl.DateTimeFormat('tr-TR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      }).format(date);
+      var timePart = new Intl.DateTimeFormat('tr-TR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      }).format(date);
+      return datePart + ' ' + timePart;
+    }
+    function formatTime(value){
+      if (!value) return '-';
+      var date = parseDateValue(value);
+      if (!date) return '-';
+      return new Intl.DateTimeFormat('tr-TR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }).format(date);
+    }
+    function buildCustomerReference(record){
+      var code = trim(text(record && record.jobCode ? record.jobCode : ''));
+      var name = trim(text(record && record.customerName ? record.customerName : ''));
+      if (code && name) {
+        if (normalize(code) === normalize(name)) return code;
+        if (name.indexOf(code) !== -1) return name;
+        if (code.indexOf(name) !== -1) return code;
+        return code + ' ' + name;
+      }
+      return code || name || '-';
+    }
+    function renderRowToggle(mainHtml, detailHtml, className, title){
+      return [
+        '<button type="button" class="row-toggle', className ? ' ' + className : '', '" data-row-toggle="1" aria-expanded="false" title="', escapeHtml(title || 'Detay göster'), '" onclick="event.stopPropagation(); toggleInlineRowDetail(this); return false;">',
+        '<span class="row-main">', mainHtml, '</span>',
+        '<span class="row-detail" hidden>', detailHtml, '</span>',
+        '</button>'
+      ].join('');
+    }
+    function sortRecords(records){
+      return records.slice().sort(function(a,b){
+        var rightParsed = parseDateValue(b.orderDate || 0);
+        var leftParsed = parseDateValue(a.orderDate || 0);
+        var rightTime = rightParsed ? rightParsed.getTime() : 0;
+        var leftTime = leftParsed ? leftParsed.getTime() : 0;
+        if (rightTime !== leftTime) return rightTime - leftTime;
+        return text(b.sourceFile || '').localeCompare(text(a.sourceFile || ''), 'tr-TR');
+      });
+    }
+    function normalizeList(items){
+      if (!items) return [];
+      return Array.isArray(items) ? items : [items];
+    }
+    function isMeaningfulNoteValue(value){
+      var note = trim(text(value));
+      if (!note || note === '-') return false;
+      var letters = note.replace(/[^A-Za-zÇĞİÖŞÜçğıöşü]/g, '');
+      return letters.length >= 2;
+    }
+    function textifyItems(items){
+      return normalizeList(items)
+        .map(function(item){
+          if (typeof item === 'string') return item;
+          if (!item || typeof item !== 'object') return '';
+          return [item.cell, item.label, item.value].filter(Boolean).join(' ');
+        })
+        .join(' ');
+    }
+    function renderRangeNotes(items){
+      var list = normalizeList(items).filter(function(item){
+        if (typeof item === 'string') {
+          return isMeaningfulNoteValue(item);
+        }
+        if (!item || typeof item !== 'object') {
+          return false;
+        }
+        return isMeaningfulNoteValue(item.value);
+      });
+      if (!list.length) return '<span class="muted">-</span>';
+      return '<div class="notes-list">' + list.map(function(item){
+        if (typeof item === 'string') {
+          return '<div>' + escapeHtml(item) + '</div>';
+        }
+        return '<div>' + escapeHtml(item.value || '') + '</div>';
+      }).join('') + '</div>';
+    }
+    function formatNotes(record){
+      var direct = trim(record && record.notes);
+      if (direct && direct !== '-') {
+        return escapeHtml(direct);
+      }
+      return renderRangeNotes(record && record.rangeNotes);
+    }
+    function renderCutStatusCell(record){
+      var status = text(record && record.cutStatus ? record.cutStatus : 'Bilinmiyor');
+      var lower = status.toLowerCase();
+      var cutClass = lower.indexOf('kesildi') !== -1 ? 'done' : lower.indexOf('kesilmedi') !== -1 ? 'waiting' : 'unknown';
+      if (cutClass !== 'done') {
+        return '<span class="badge ' + cutClass + '">' + escapeHtml(status) + '</span>';
+      }
+      var cutDate = record && (record.cutDate || record.kesimDate || '');
+      var detail = cutDate ? ('Kesim tarihi: ' + formatDateTime(cutDate)) : 'Kesim tarihi bulunamadı.';
+      return [
+        '<div class="cut-status-wrap">',
+        '<button type="button" class="badge ', cutClass, ' cut-toggle" data-cut-toggle="1" aria-expanded="false" title="Kesim tarihini göster" onclick="event.stopPropagation(); toggleCutStatusDetails(this); return false;">',
+        escapeHtml(status),
+        '</button>',
+        '<div class="cut-detail" hidden>',
+        escapeHtml(detail),
+        '</div>',
+        '</div>'
+      ].join('');
+    }
+    function toggleCutStatusDetails(button){
+      if (!button) return;
+      var wrap = button.closest('.cut-status-wrap');
+      if (!wrap) return;
+      var detail = wrap.querySelector('.cut-detail');
+      if (!detail) return;
+      var isOpen = !detail.hidden;
+      detail.hidden = isOpen;
+      button.setAttribute('aria-expanded', String(!isOpen));
+    }
+    window.toggleCutStatusDetails = toggleCutStatusDetails;
+    function customerPhones(customer){
+      var phones = [];
+      if (!customer) return phones;
+      var raw = customer.phones;
+      if (Array.isArray(raw)) phones = raw;
+      else if (Array.isArray(customer.phone)) phones = customer.phone;
+      else if (customer.phone) phones = [customer.phone];
+      else if (Array.isArray(customer.customerPhones)) phones = customer.customerPhones;
+      return phones.map(normalizePhone).filter(Boolean);
+    }
+    function recordPhones(record){
+      var phones = [];
+      if (!record) return phones;
+      if (Array.isArray(record.customerPhones)) phones = record.customerPhones;
+      else if (record.customerPhone) phones = [record.customerPhone];
+      else if (Array.isArray(record.phones)) phones = record.phones;
+      return phones.map(normalizePhone).filter(Boolean);
+    }
+    function findCustomerByPhone(phone){
+      var db = state.database || {};
+      var customers = Array.isArray(db.customers) ? db.customers : [];
+      for (var i = 0; i < customers.length; i++) {
+        if (customerPhones(customers[i]).indexOf(phone) !== -1) {
+          return customers[i];
+        }
+      }
+      var records = Array.isArray(db.records) ? db.records : [];
+      for (var j = 0; j < records.length; j++) {
+        if (recordPhones(records[j]).indexOf(phone) !== -1) {
+          return { name: records[j].customerName || '' };
+        }
+      }
+      return null;
+    }
+    function buildSearchText(record){
+      return [
+        text(record.orderDate),
+        text(record.customerName),
+        text(record.material),
+        text(record.cutStatus),
+        text(record.notes),
+        text(record.sourceFile),
+        text(record.opt),
+        text(record.sheetName),
+        text(record.jobCode),
+        text(record.color),
+        text(record.pvcMeters),
+        text(record.quantity),
+        textifyItems(record.cellHighlights),
+        textifyItems(record.rangeNotes)
+      ].join(' ');
+    }
+    function clearAuthPrompt(){
+      if (!els.authError) return;
+      els.authError.textContent = '';
+    }
+    function setError(message){
+      if (!els.authError) return;
+      els.authError.textContent = message || '';
+    }
+    function setSupportPrompt(){
+      if (!els.authError) return;
+      var phone = '905332014898';
+      var message = encodeURIComponent('Kesim sorgulama sistemine kayıt olmak istiyorum');
+      els.authError.innerHTML = [
+        '<div class="support-cta">',
+        '<a href="https://wa.me/' + phone + '?text=' + message + '" target="_blank" rel="noopener noreferrer">',
+        'WhatsApp ile İletişime Geç',
+        '</a>',
+        '<small>Kayıt bulunamadıysa WhatsApp üzerinden bizimle iletişime geçebilirsiniz.</small>',
+        '</div>'
+      ].join('');
+    }
+    function setPageError(message){
+      els.pageError.textContent = message || '';
+    }
+    function toggleApp(authenticated){
+      els.authCard.hidden = authenticated;
+      els.shellCard.classList.toggle('open', authenticated);
+      els.shellCard.hidden = !authenticated;
+    }
+    function toggleSearch(){
+      if (!state.session) {
+        if (els.searchWrap) els.searchWrap.hidden = true;
+        if (els.search) els.search.value = '';
+        return;
+      }
+      if (els.searchWrap) {
+        els.searchWrap.hidden = false;
+      }
+      updateSearchMode();
+    }
+    function updateSearchMode(){
+      var isAdmin = state.session && state.session.role === 'admin';
+      if (!els.search) return;
+      if (isAdmin) {
+        if (els.searchLabel) els.searchLabel.textContent = 'Kayıtlarda ara';
+        els.search.placeholder = 'Müşteri, malzeme, not...';
+      } else {
+        if (els.searchLabel) els.searchLabel.textContent = 'Renk filtresi';
+        els.search.placeholder = 'Renk ara';
+      }
+      els.search.value = '';
+    }
+    function baseRecords(){
+      var records = sortRecords((state.database && state.database.records) || []);
+      if (!state.session) {
+        return [];
+      }
+      if (state.session.role === 'admin') {
+        return records;
+      }
+      var phone = normalizePhone(state.session.phone);
+      var customerName = normalize(state.session.label);
+      return records.filter(function(record){
+        if (recordPhones(record).indexOf(phone) !== -1) return true;
+        return customerName && (
+          normalize(record.customerName || '').indexOf(customerName) !== -1 ||
+          normalize(record.sourceFile || '').indexOf(customerName) !== -1
+        );
+      });
+    }
+    function scopeRecords(query){
+      var records = baseRecords();
+      if (!query) {
+        return records;
+      }
+      var isAdmin = state.session && state.session.role === 'admin';
+      if (!isAdmin) {
+        var customerQuery = normalize(query);
+        return customerQuery ? records.filter(function(record){
+          return normalize(record.color || '').indexOf(customerQuery) !== -1;
+        }) : records;
+      }
+      var q = normalize(query);
+      return q ? records.filter(function(record){
+        return normalize(buildSearchText(record)).indexOf(q) !== -1;
+      }) : records;
+    }
+    function countDistinctFiles(records){
+      var map = {};
+      (records || []).forEach(function(record){
+        var key = text(record && record.sourceFile || '');
+        if (key) map[key] = true;
+      });
+      return Object.keys(map).length;
+    }
+    function renderSummary(){
+      var isAdmin = state.session && state.session.role === 'admin';
+      var visible = state.visible || [];
+      var totalRecords = isAdmin
+        ? Number((state.database && state.database.totalRecords) || (state.database && state.database.records && state.database.records.length) || 0)
+        : visible.length;
+      els.totalRecords.textContent = String(totalRecords);
+      els.matchedRecords.textContent = String(visible.length);
+      els.generatedAt.textContent = (state.database && state.database.generatedAt) ? formatDateTime(state.database.generatedAt) : '-';
+    }
+    function renderPager(total){
+      if (!els.pager) {
+        return;
+      }
+      var totalPages = Math.max(1, Math.ceil(total / state.pageSize));
+      if (!total || totalPages <= 1) {
+        els.pager.innerHTML = '';
+        return;
+      }
+      var currentPage = Math.min(Math.max(state.currentPage, 1), totalPages);
+      state.currentPage = currentPage;
+      var start = (currentPage - 1) * state.pageSize + 1;
+      var end = Math.min(currentPage * state.pageSize, total);
+      els.pager.innerHTML = [
+        '<button class="pager-btn" data-action="prev" ' + (currentPage <= 1 ? 'disabled' : '') + '>Önceki</button>',
+        '<span class="pager-info">' + start + '-' + end + ' / ' + String(total) + '</span>',
+        '<button class="pager-btn" data-action="next" ' + (currentPage >= totalPages ? 'disabled' : '') + '>Sonraki</button>'
+      ].join('');
+      els.pager.querySelectorAll('.pager-btn').forEach(function(button){
+        button.addEventListener('click', function(){
+          var action = button.getAttribute('data-action');
+          if (action === 'prev' && state.currentPage > 1) {
+            state.currentPage -= 1;
+          } else if (action === 'next' && state.currentPage < totalPages) {
+            state.currentPage += 1;
+          }
+          renderResults(els.search && els.search.value ? els.search.value : '');
+        });
+      });
+    }
+    function renderRow(record){
+      var cutStatus = text(record.cutStatus || 'Bilinmiyor').toLowerCase();
+      var cutClass = cutStatus.indexOf('kesildi') !== -1 ? 'done' : cutStatus.indexOf('kesilmedi') !== -1 ? 'waiting' : 'unknown';
+      return [
+        '<tr>',
+        '<td>', escapeHtml(formatDate(record.orderDate)), '</td>',
+        '<td>', escapeHtml(record.customerName || '-'), '</td>',
+        '<td>', escapeHtml(record.material || '-'), '</td>',
+        '<td>', renderCutStatusCell(record), '</td>',
+        '<td>', escapeHtml(record.opt || '-'), '</td>',
+        '<td class="note-col">', formatNotes(record), '</td>',
+        '</tr>'
+      ].join('');
+    }
+    function renderResults(query){
+      var rows = state.visible || [];
+      var total = rows.length;
+      var totalPages = Math.max(1, Math.ceil(total / state.pageSize));
+      var currentPage = Math.min(Math.max(state.currentPage, 1), totalPages);
+      state.currentPage = currentPage;
+      var startIndex = (currentPage - 1) * state.pageSize;
+      var pageRows = rows.slice(startIndex, startIndex + state.pageSize);
+      if (!pageRows.length) {
+        var emptyMessage = query ? '"' + query + '" için sonuç bulunamadı.' : 'Kayıt bulunamadı.';
+        els.rows.innerHTML = '<tr><td colspan="6" class="empty">' + escapeHtml(emptyMessage) + '</td></tr>';
+        els.empty.hidden = false;
+        renderPager(0);
+        return;
+      }
+      els.empty.hidden = true;
+      els.rows.innerHTML = pageRows.map(renderRow).join('');
+      renderPager(total);
+    }
+    function renderDatabase(database){
+      state.database = database || { records: [], customers: [] };
+      state.visible = scopeRecords('');
+      state.currentPage = 1;
+      toggleSearch();
+      renderSummary();
+      renderResults('');
+    }
+    function filterAndRender(query){
+      state.visible = scopeRecords(query);
+      state.currentPage = 1;
+      renderSummary();
+      renderResults(query);
+    }
+    function loadDatabase(){
+      var params = new URLSearchParams(location.search);
+      var dataUrl = params.get('data') || 'kesim-data.json';
+      return fetch(dataUrl + (dataUrl.indexOf('?') === -1 ? '?v=' + Date.now() : '&v=' + Date.now()), { cache: 'no-store' })
+        .then(function(res){
+          if (!res.ok) throw new Error('Veritabanı yüklenemedi.');
+          return res.json();
+        });
+    }
+    function ensureDatabase(){
+      return databasePromise.then(function(db){
+        if (!state.database) {
+          state.database = db;
+        }
+        return state.database;
+      });
+    }
+    async function login(){
+      var identifier = trim(els.identifier.value);
+      if (!identifier) {
+        setError('Telefon numaranızı girin.');
+        return;
+      }
+      setError('');
+      clearAuthPrompt();
+      await ensureDatabase();
+      var admin = ADMIN_PASSWORDS.indexOf(identifier) !== -1;
+      if (admin) {
+      state.session = { role: 'admin', label: 'Yönetici' };
+      els.welcome.textContent = 'Yönetici oturumu';
+      toggleApp(true);
+      toggleSearch();
+      renderDatabase(state.database);
+        return;
+      }
+      var phone = normalizePhone(identifier);
+      if (!phone) {
+        setSupportPrompt();
+        return;
+      }
+      var customer = findCustomerByPhone(phone);
+      if (!customer) {
+        setSupportPrompt();
+        return;
+      }
+      state.session = { role: 'customer', phone: phone, label: trim(customer.name || '') || 'Müşteri' };
+      els.welcome.textContent = 'Müşteri: ' + state.session.label;
+      toggleApp(true);
+      toggleSearch();
+      renderDatabase(state.database);
+    }
+    function logout(){
+      state.session = null;
+      els.identifier.value = '';
+      setError('');
+      clearAuthPrompt();
+      setPageError('');
+      toggleSearch();
+      toggleApp(false);
+    }
+
+    function repairText(value){
+      var raw = String(value == null ? '' : value);
+      if (!(/[\u00C3\u00C2\u00C4\u00C5\uFFFD]/.test(raw) || /[\u0080-\u009f]/.test(raw))) {
+        return raw;
+      }
+      try {
+        var bytes = new Uint8Array(raw.length);
+        for (var i = 0; i < raw.length; i++) {
+          bytes[i] = raw.charCodeAt(i) & 255;
+        }
+        var repaired = new TextDecoder('utf-8').decode(bytes);
+        return /[\u00C3\u00C2\u00C4\u00C5\uFFFD]/.test(repaired) ? raw : repaired;
+      } catch (error) {
+        return raw;
+      }
+    }
+
+    function text(value){ return repairText(value); }
+
+    function normalize(value){
+      return String(text(value) || '')
+        .toLocaleLowerCase('tr-TR')
+        .normalize('NFKD')
+        .replace(/\p{M}+/gu, '')
+        .replace(/[^a-z0-9]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function setSupportPrompt(){
+      if (!els.authError) return;
+      var phone = '905332014898';
+      var message = encodeURIComponent('Kesim sorgulama sistemine kayıt olmak istiyorum');
+      els.authError.innerHTML = [
+        '<div class="support-cta">',
+        '<a href="https://wa.me/' + phone + '?text=' + message + '" target="_blank" rel="noopener noreferrer">WhatsApp ile İletişime Geç</a>',
+        '<small>Kayıt bulunamadıysa WhatsApp üzerinden bizimle iletişime geçebilirsiniz.</small>',
+        '</div>'
+      ].join('');
+    }
+
+    function toggleApp(authenticated){
+      els.authCard.hidden = authenticated;
+      els.shellCard.classList.toggle('open', authenticated);
+      els.shellCard.classList.toggle('customer-view', authenticated && state.session && state.session.role !== 'admin');
+      els.shellCard.hidden = !authenticated;
+    }
+
+    function scopeRecords(query){
+      var records = Array.isArray(state.baseRecords) ? state.baseRecords : baseRecords();
+      if (!query) {
+        return records;
+      }
+      var isAdmin = state.session && state.session.role === 'admin';
+      if (!isAdmin) {
+        var customerQuery = normalize(query);
+        return customerQuery ? records.filter(function(record){
+          return normalize((record.material || '') + ' ' + (record.color || '')).indexOf(customerQuery) !== -1;
+        }) : records;
+      }
+      var q = normalize(query);
+      return q ? records.filter(function(record){
+        return normalize(buildSearchText(record)).indexOf(q) !== -1;
+      }) : records;
+    }
+
+    function renderSummary(){
+      var isAdmin = state.session && state.session.role === 'admin';
+      var visible = state.visible || [];
+      var baseCount = Array.isArray(state.baseRecords) ? state.baseRecords.length : baseRecords().length;
+      var totalRecords = isAdmin
+        ? Number((state.database && state.database.totalRecords) || (state.database && state.database.records && state.database.records.length) || 0)
+        : baseCount;
+      els.totalRecords.textContent = String(totalRecords);
+      els.matchedRecords.textContent = String(visible.length);
+      els.generatedAt.textContent = (state.database && state.database.generatedAt) ? formatDateTime(state.database.generatedAt) : '-';
+    }
+
+    function renderRow(record){
+      var isAdmin = state.session && state.session.role === 'admin';
+      var cutStatus = text(record.cutStatus || 'Bilinmiyor').toLowerCase();
+      var cutClass = cutStatus.indexOf('kesildi') !== -1 ? 'done' : cutStatus.indexOf('kesilmedi') !== -1 ? 'waiting' : 'unknown';
+      return [
+        '<tr>',
+        '<td>', escapeHtml(formatDate(record.orderDate)), '</td>',
+        '<td>', escapeHtml(record.customerName || '-'), '</td>',
+        '<td>', escapeHtml(record.material || '-'), '</td>',
+        '<td>', renderCutStatusCell(record), '</td>',
+        '<td>', escapeHtml(record.opt || '-'), '</td>',
+        '<td class="note-col">', isAdmin ? formatNotes(record) : '', '</td>',
+        '</tr>'
+      ].join('');
+    }
+
+    function renderResults(query){
+      var rows = state.visible || [];
+      var isAdmin = state.session && state.session.role === 'admin';
+      var total = rows.length;
+      var totalPages = Math.max(1, Math.ceil(total / state.pageSize));
+      var currentPage = Math.min(Math.max(state.currentPage, 1), totalPages);
+      state.currentPage = currentPage;
+      var startIndex = (currentPage - 1) * state.pageSize;
+      var pageRows = rows.slice(startIndex, startIndex + state.pageSize);
+      if (!pageRows.length) {
+        var emptyMessage = query ? '"' + query + '" için sonuç bulunamadı.' : 'Kayıt bulunamadı.';
+        els.rows.innerHTML = '<tr><td colspan="' + (isAdmin ? 6 : 5) + '" class="empty">' + escapeHtml(emptyMessage) + '</td></tr>';
+        els.empty.hidden = false;
+        renderPager(0);
+        return;
+      }
+      els.empty.hidden = true;
+      els.rows.innerHTML = pageRows.map(renderRow).join('');
+      renderPager(total);
+    }
+
+    function renderDatabase(database){
+      state.database = database || { records: [], customers: [] };
+      state.baseRecords = baseRecords();
+      state.visible = scopeRecords('');
+      state.currentPage = 1;
+      toggleSearch();
+      renderSummary();
+      renderResults('');
+    }
+
+    els.loginBtn.addEventListener('click', function(){
+      login().catch(function(e){
+        setError((e && e.message) || 'Giriş başarısız.');
+      });
+    });
+    els.identifier.addEventListener('keydown', function(e){
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        login().catch(function(err){
+          setError((err && err.message) || 'Giriş başarısız.');
+        });
+      }
+    });
+    els.logoutBtn.addEventListener('click', logout);
+    els.identifier.addEventListener('blur', function(){
+      if (looksLikePhone(els.identifier.value || '')) {
+        els.identifier.value = formatPhoneDisplay(els.identifier.value || '');
+      }
+    });
+    els.search.addEventListener('input', function(){ filterAndRender(els.search.value || ''); });
+
+    toggleApp(false);
+    toggleSearch();
+    loadDatabase()
+      .then(function(db){
+        state.database = db;
+      })
+      .catch(function(err){
+        setPageError((err && err.message) || 'Veri yüklenemedi.');
+      });
+    function apiRequest(action, payload){
+      var body = new URLSearchParams();
+      body.set('action', action);
+      Object.keys(payload || {}).forEach(function(key){
+        var value = payload[key];
+        if (value !== undefined && value !== null && value !== '') {
+          body.set(key, String(value));
+        }
+      });
+
+      return fetch(window.location.origin + '/wp-admin/admin-ajax.php', {
+        method: 'POST',
+        credentials: 'same-origin',
+        cache: 'no-store',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        body: body.toString()
+      }).then(function(response){
+        return response.text().then(function(raw){
+          var data = {};
+          if (raw) {
+            try {
+              data = JSON.parse(raw);
+            } catch (error) {
+              throw new Error('Beklenmeyen yanıt alındı.');
+            }
+          }
+          if (!response.ok || (data && data.error)) {
+            throw new Error((data && data.error) || ('İstek başarısız (' + response.status + ').'));
+          }
+          return data;
+        });
+      });
+    }
+
+    function recordLoginEvent(session){
+      if (!session || !session.role) {
+        return Promise.resolve(null);
+      }
+      return apiRequest('kesim_login_event', {
+        token: 'kesim-login-history-2026-06-03',
+        role: session.role,
+        phone: session.phone || '',
+        label: session.label || '',
+        customerName: session.customerName || ''
+      }).catch(function(error){
+        console.warn('Giriş kaydı alınamadı:', error);
+        return null;
+      });
+    }
+
+    function historyEventKey(item){
+      if (!item || typeof item !== 'object') return '';
+      var key = trim(text(item.key || ''));
+      if (key) return key;
+      var role = trim(text(item.role || '')).toLowerCase();
+      if (role === 'admin') {
+        return 'admin';
+      }
+      var phone = normalizePhone(item.phone || '');
+      if (phone) {
+        return 'customer:' + phone;
+      }
+      var label = normalize(item.label || item.customerName || '');
+      return label ? 'customer:' + label : 'customer:unknown';
+    }
+
+    function historyTitle(item){
+      var label = trim(text(item && (item.label || item.customerName) ? (item.label || item.customerName) : ''));
+      if (!label) {
+        label = (item && String(item.role || '').toLowerCase() === 'admin') ? 'Yönetici' : 'Müşteri';
+      }
+      return label;
+    }
+
+    function historyMeta(item){
+      var meta = [];
+      if (item && item.role) {
+        meta.push(String(item.role || '').toLowerCase() === 'admin' ? 'Yönetici' : 'Müşteri');
+      }
+      if (item && item.phone) {
+        meta.push(formatPhoneDisplay(item.phone));
+      }
+      if (item && item.timestamp) {
+        meta.push('Son giriş: ' + formatDateTime(item.timestamp));
+      }
+      return meta.map(escapeHtml).join(' · ');
+    }
+
+    function aggregateHistoryStats(stats){
+      var source = [];
+      if (stats && Array.isArray(stats.events) && stats.events.length) {
+        source = stats.events;
+      } else if (stats && Array.isArray(stats.recent) && stats.recent.length) {
+        source = stats.recent;
+      }
+      var counts = stats && stats.counts && typeof stats.counts === 'object' ? stats.counts : {};
+      var map = {};
+      source.forEach(function(item){
+        if (!item || typeof item !== 'object') {
+          return;
+        }
+        var key = historyEventKey(item);
+        if (!key) {
+          return;
+        }
+        var timestamp = trim(text(item.timestamp || ''));
+        var entry = map[key];
+        if (!entry) {
+          entry = map[key] = {
+            key: key,
+            role: trim(text(item.role || '')),
+            label: historyTitle(item),
+            phone: normalizePhone(item.phone || ''),
+            customerName: trim(text(item.customerName || '')),
+            timestamp: timestamp,
+            count: Number(counts[key] || item.count || 0),
+            history: []
+          };
+        }
+        if (timestamp) {
+          entry.history.push(timestamp);
+          if (!entry.timestamp || timestamp > entry.timestamp) {
+            entry.timestamp = timestamp;
+          }
+        }
+        if (!entry.label || entry.label === 'Müşteri' || entry.label === 'Yönetici') {
+          entry.label = historyTitle(item);
+        }
+        if (!entry.phone) {
+          entry.phone = normalizePhone(item.phone || '');
+        }
+        if (!entry.customerName) {
+          entry.customerName = trim(text(item.customerName || ''));
+        }
+        if (!entry.role) {
+          entry.role = trim(text(item.role || ''));
+        }
+        if (!entry.count) {
+          entry.count = Number(item && item.count ? item.count : 0);
+        }
+      });
+
+      var recent = Object.keys(map).map(function(key){
+        return map[key];
+      }).sort(function(a, b){
+        return (b.timestamp || '').localeCompare(a.timestamp || '') || (a.label || '').localeCompare(b.label || '', 'tr-TR');
+      });
+
+      recent.forEach(function(item){
+        item.history = item.history.filter(Boolean).sort(function(a, b){
+          return b.localeCompare(a);
+        }).slice(0, 20);
+        if (!item.count) {
+          item.count = item.history.length;
+        }
+      });
+
+      return {
+        updatedAt: text(stats && stats.updatedAt ? stats.updatedAt : ''),
+        totalEvents: Number(stats && stats.totalEvents ? stats.totalEvents : source.length),
+        uniqueUsers: Object.keys(map).length,
+        recent: recent
+      };
+    }
+
+    function historyTimeline(item){
+      var history = Array.isArray(item && item.history) ? item.history.slice(0, 20) : [];
+      if (!history.length) {
+        return '<div class="history-empty">Tarihçe bulunamadı.</div>';
+      }
+      return history.map(function(timestamp, index){
+        return [
+          '<div class="history-history-entry">',
+          '<span>#', escapeHtml(String(index + 1)), '</span>',
+          '<span>', escapeHtml(formatDateTime(timestamp)), '</span>',
+          '</div>'
+        ].join('');
+      }).join('');
+    }
+
+    function renderHistoryModal(stats){
+      var view = aggregateHistoryStats(stats || {});
+      state.historyStats = view || null;
+      if (!els.historySummary || !els.historyList) {
+        return;
+      }
+
+      var totalEvents = Number((view && view.totalEvents) || 0);
+      var uniqueUsers = Number((view && view.uniqueUsers) || 0);
+      var updatedAt = view && view.updatedAt ? formatDateTime(view.updatedAt) : '-';
+      els.historySummary.textContent = 'Toplam ' + totalEvents + ' giriş kaydı · ' + uniqueUsers + ' kullanıcı · Son güncelleme: ' + updatedAt;
+
+      var recent = Array.isArray(view && view.recent) ? view.recent : [];
+      if (!recent.length) {
+        els.historyList.innerHTML = '<div class="history-empty">Henüz giriş kaydı yok.</div>';
+        return;
+      }
+
+      els.historyList.innerHTML = recent.map(function(item){
+        var title = escapeHtml(historyTitle(item));
+        var meta = historyMeta(item);
+        var count = Number(item && item.count ? item.count : 0);
+        var historyCount = Array.isArray(item && item.history) ? item.history.length : 0;
+        return [
+          '<div class="history-item">',
+          '<div class="history-item-top">',
+          '<div>',
+          '<strong>', title, '</strong>',
+          '<div class="history-meta">', meta || 'Kayıt detayı yok.', '</div>',
+          '</div>',
+          '<button class="history-count" type="button" data-history-toggle="1" aria-expanded="false" title="Giriş tarihçesini göster" data-history-count="', escapeHtml(String(count || historyCount || 0)), '">',
+          'Toplam ', escapeHtml(String(count || historyCount || 0)), ' giriş',
+          '</button>',
+          '</div>',
+          '<div class="history-history" hidden>',
+          '<div class="history-history-title">Giriş tarihçesi</div>',
+          '<div class="history-history-list">',
+          historyTimeline(item),
+          '</div>',
+          '</div>',
+          '</div>'
+        ].join('');
+      }).join('');
+    }
+
+    function renderHistoryLoading(){
+      if (els.historySummary) {
+        els.historySummary.textContent = 'Kullanıcı geçmişi yükleniyor...';
+      }
+      if (els.historyList) {
+        els.historyList.innerHTML = '<div class="history-empty">Yükleniyor...</div>';
+      }
+    }
+
+    function renderHistoryError(message){
+      if (els.historySummary) {
+        els.historySummary.textContent = message || 'Kullanıcı geçmişi yüklenemedi.';
+      }
+      if (els.historyList) {
+        els.historyList.innerHTML = '<div class="history-empty">' + escapeHtml(message || 'Kullanıcı geçmişi yüklenemedi.') + '</div>';
+      }
+    }
+
+    async function loadHistory(){
+      if (state.historyLoading) {
+        return state.historyStats || loadLocalHistory();
+      }
+      state.historyLoading = true;
+      try {
+        try {
+          var stats = await apiRequest('kesim_login_stats', {
+            token: 'kesim-login-history-2026-06-03'
+          });
+          if (stats && typeof stats === 'object' && !Array.isArray(stats)) {
+            renderHistoryModal(stats);
+            return stats;
+          }
+        } catch (error) {
+          // Sunucu geçmişi kapalıysa yerel yedeğe düş.
+        }
+        var fallback = loadLocalHistory();
+        renderHistoryModal(fallback);
+        return fallback;
+      } finally {
+        state.historyLoading = false;
+      }
+    }
+
+    function openHistoryModal(){
+      if (!els.historyModal || !state.session || state.session.role !== 'admin') {
+        return Promise.resolve();
+      }
+      els.historyModal.hidden = false;
+      els.historyModal.classList.add('open');
+      els.historyModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      renderHistoryLoading();
+      return loadHistory().catch(function(error){
+        renderHistoryError((error && error.message) || 'Kullanıcı geçmişi yüklenemedi.');
+      });
+    }
+
+    function closeHistoryModal(){
+      if (!els.historyModal) {
+        return;
+      }
+      els.historyModal.classList.remove('open');
+      els.historyModal.hidden = true;
+      els.historyModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function toggleHistoryItem(button){
+      if (!button) return;
+      var item = button.closest('.history-item');
+      if (!item) return;
+      var panel = item.querySelector('.history-history');
+      if (!panel) return;
+      var isOpen = !panel.hidden;
+      panel.hidden = isOpen;
+      item.classList.toggle('is-expanded', !isOpen);
+      button.setAttribute('aria-expanded', String(!isOpen));
+    }
+
+    var LOGIN_HISTORY_STORAGE_KEY = 'kesim-login-history-v1';
+
+    function loadLocalHistory(){
+      try {
+        var raw = window.localStorage.getItem(LOGIN_HISTORY_STORAGE_KEY);
+        if (!raw) {
+          return { updatedAt: '', totalEvents: 0, counts: {}, events: [], recent: [] };
+        }
+        var data = JSON.parse(raw);
+        var events = Array.isArray(data && data.events) ? data.events.filter(function(item){
+          return item && typeof item === 'object';
+        }) : [];
+        if (!events.length && Array.isArray(data && data.recent)) {
+          events = data.recent.filter(function(item){
+            return item && typeof item === 'object';
+          });
+        }
+        return {
+          updatedAt: text(data && data.updatedAt ? data.updatedAt : ''),
+          totalEvents: Number((data && data.totalEvents) || 0),
+          counts: data && data.counts && typeof data.counts === 'object' ? data.counts : {},
+          events: events,
+          recent: Array.isArray(data && data.recent) ? data.recent.filter(function(item){
+            return item && typeof item === 'object';
+          }) : []
+        };
+      } catch (error) {
+        return { updatedAt: '', totalEvents: 0, counts: {}, events: [], recent: [] };
+      }
+    }
+
+    function saveLocalHistory(stats){
+      try {
+        window.localStorage.setItem(LOGIN_HISTORY_STORAGE_KEY, JSON.stringify(stats));
+      } catch (error) {
+        // Local history is only a fallback.
+      }
+    }
+
+    function recordLocalLoginEvent(session){
+      var stats = loadLocalHistory();
+      var key;
+      if (session.role === 'admin') {
+        key = 'admin';
+      } else {
+        var phone = normalizePhone(session.phone || '');
+        if (phone) {
+          key = 'customer:' + phone;
+        } else {
+          key = 'customer:' + (normalize(session.label || session.customerName || '') || 'unknown');
+        }
+      }
+      var count = Number(stats.counts[key] || 0) + 1;
+      stats.counts[key] = count;
+      var entry = {
+        key: key,
+        role: session.role || '',
+        label: trim(session.label || ''),
+        phone: normalizePhone(session.phone || ''),
+        customerName: trim(session.customerName || ''),
+        timestamp: new Date().toISOString(),
+        count: count
+      };
+      stats.events = [entry].concat(stats.events || []).slice(0, 200);
+      stats.recent = [entry].concat(stats.recent || []).slice(0, 20);
+      stats.totalEvents = Number(stats.totalEvents || 0) + 1;
+      stats.updatedAt = entry.timestamp;
+      saveLocalHistory(stats);
+      return entry;
+    }
+
+    function toggleApp(authenticated){
+      els.authCard.hidden = authenticated;
+      els.shellCard.classList.toggle('open', authenticated);
+      els.shellCard.classList.toggle('customer-view', authenticated && state.session && state.session.role !== 'admin');
+      els.shellCard.hidden = !authenticated;
+      if (els.historyBtn) {
+        els.historyBtn.hidden = !(authenticated && state.session && state.session.role === 'admin');
+      }
+      if (els.supportWhatsappBtn) {
+        els.supportWhatsappBtn.hidden = !(authenticated && state.session && state.session.role === 'customer');
+      }
+      if (els.supportCallBtn) {
+        els.supportCallBtn.hidden = !(authenticated && state.session && state.session.role === 'customer');
+      }
+      if (!authenticated) {
+        closeHistoryModal();
+      }
+    }
+
+    async function login(){
+      var identifier = trim(els.identifier.value);
+      if (!identifier) {
+        setError('Telefon numaranızı girin.');
+        return;
+      }
+      setError('');
+      clearAuthPrompt();
+      await ensureDatabase();
+      var admin = ADMIN_PASSWORDS.indexOf(identifier) !== -1;
+      if (admin) {
+        state.session = { role: 'admin', label: 'Yönetici' };
+        els.welcome.textContent = 'Yönetici oturumu';
+        toggleApp(true);
+        toggleSearch();
+        renderDatabase(state.database);
+        recordLocalLoginEvent(state.session);
+        recordLoginEvent(state.session);
+        return;
+      }
+      var phone = normalizePhone(identifier);
+      if (!phone) {
+        setSupportPrompt();
+        return;
+      }
+      var customer = findCustomerByPhone(phone);
+      if (!customer) {
+        setSupportPrompt();
+        return;
+      }
+      state.session = { role: 'customer', phone: phone, label: trim(customer.name || '') || 'Müşteri' };
+      els.welcome.textContent = 'Müşteri: ' + state.session.label;
+      toggleApp(true);
+      toggleSearch();
+      renderDatabase(state.database);
+      recordLocalLoginEvent(state.session);
+      recordLoginEvent(state.session);
+    }
+
+    function logout(){
+      state.session = null;
+      state.historyStats = null;
+      els.identifier.value = '';
+      setError('');
+      clearAuthPrompt();
+      setPageError('');
+      closeHistoryModal();
+      toggleSearch();
+      toggleApp(false);
+    }
+
+    function appendParentMenuItem(){
+      var topDocument = null;
+      try {
+        topDocument = window.top && window.top.document ? window.top.document : null;
+      } catch (error) {
+        return false;
+      }
+      if (!topDocument) {
+        return false;
+      }
+
+      var menus = topDocument.querySelectorAll('ul.hfe-nav-menu');
+      if (!menus.length) {
+        return false;
+      }
+
+      var targetUrl = window.top.location.origin.replace(/\/$/, '') + '/kesimsorgu/';
+      var appended = false;
+
+      for (var i = 0; i < menus.length; i++) {
+        var menu = menus[i];
+        var links = menu.querySelectorAll('a[href]');
+        var exists = false;
+        for (var j = 0; j < links.length; j++) {
+          var href = links[j].getAttribute('href') || '';
+          if (href.indexOf('/kesimsorgu') !== -1) {
+            exists = true;
+            break;
+          }
+        }
+        if (exists) {
+          continue;
+        }
+
+        var item = topDocument.createElement('li');
+        item.className = 'menu-item menu-item-type-custom menu-item-object-custom parent hfe-creative-menu';
+        var link = topDocument.createElement('a');
+        link.className = 'hfe-menu-item';
+        link.href = targetUrl;
+        link.textContent = 'Kesim Sorgulama';
+        item.appendChild(link);
+        menu.appendChild(item);
+        appended = true;
+      }
+
+      return appended;
+    }
+
+    // Final overrides: normalize text before display/search so mojibake does not leak through.
+    function repairText(value){
+      var raw = String(value == null ? '' : value);
+      if (!raw) return raw;
+      var repaired = raw;
+      if (!(/[\u00C3\u00C2\u00C4\u00C5\uFFFD]/.test(repaired) || /[\u0080-\u009f]/.test(repaired))) {
+        return raw;
+      }
+      try {
+        for (var pass = 0; pass < 2; pass++) {
+          var bytes = new Uint8Array(repaired.length);
+          for (var i = 0; i < repaired.length; i++) {
+            bytes[i] = repaired.charCodeAt(i) & 255;
+          }
+          var next = new TextDecoder('utf-8').decode(bytes);
+          if (!next || next === repaired) {
+            break;
+          }
+          repaired = next;
+          if (!(/[\u00C3\u00C2\u00C4\u00C5\uFFFD]/.test(repaired) || /[\u0080-\u009f]/.test(repaired))) {
+            break;
+          }
+        }
+      } catch (error) {
+        return raw;
+      }
+      return repaired;
+    }
+
+    function text(value){ return repairText(value); }
+
+    function normalize(value){
+      return String(text(value) || '')
+        .toLocaleLowerCase('tr-TR')
+        .normalize('NFKD')
+        .replace(/\p{M}+/gu, '')
+        .replace(/ı/g, 'i')
+        .replace(/[^a-z0-9]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function isMeaningfulNoteValue(value){
+      var note = trim(text(value));
+      if (!note || note === '-') return false;
+      if (/^[xX]$/.test(note)) return false;
+      if (/^\d+\*?$/.test(note)) return false;
+      var letters = normalize(note).replace(/[^a-z]/g, '');
+      return letters.length >= 2;
+    }
+
+    function setSupportPrompt(){
+      if (!els.authError) return;
+      var phone = '905332014898';
+      var message = encodeURIComponent('Kesim sorgulama sistemine kayıt olmak istiyorum');
+      els.authError.innerHTML = [
+        '<div class="support-cta">',
+        '<a href="https://wa.me/' + phone + '?text=' + message + '" target="_blank" rel="noopener noreferrer">WhatsApp ile İletişime Geç</a>',
+        '<small>Kayıt bulunamadıysa WhatsApp üzerinden bizimle iletişime geçebilirsiniz.</small>',
+        '</div>'
+      ].join('');
+    }
+
+    function updateSearchMode(){
+      var isAdmin = state.session && state.session.role === 'admin';
+      if (!els.search) return;
+      if (isAdmin) {
+        if (els.searchLabel) els.searchLabel.textContent = 'Kayıtlarda ara';
+        els.search.placeholder = 'Müşteri, malzeme, not...';
+      } else {
+        if (els.searchLabel) els.searchLabel.textContent = 'Renk filtresi';
+        els.search.placeholder = 'Renk ara';
+      }
+      els.search.value = '';
+    }
+
+    function renderRangeNotes(items){
+      var list = normalizeList(items).filter(function(item){
+        if (typeof item === 'string') {
+          return isMeaningfulNoteValue(item);
+        }
+        if (!item || typeof item !== 'object') {
+          return false;
+        }
+        return isMeaningfulNoteValue(item.value);
+      });
+      if (!list.length) return '<span class="muted">-</span>';
+      return '<div class="notes-list">' + list.map(function(item){
+        if (typeof item === 'string') {
+          return '<div>' + escapeHtml(text(item)) + '</div>';
+        }
+        return '<div>' + escapeHtml(text(item.value || '')) + '</div>';
+      }).join('') + '</div>';
+    }
+
+    function formatNotes(record){
+      var direct = trim(text(record && record.notes));
+      if (direct && direct !== '-') {
+        return escapeHtml(direct);
+      }
+      return renderRangeNotes(record && record.rangeNotes);
+    }
+
+    function scopeRecords(query){
+      var records = Array.isArray(state.baseRecords) ? state.baseRecords : baseRecords();
+      if (!query) {
+        return records;
+      }
+      var isAdmin = state.session && state.session.role === 'admin';
+      if (!isAdmin) {
+        var customerQuery = normalize(query);
+        return customerQuery ? records.filter(function(record){
+          return normalize(buildSearchText(record)).indexOf(customerQuery) !== -1;
+        }) : records;
+      }
+      var q = normalize(query);
+      return q ? records.filter(function(record){
+        return normalize(buildSearchText(record)).indexOf(q) !== -1;
+      }) : records;
+    }
+
+    function renderRow(record){
+      var cutStatus = text(record.cutStatus || 'Bilinmiyor').toLowerCase();
+      var cutClass = cutStatus.indexOf('kesildi') !== -1 ? 'done' : cutStatus.indexOf('kesilmedi') !== -1 ? 'waiting' : 'unknown';
+      return [
+        '<tr>',
+        '<td>', escapeHtml(formatDate(record.orderDate)), '</td>',
+        '<td>', escapeHtml(text(record.customerName || '-')), '</td>',
+        '<td>', escapeHtml(text(record.material || '-')), '</td>',
+        '<td>', renderCutStatusCell(record), '</td>',
+        '<td>', escapeHtml(text(record.opt || '-')), '</td>',
+        '<td>', formatNotes(record), '</td>',
+        '</tr>'
+      ].join('');
+    }
+
+    function renderResults(query){
+      var rows = state.visible || [];
+      var total = rows.length;
+      var totalPages = Math.max(1, Math.ceil(total / state.pageSize));
+      var currentPage = Math.min(Math.max(state.currentPage, 1), totalPages);
+      state.currentPage = currentPage;
+      var startIndex = (currentPage - 1) * state.pageSize;
+      var pageRows = rows.slice(startIndex, startIndex + state.pageSize);
+      if (!pageRows.length) {
+        var emptyMessage = query ? '"' + text(query) + '" için sonuç bulunamadı.' : 'Kayıt bulunamadı.';
+        els.rows.innerHTML = '<tr><td colspan="6" class="empty">' + escapeHtml(emptyMessage) + '</td></tr>';
+        els.empty.hidden = false;
+        renderPager(0);
+        return;
+      }
+      els.empty.hidden = true;
+      els.rows.innerHTML = pageRows.map(renderRow).join('');
+      renderPager(total);
+    }
+
+    function renderRow(record){
+      var cutStatus = text(record.cutStatus || 'Bilinmiyor').toLowerCase();
+      var cutClass = cutStatus.indexOf('kesildi') !== -1 ? 'done' : cutStatus.indexOf('kesilmedi') !== -1 ? 'waiting' : 'unknown';
+      return [
+        '<tr>',
+        '<td>', escapeHtml(formatDate(record.orderDate)), '</td>',
+        '<td>', escapeHtml(text(record.customerName || '-')), '</td>',
+        '<td>', escapeHtml(text(record.material || '-')), '</td>',
+        '<td>', renderCutStatusCell(record), '</td>',
+        '<td>', escapeHtml(text(record.opt || '-')), '</td>',
+        '<td class="note-col">', formatNotes(record), '</td>',
+        '</tr>'
+      ].join('');
+    }
+
+    function renderResults(query){
+      var rows = state.visible || [];
+      var total = rows.length;
+      var totalPages = Math.max(1, Math.ceil(total / state.pageSize));
+      var currentPage = Math.min(Math.max(state.currentPage, 1), totalPages);
+      state.currentPage = currentPage;
+      var startIndex = (currentPage - 1) * state.pageSize;
+      var pageRows = rows.slice(startIndex, startIndex + state.pageSize);
+      if (!pageRows.length) {
+        var emptyMessage = query ? '"' + text(query) + '" için sonuç bulunamadı.' : 'Kayıt bulunamadı.';
+        els.rows.innerHTML = '<tr><td colspan="6" class="empty">' + escapeHtml(emptyMessage) + '</td></tr>';
+        els.empty.hidden = false;
+        renderPager(0);
+        return;
+      }
+      els.empty.hidden = true;
+      els.rows.innerHTML = pageRows.map(renderRow).join('');
+      renderPager(total);
+    }
+
+    if (els.rows) {
+      els.rows.addEventListener('click', function(e){
+        var button = e.target && e.target.closest ? e.target.closest('[data-cut-toggle]') : null;
+        if (!button || !els.rows.contains(button)) {
+          return;
+        }
+        toggleCutStatusDetails(button);
+      });
+    }
+
+    if (els.historyBtn) {
+      els.historyBtn.addEventListener('click', function(){
+        openHistoryModal();
+      });
+    }
+    if (els.historyClose) {
+      els.historyClose.addEventListener('click', closeHistoryModal);
+    }
+    if (els.historyBackdrop) {
+      els.historyBackdrop.addEventListener('click', closeHistoryModal);
+    }
+    if (els.historyList) {
+      els.historyList.addEventListener('click', function(e){
+        var button = e.target && e.target.closest ? e.target.closest('[data-history-toggle]') : null;
+        if (!button || !els.historyList.contains(button)) {
+          return;
+        }
+        toggleHistoryItem(button);
+      });
+    }
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && els.historyModal && !els.historyModal.hidden) {
+        closeHistoryModal();
+      }
+    });
+
+    appendParentMenuItem();
+    (function(){
+      var attempts = 0;
+      var timer = window.setInterval(function(){
+        attempts += 1;
+        if (appendParentMenuItem() || attempts >= 20) {
+          window.clearInterval(timer);
+        }
+      }, 250);
+    })();
+
+    function loadStoredSession(){
+      try {
+        var raw = window.sessionStorage.getItem(SESSION_STORAGE_KEY);
+        if (!raw) return null;
+        var data = JSON.parse(raw);
+        if (!data || typeof data !== 'object') return null;
+        var role = String(data.role || '').toLowerCase();
+        if (role !== 'admin' && role !== 'customer') return null;
+        return {
+          role: role,
+          phone: normalizePhone(data.phone || ''),
+          label: trim(data.label || ''),
+          customerName: trim(data.customerName || '')
+        };
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function saveStoredSession(session){
+      try {
+        if (!session) {
+          window.sessionStorage.removeItem(SESSION_STORAGE_KEY);
+          return;
+        }
+        window.sessionStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify({
+          role: session.role || '',
+          phone: session.phone || '',
+          label: session.label || '',
+          customerName: session.customerName || ''
+        }));
+      } catch (error) {
+        // Session storage may be unavailable in some contexts.
+      }
+    }
+
+    function clearStoredSession(){
+      saveStoredSession(null);
+    }
+
+    function clearLocalHistoryCache(){
+      try {
+        window.localStorage.removeItem(LOGIN_HISTORY_STORAGE_KEY);
+      } catch (error) {
+        // Ignore local cache failures.
+      }
+    }
+
+    function toggleInlineRowDetail(button){
+      if (!button) return;
+      var detail = button.querySelector('.row-detail');
+      if (!detail) return;
+      var isOpen = !detail.hidden;
+      detail.hidden = isOpen;
+      button.setAttribute('aria-expanded', String(!isOpen));
+    }
+    window.toggleInlineRowDetail = toggleInlineRowDetail;
+
+    function historyTimeline(item){
+      var history = Array.isArray(item && item.history) ? item.history.slice(0, 20) : [];
+      if (!history.length) {
+        return '<div class="history-empty">Tarihçe bulunamadı.</div>';
+      }
+      return history.map(function(timestamp, index){
+        return [
+          '<div class="history-history-entry">',
+          '<span>#', escapeHtml(String(index + 1)), '</span>',
+          '<span>', escapeHtml(formatDateTime(timestamp)), '</span>',
+          '</div>'
+        ].join('');
+      }).join('');
+    }
+
+    function renderHistoryModal(stats){
+      var view = aggregateHistoryStats(stats || {});
+      state.historyStats = stats || null;
+      state.historyView = view || null;
+      if (!els.historySummary || !els.historyList) {
+        return;
+      }
+
+      var totalEvents = Number((view && view.totalEvents) || 0);
+      var uniqueUsers = Number((view && view.uniqueUsers) || 0);
+      var updatedAt = view && view.updatedAt ? formatDateTime(view.updatedAt) : '-';
+      var recent = Array.isArray(view && view.recent) ? view.recent : [];
+      var pageSize = Number(state.historyPageSize || 10);
+      var totalPages = Math.max(1, Math.ceil(recent.length / pageSize));
+      var currentPage = Math.min(Math.max(Number(state.historyPage || 1), 1), totalPages);
+      state.historyPage = currentPage;
+      var startIndex = (currentPage - 1) * pageSize;
+      var pageRecent = recent.slice(startIndex, startIndex + pageSize);
+
+      els.historySummary.textContent = 'Toplam ' + totalEvents + ' giriş kaydı · ' + uniqueUsers + ' kullanıcı · Sayfa ' + currentPage + '/' + totalPages + ' · Son güncelleme: ' + updatedAt;
+      if (els.historyPageInfo) {
+        els.historyPageInfo.textContent = 'Sayfa ' + currentPage + '/' + totalPages;
+      }
+      if (els.historyPrevPage) {
+        els.historyPrevPage.disabled = currentPage <= 1;
+      }
+      if (els.historyNextPage) {
+        els.historyNextPage.disabled = currentPage >= totalPages;
+      }
+
+      if (!pageRecent.length) {
+        els.historyList.innerHTML = '<div class="history-empty">Henüz giriş kaydı yok.</div>';
+        return;
+      }
+
+      els.historyList.innerHTML = pageRecent.map(function(item){
+        var title = escapeHtml(historyTitle(item));
+        var meta = historyMeta(item);
+        var count = Number(item && item.count ? item.count : 0);
+        var historyCount = Array.isArray(item && item.history) ? item.history.length : 0;
+        return [
+          '<div class="history-item">',
+          '<div class="history-item-top">',
+          '<div>',
+          '<strong>', title, '</strong>',
+          '<div class="history-meta">', meta || 'Kayıt detayı yok.', '</div>',
+          '</div>',
+          '<button class="history-count" type="button" data-history-toggle="1" aria-expanded="false" title="Giriş tarihçesini göster" data-history-count="', escapeHtml(String(count || historyCount || 0)), '">',
+          'Toplam ', escapeHtml(String(count || historyCount || 0)), ' giriş',
+          '</button>',
+          '</div>',
+          '<div class="history-history" hidden>',
+          '<div class="history-history-title">Giriş tarihçesi</div>',
+          '<div class="history-history-list">',
+          historyTimeline(item),
+          '</div>',
+          '</div>',
+          '</div>'
+        ].join('');
+      }).join('');
+    }
+
+    function renderHistoryLoading(){
+      if (els.historySummary) {
+        els.historySummary.textContent = 'Kullanıcı geçmişi yükleniyor...';
+      }
+      if (els.historyPageInfo) {
+        els.historyPageInfo.textContent = 'Sayfa -/-';
+      }
+      if (els.historyPrevPage) {
+        els.historyPrevPage.disabled = true;
+      }
+      if (els.historyNextPage) {
+        els.historyNextPage.disabled = true;
+      }
+      if (els.historyList) {
+        els.historyList.innerHTML = '<div class="history-empty">Yükleniyor...</div>';
+      }
+    }
+
+    function renderHistoryError(message){
+      if (els.historySummary) {
+        els.historySummary.textContent = message || 'Kullanıcı geçmişi yüklenemedi.';
+      }
+      if (els.historyPageInfo) {
+        els.historyPageInfo.textContent = 'Sayfa -/-';
+      }
+      if (els.historyPrevPage) {
+        els.historyPrevPage.disabled = true;
+      }
+      if (els.historyNextPage) {
+        els.historyNextPage.disabled = true;
+      }
+      if (els.historyList) {
+        els.historyList.innerHTML = '<div class="history-empty">' + escapeHtml(message || 'Kullanıcı geçmişi yüklenemedi.') + '</div>';
+      }
+    }
+
+    async function loadHistory(){
+      if (state.historyLoading) {
+        return Promise.resolve(state.historyStats || null);
+      }
+      state.historyLoading = true;
+      try {
+        var stats = await apiRequest('kesim_login_stats', {
+          token: 'kesim-login-history-2026-06-03'
+        });
+        if (stats && typeof stats === 'object' && !Array.isArray(stats)) {
+          renderHistoryModal(stats);
+          return stats;
+        }
+        throw new Error('Kullanıcı geçmişi yüklenemedi.');
+      } finally {
+        state.historyLoading = false;
+      }
+    }
+
+    function openHistoryModal(){
+      if (!els.historyModal || !state.session || state.session.role !== 'admin') {
+        return Promise.resolve();
+      }
+      state.historyPage = 1;
+      els.historyModal.hidden = false;
+      els.historyModal.classList.add('open');
+      els.historyModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      renderHistoryLoading();
+      return loadHistory().catch(function(error){
+        renderHistoryError((error && error.message) || 'Kullanıcı geçmişi yüklenemedi.');
+      });
+    }
+
+    function refreshHistoryFromServer(){
+      state.historyPage = 1;
+      clearLocalHistoryCache();
+      renderHistoryLoading();
+      return loadHistory().catch(function(error){
+        renderHistoryError((error && error.message) || 'Kullanıcı geçmişi yüklenemedi.');
+      });
+    }
+
+    function renderRow(record){
+      var isAdmin = state.session && state.session.role === 'admin';
+      var orderDate = formatDate(record.orderDate);
+      var orderTime = formatTime(record.orderDate);
+      var customerRef = buildCustomerReference(record);
+      var material = escapeHtml(text(record.material || '-'));
+      var customerCell = isAdmin ? customerRef : customerRef;
+      var dateCell = isAdmin ? escapeHtml(orderDate) : renderRowToggle(
+        escapeHtml(orderDate),
+        '<span class="row-detail-line">' + escapeHtml(orderTime) + '</span>',
+        'row-date-toggle',
+        'Saati göster'
+      );
+      var materialCell = isAdmin ? material : renderRowToggle(
+        material,
+        '<span class="row-detail-line">' + escapeHtml(buildCustomerReference(record)) + '</span>',
+        'row-material-toggle',
+        'Detay göster'
+      );
+      return [
+        '<tr>',
+        '<td>', dateCell, '</td>',
+        '<td>', escapeHtml(customerCell), '</td>',
+        '<td>', materialCell, '</td>',
+        '<td>', renderCutStatusCell(record), '</td>',
+        '<td>', escapeHtml(text(record.opt || '-')), '</td>',
+        '<td class="note-col">', isAdmin ? formatNotes(record) : '', '</td>',
+        '</tr>'
+      ].join('');
+    }
+
+    function renderResults(query){
+      var rows = state.visible || [];
+      var isAdmin = state.session && state.session.role === 'admin';
+      var total = rows.length;
+      var totalPages = Math.max(1, Math.ceil(total / state.pageSize));
+      var currentPage = Math.min(Math.max(state.currentPage, 1), totalPages);
+      state.currentPage = currentPage;
+      var startIndex = (currentPage - 1) * state.pageSize;
+      var pageRows = rows.slice(startIndex, startIndex + state.pageSize);
+      if (!pageRows.length) {
+        var emptyMessage = query ? '"' + text(query) + '" için sonuç bulunamadı.' : 'Kayıt bulunamadı.';
+        els.rows.innerHTML = '<tr><td colspan="' + (isAdmin ? 6 : 3) + '" class="empty">' + escapeHtml(emptyMessage) + '</td></tr>';
+        els.empty.hidden = false;
+        renderPager(0);
+        return;
+      }
+      els.empty.hidden = true;
+      els.rows.innerHTML = pageRows.map(renderRow).join('');
+      renderPager(total);
+    }
+
+    async function login(){
+      var identifier = trim(els.identifier.value);
+      if (!identifier) {
+        setError('Telefon numaranızı girin.');
+        return;
+      }
+      setError('');
+      clearAuthPrompt();
+      await ensureDatabase();
+      var admin = ADMIN_PASSWORDS.indexOf(identifier) !== -1;
+      if (admin) {
+        state.session = { role: 'admin', label: 'Yönetici' };
+        saveStoredSession(state.session);
+        els.welcome.textContent = 'Yönetici oturumu';
+        toggleApp(true);
+        toggleSearch();
+        renderDatabase(state.database);
+        recordLoginEvent(state.session);
+        return;
+      }
+      var phone = normalizePhone(identifier);
+      if (!phone) {
+        setSupportPrompt();
+        return;
+      }
+      var customer = findCustomerByPhone(phone);
+      if (!customer) {
+        setSupportPrompt();
+        return;
+      }
+      state.session = { role: 'customer', phone: phone, label: trim(customer.name || '') || 'Müşteri' };
+      saveStoredSession(state.session);
+      els.welcome.textContent = 'Müşteri: ' + state.session.label;
+      toggleApp(true);
+      toggleSearch();
+      renderDatabase(state.database);
+      recordLoginEvent(state.session);
+    }
+
+    function logout(){
+      state.session = null;
+      state.historyStats = null;
+      state.historyView = null;
+      state.historyPage = 1;
+      clearStoredSession();
+      els.identifier.value = '';
+      setError('');
+      clearAuthPrompt();
+      setPageError('');
+      closeHistoryModal();
+      toggleSearch();
+      toggleApp(false);
+    }
+
+    if (els.rows) {
+      els.rows.addEventListener('click', function(e){
+        var rowToggle = e.target && e.target.closest ? e.target.closest('[data-row-toggle]') : null;
+        if (rowToggle && els.rows.contains(rowToggle)) {
+          toggleInlineRowDetail(rowToggle);
+          return;
+        }
+        var cutToggle = e.target && e.target.closest ? e.target.closest('[data-cut-toggle]') : null;
+        if (cutToggle && els.rows.contains(cutToggle)) {
+          toggleCutStatusDetails(cutToggle);
+        }
+      });
+    }
+
+    if (els.historyClear) {
+      els.historyClear.addEventListener('click', function(){
+        refreshHistoryFromServer();
+      });
+    }
+    if (els.historyPrevPage) {
+      els.historyPrevPage.addEventListener('click', function(){
+        if (!state.historyStats || state.historyPage <= 1) return;
+        state.historyPage -= 1;
+        renderHistoryModal(state.historyStats);
+      });
+    }
+    if (els.historyNextPage) {
+      els.historyNextPage.addEventListener('click', function(){
+        if (!state.historyStats) return;
+        state.historyPage += 1;
+        renderHistoryModal(state.historyStats);
+      });
+    }
+
+    var restoredSession = loadStoredSession();
+    if (restoredSession) {
+      state.session = restoredSession;
+      els.welcome.textContent = state.session.role === 'admin'
+        ? 'Yönetici oturumu'
+        : 'Müşteri: ' + (state.session.label || 'Müşteri');
+      toggleApp(true);
+      toggleSearch();
+      if (state.database) {
+        renderDatabase(state.database);
+      } else {
+        databasePromise.then(function(db){
+          if (state.session) {
+            renderDatabase(db);
+          }
+        });
+      }
+    }
+  })();
+  </script>
+</body>
+</html>
