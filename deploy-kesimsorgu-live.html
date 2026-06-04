@@ -205,11 +205,11 @@
     .pager-info{color:var(--muted);font-size:14px;white-space:nowrap;text-align:center;min-width:0}
     .table-wrap{overflow:auto;border-top:1px solid var(--line)}
     table{width:100%;border-collapse:collapse;min-width:820px;background:#fff;table-layout:fixed}
-    th,td{padding:12px 10px;border-bottom:1px solid #ece3d7;text-align:left;vertical-align:top;font-size:14px;word-break:break-word}
+    th,td{padding:9px 8px;border-bottom:1px solid #ece3d7;text-align:left;vertical-align:top;font-size:14px;word-break:break-word}
     th:nth-child(1),td:nth-child(1){width:98px}
-    th:nth-child(2),td:nth-child(2){width:20%}
-    th:nth-child(3),td:nth-child(3){width:22%}
-    th:nth-child(4),td:nth-child(4){width:92px}
+    th:nth-child(2),td:nth-child(2){width:92px}
+    th:nth-child(3),td:nth-child(3){width:20%}
+    th:nth-child(4),td:nth-child(4){width:22%}
     th:nth-child(5),td:nth-child(5){width:84px}
     th:nth-child(6),td:nth-child(6){width:auto}
     th{background:#faf7f2;position:sticky;top:0;z-index:1}
@@ -423,12 +423,12 @@
     .row-main{
       display:block;
       font-weight:700;
-      line-height:1.35;
+      line-height:1.22;
     }
     .row-detail{
       display:block;
-      margin-top:6px;
-      padding-top:6px;
+      margin-top:4px;
+      padding-top:4px;
       border-top:1px dashed rgba(15,118,110,.18);
       color:var(--muted);
       font-size:12px;
@@ -440,10 +440,10 @@
     .shell.customer-view table{min-width:0;width:100%;table-layout:fixed}
     .shell.customer-view th:nth-child(1),
     .shell.customer-view td:nth-child(1){width:78px}
-    .shell.customer-view th:nth-child(3),
-    .shell.customer-view td:nth-child(3){width:auto}
+    .shell.customer-view th:nth-child(2),
+    .shell.customer-view td:nth-child(2){width:92px}
     .shell.customer-view th:nth-child(4),
-    .shell.customer-view td:nth-child(4){width:92px}
+    .shell.customer-view td:nth-child(4){width:auto}
     .badge{
       display:inline-flex;
       align-items:center;
@@ -485,8 +485,8 @@
     }
     .shell.customer-view th.note-col,
     .shell.customer-view td.note-col,
-    .shell.customer-view th:nth-child(2),
-    .shell.customer-view td:nth-child(2),
+    .shell.customer-view th:nth-child(3),
+    .shell.customer-view td:nth-child(3),
     .shell.customer-view th:nth-child(5),
     .shell.customer-view td:nth-child(5){
       display:none;
@@ -534,22 +534,22 @@
       .top-actions{justify-content:flex-end}
       table{min-width:680px}
       th,td{
-        padding:6px 5px;
+        padding:5px 4px;
         font-size:12px;
         line-height:1.2;
       }
       .shell.customer-view table{min-width:0;width:100%}
       .shell.customer-view th,
       .shell.customer-view td{
-        padding:5px 3px;
+        padding:4px 3px;
         font-size:10.5px;
       }
       .shell.customer-view th:nth-child(1),
       .shell.customer-view td:nth-child(1){width:68px}
-      .shell.customer-view th:nth-child(3),
-      .shell.customer-view td:nth-child(3){width:auto}
+      .shell.customer-view th:nth-child(2),
+      .shell.customer-view td:nth-child(2){width:78px}
       .shell.customer-view th:nth-child(4),
-      .shell.customer-view td:nth-child(4){width:78px}
+      .shell.customer-view td:nth-child(4){width:auto}
       .shell.customer-view .badge{
         padding:6px 7px;
         font-size:11px;
@@ -614,9 +614,9 @@
             <thead>
               <tr>
                 <th>Tarih</th>
+                <th>Durum</th>
                 <th>Müşteri</th>
                 <th>Malzeme</th>
-                <th>Durum</th>
                 <th>Opt</th>
         <th class="note-col">Not</th>
               </tr>
@@ -639,7 +639,7 @@
           <p class="history-summary" id="historySummary">Son giriş yapanlar, son giriş zamanı ve toplam giriş sayıları burada görünür.</p>
         </div>
         <div class="history-actions">
-          <button id="historyClear" class="history-clear" type="button" title="Bu cihazdaki yerel geçmişi temizle">Temizle</button>
+          <button id="historyClear" class="history-clear" type="button" title="Kullanıcı geçmişini sunucudan yeniden yükle">Yenile</button>
           <button id="historyClose" class="history-close" type="button">Kapat</button>
         </div>
       </div>
@@ -660,7 +660,7 @@
   (function(){
     var ADMIN_PASSWORDS = ['A12b12c12*', 'artiebatlama18'];
     var CUSTOMER_SUPPORT_PHONE = '905339604410';
-    var CUSTOMER_SUPPORT_MESSAGE = 'Kesim sorgulama sistemine kayıt olmak istiyorum';
+    var CUSTOMER_SUPPORT_MESSAGE = 'Merhaba, siparişimle ilgili kesim durumu hakkında bilgi almak istiyorum. Yardımcı olabilir misiniz?';
     var els = {
       authCard: document.getElementById('authCard'),
       shellCard: document.getElementById('shellCard'),
@@ -713,11 +713,32 @@
       return db;
     });
 
+    function buildCallHref(phone){
+      var digits = normalizePhone(phone);
+      if (digits.length === 10) {
+        return 'tel:0' + digits;
+      }
+      return 'tel:+' + text(phone).replace(/\s+/g, '');
+    }
+    function triggerPhoneCall(phone){
+      var href = buildCallHref(phone);
+      try {
+        if (window.top && window.top.location) {
+          window.top.location.href = href;
+          return href;
+        }
+      } catch (error) {
+        // Fall back to the current frame when top navigation is blocked.
+      }
+      window.location.href = href;
+      return href;
+    }
+
     if (els.supportWhatsappBtn) {
       els.supportWhatsappBtn.href = 'https://wa.me/' + CUSTOMER_SUPPORT_PHONE + '?text=' + encodeURIComponent(CUSTOMER_SUPPORT_MESSAGE);
     }
     if (els.supportCallBtn) {
-      els.supportCallBtn.href = 'tel:+' + CUSTOMER_SUPPORT_PHONE;
+      els.supportCallBtn.href = buildCallHref(CUSTOMER_SUPPORT_PHONE);
     }
 
     function text(value){ return String(value == null ? '' : value); }
@@ -992,7 +1013,7 @@
     function setSupportPrompt(){
       if (!els.authError) return;
       var phone = '905332014898';
-      var message = encodeURIComponent('Kesim sorgulama sistemine kayıt olmak istiyorum');
+      var message = encodeURIComponent('Merhaba, siparişimle ilgili kesim durumu hakkında bilgi almak istiyorum. Yardımcı olabilir misiniz?');
       els.authError.innerHTML = [
         '<div class="support-cta">',
         '<a href="https://wa.me/' + phone + '?text=' + message + '" target="_blank" rel="noopener noreferrer">',
@@ -1122,9 +1143,9 @@
       return [
         '<tr>',
         '<td>', escapeHtml(formatDate(record.orderDate)), '</td>',
+        '<td>', renderCutStatusCell(record), '</td>',
         '<td>', escapeHtml(record.customerName || '-'), '</td>',
         '<td>', escapeHtml(record.material || '-'), '</td>',
-        '<td>', renderCutStatusCell(record), '</td>',
         '<td>', escapeHtml(record.opt || '-'), '</td>',
         '<td class="note-col">', formatNotes(record), '</td>',
         '</tr>'
@@ -1256,7 +1277,7 @@
     function setSupportPrompt(){
       if (!els.authError) return;
       var phone = '905332014898';
-      var message = encodeURIComponent('Kesim sorgulama sistemine kayıt olmak istiyorum');
+      var message = encodeURIComponent('Merhaba, siparişimle ilgili kesim durumu hakkında bilgi almak istiyorum. Yardımcı olabilir misiniz?');
       els.authError.innerHTML = [
         '<div class="support-cta">',
         '<a href="https://wa.me/' + phone + '?text=' + message + '" target="_blank" rel="noopener noreferrer">WhatsApp ile İletişime Geç</a>',
@@ -1928,7 +1949,7 @@
     function setSupportPrompt(){
       if (!els.authError) return;
       var phone = '905332014898';
-      var message = encodeURIComponent('Kesim sorgulama sistemine kayıt olmak istiyorum');
+      var message = encodeURIComponent('Merhaba, siparişimle ilgili kesim durumu hakkında bilgi almak istiyorum. Yardımcı olabilir misiniz?');
       els.authError.innerHTML = [
         '<div class="support-cta">',
         '<a href="https://wa.me/' + phone + '?text=' + message + '" target="_blank" rel="noopener noreferrer">WhatsApp ile İletişime Geç</a>',
@@ -2348,9 +2369,9 @@
       return [
         '<tr>',
         '<td>', dateCell, '</td>',
+        '<td>', renderCutStatusCell(record), '</td>',
         '<td>', escapeHtml(customerCell), '</td>',
         '<td>', materialCell, '</td>',
-        '<td>', renderCutStatusCell(record), '</td>',
         '<td>', escapeHtml(text(record.opt || '-')), '</td>',
         '<td class="note-col">', isAdmin ? formatNotes(record) : '', '</td>',
         '</tr>'
@@ -2449,6 +2470,13 @@
     if (els.historyClear) {
       els.historyClear.addEventListener('click', function(){
         refreshHistoryFromServer();
+      });
+    }
+    if (els.supportCallBtn) {
+      els.supportCallBtn.addEventListener('click', function(e){
+        e.preventDefault();
+        var href = triggerPhoneCall(CUSTOMER_SUPPORT_PHONE);
+        els.supportCallBtn.href = href;
       });
     }
     if (els.historyPrevPage) {
