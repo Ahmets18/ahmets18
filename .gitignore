@@ -1,6 +1,0 @@
-data/database.txt
-local-database.js
-logs/
-supabase-schema.sql
-scripts/push-to-supabase.ps1
-dist/
